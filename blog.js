@@ -1,5 +1,5 @@
 const BLOGGER_API =
-"https://yeshukenanhedost.blogspot.com/feeds/posts/default?alt=json";
+"https://api.allorigins.win/raw?url=https://yeshukenanhedost.blogspot.com/feeds/posts/default?alt=json";
 
 const blogsDiv = document.getElementById("blogs");
 const loading = document.getElementById("loading");
