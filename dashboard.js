@@ -1,5 +1,6 @@
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.querySelector(".sidebar");
+const main = document.querySelector(".main");
 
 const auth = firebase.auth();
 
@@ -19,11 +20,9 @@ auth.onAuthStateChanged(user => {
     window.location.href = "index.html";
   }else{
 
-    // Top bar
     userPhoto.src = user.photoURL || "logos/logo.png";
     userName.innerText = user.displayName || "User";
 
-    // Sidebar
     sidePhoto.src = user.photoURL || "logos/logo.png";
     sideName.innerText = user.displayName || "User";
 
@@ -33,26 +32,15 @@ auth.onAuthStateChanged(user => {
 
 /* LOGOUT */
 
-logoutBtn.addEventListener("click", () => {
-
-  auth.signOut()
-  .then(() => {
-    window.location.href = "index.html";
-  })
-  .catch(err => alert(err.message));
-
-});
-
-menuBtn.onclick = () => {
-  sidebar.classList.toggle("show");
+logoutBtn.onclick = () => {
+  auth.signOut().then(()=>{
+    window.location.href="index.html";
+  });
 };
 
-const menuBtn = document.getElementById("menuBtn");
-const sidebar = document.querySelector(".sidebar");
-const main = document.querySelector(".main");
+/* SIDEBAR TOGGLE */
 
 menuBtn.onclick = ()=>{
-  sidebar.classList.toggle("closed");
-  main.classList.toggle("full");
+  sidebar.classList.toggle("show");
+  main.classList.toggle("shift");
 };
-
