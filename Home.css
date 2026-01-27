@@ -133,3 +133,20 @@ footer a{
 footer a:hover{
     text-decoration:underline;
 }
+
+/* BLOG PAGE */
+
+.blog-page{
+  max-width:900px;
+  margin:60px auto;
+  padding:20px;
+}
+
+.blog-page h1{
+  margin-bottom:20px;
+}
+
+.blog-page img{
+  max-width:100%;
+}
+
