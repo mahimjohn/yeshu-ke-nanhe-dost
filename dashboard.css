@@ -4,29 +4,31 @@ body{
   background:#f3f3f3;
 }
 
-/* ========== LAYOUT ========== */
+/* ================= LAYOUT ================= */
 
 .layout{
-  display:flex;
+  min-height:100vh;
 }
 
-/* ========== TOPBAR ========== */
+/* ================= TOPBAR ================= */
 
-/* TOPBAR */
 .topbar{
   background:white;
-  padding:0 20px;
   height:60px;
+  padding:0 20px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   box-shadow:0 2px 4px rgba(0,0,0,0.1);
-  position:sticky;
+  position:fixed;
   top:0;
-  z-index:500;
+  left:0;
+  right:0;
+  z-index:1000;
 }
 
-/* HAMBURGER BUTTON */
+/* Hamburger */
+
 .menu-btn{
   width:42px;
   height:42px;
@@ -41,14 +43,28 @@ body{
   color:white;
 }
 
-/* ========== SIDEBAR ========== */
+/* Profile */
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.profile img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+}
+
+/* ================= SIDEBAR ================= */
 
 .sidebar{
   position:fixed;
-  top:70px;
+  top:60px;
   left:0;
   width:220px;
-  height:calc(100vh - 70px);
+  height:calc(100vh - 60px);
   background:#0b3d2e;
   color:white;
   padding:20px;
@@ -56,7 +72,7 @@ body{
   flex-direction:column;
   transform:translateX(-100%);
   transition:0.3s ease;
-  z-index:1500;
+  z-index:900;
 }
 
 .sidebar.show{
@@ -76,7 +92,7 @@ body{
   background:#145c46;
 }
 
-/* Profile inside sidebar */
+/* Sidebar Profile */
 
 .profile-header{
   text-align:center;
@@ -96,11 +112,22 @@ body{
   font-size:16px;
 }
 
-/* ========== MAIN CONTENT ========== */
+/* Logout inside sidebar */
+
+.sidebar .logout-btn{
+  margin-top:auto;
+  background:#145c46;
+  border:none;
+  color:white;
+  padding:12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ================= MAIN ================= */
 
 .main{
-  margin-top:70px;
-  width:100%;
+  margin-top:60px;
   padding:30px;
   transition:margin-left 0.3s ease;
 }
@@ -123,34 +150,4 @@ body{
   padding:20px;
   border-radius:10px;
   box-shadow:0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Profile top right */
-
-.profile{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.profile img{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-}
-
-/* Logout button */
-
-button{
-  margin-top:30px;
-  background:#0b3d2e;
-  color:white;
-  border:none;
-  padding:12px 25px;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#145c46;
 }
