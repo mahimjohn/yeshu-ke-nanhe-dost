@@ -1,3 +1,6 @@
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+
 const auth = firebase.auth();
 
 const userPhoto = document.getElementById("userPhoto");
@@ -39,3 +42,7 @@ logoutBtn.addEventListener("click", () => {
   .catch(err => alert(err.message));
 
 });
+
+menuBtn.onclick = () => {
+  sidebar.classList.toggle("show");
+};
