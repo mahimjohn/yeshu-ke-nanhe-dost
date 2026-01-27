@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yeshu Ke Nanhe Dost</title>
+
 <link rel="stylesheet" href="Home.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
 </head>
 
 <body>
@@ -12,20 +18,20 @@
 <!-- TOP GREEN BAR -->
 <div class="top-bar">
 
-    <!-- LEFT EMPTY SPACE -->
     <div></div>
 
-    <!-- RIGHT LOGIN AREA -->
+    <!-- AUTH AREA -->
     <div id="auth-area">
-  <a href="login.html" id="loginLink">Login | Sign Up</a>
 
-  <img
-    id="userAvatar"
-    src=""
-    alt="User"
-    style="display:none; width:40px; height:40px; border-radius:50%; cursor:pointer;"
-  />
-</div>
+        <a href="login.html" id="loginLink">Login | Sign Up</a>
+
+        <div id="profileBox">
+            <img id="userAvatar">
+            <span id="userName"></span>
+        </div>
+
+    </div>
+
 </div>
 
 <!-- MAIN NAVBAR -->
@@ -38,19 +44,21 @@
 
     <ul class="nav-center">
         <li><a href="index.html">Home</a></li>
-        <li><a href="#">About Us</a></li>
+        <li><a href="about.html">About Us</a></li>
         <li><a href="#">Programs</a></li>
         <li><a href="#">Gallery</a></li>
         <li><a href="#">Contact</a></li>
     </ul>
 
 </nav>
-    <hr>
+
+<footer class="footer">
 <a href="about.html">About</a> |
 <a href="privacy.html">Privacy Policy</a> |
 <a href="terms.html">Terms</a>
-
+</footer>
 
 <script src="Home.js"></script>
+
 </body>
 </html>
