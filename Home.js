@@ -9,6 +9,25 @@ toggleBtn.onclick = function () {
         toggleBtn.textContent = "🌙";
     }
 };
-// Later: after signup, we can replace Login | Sign Up
-// with user profile picture dynamically.
-// For now, it's static.
+
+const auth = firebase.auth();
+
+const loginLink = document.getElementById("loginLink");
+const userAvatar = document.getElementById("userAvatar");
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    // User logged in
+    loginLink.style.display = "none";
+    userAvatar.style.display = "block";
+    userAvatar.src = user.photoURL;
+  } else {
+    // User logged out
+    loginLink.style.display = "block";
+    userAvatar.style.display = "none";
+  }
+});
+
+userAvatar.addEventListener("click", () => {
+  firebase.auth().signOut();
+});
