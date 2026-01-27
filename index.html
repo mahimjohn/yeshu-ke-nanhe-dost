@@ -10,7 +10,7 @@
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-
+<script src="firebase.js"></script>
 </head>
 
 <body>
@@ -20,13 +20,12 @@
 
     <div></div>
 
-    <!-- AUTH AREA -->
     <div id="auth-area">
 
-        <a href="login.html" id="loginLink">Login | Sign Up</a>
+        <a id="loginLink" href="login.html">Login | Sign Up</a>
 
         <div id="profileBox">
-            <img id="userAvatar">
+            <img id="userAvatar" src="">
             <span id="userName"></span>
         </div>
 
@@ -52,10 +51,11 @@
 
 </nav>
 
-<footer class="footer">
-<a href="about.html">About</a> |
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms</a>
+<!-- FOOTER -->
+<footer>
+    <a href="about.html">About</a> |
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms</a>
 </footer>
 
 <script src="Home.js"></script>
