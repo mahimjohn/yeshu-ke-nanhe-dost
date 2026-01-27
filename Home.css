@@ -1,9 +1,13 @@
+/* GLOBAL */
+
 body{
     margin:0;
     font-family:Arial, sans-serif;
 }
 
-/* TOP BAR */
+/* =====================
+   TOP BAR
+===================== */
 
 .top-bar{
     background:#0b3d2e;
@@ -14,7 +18,9 @@ body{
     justify-content:space-between;
 }
 
-/* AUTH AREA */
+/* =====================
+   AUTH AREA
+===================== */
 
 #auth-area{
     display:flex;
@@ -32,7 +38,9 @@ body{
     text-decoration:underline;
 }
 
-/* PROFILE */
+/* =====================
+   PROFILE
+===================== */
 
 #profileBox{
     display:none;
@@ -47,10 +55,13 @@ body{
     height:36px;
     border-radius:50%;
     border:2px solid white;
+    object-fit:cover;
     cursor:pointer;
 }
 
-/* NAVBAR */
+/* =====================
+   NAVBAR
+===================== */
 
 .main-navbar{
     background:white;
@@ -68,15 +79,23 @@ body{
     gap:10px;
 }
 
-.logo {
-    height: 32px;
-    width: auto;
+/* WEBSITE LOGO */
+
+.logo{
+    height:38px;
+    width:38px;
+    border-radius:50%;
+    object-fit:cover;
 }
 
 .brand{
     font-size:22px;
     font-weight:bold;
 }
+
+/* =====================
+   CENTER MENU
+===================== */
 
 .nav-center{
     list-style:none;
@@ -94,7 +113,9 @@ body{
     color:#f1c40f;
 }
 
-/* FOOTER */
+/* =====================
+   FOOTER
+===================== */
 
 footer{
     background:#0b3d2e;
