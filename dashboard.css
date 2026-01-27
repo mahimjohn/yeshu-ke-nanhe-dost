@@ -151,3 +151,36 @@ body{
   border-radius:10px;
   box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
+
+/* ================= FIX MAIN OVERLAP ================= */
+
+/* When sidebar open, push content */
+.main.shift{
+  margin-left:220px;
+  padding-left:40px;
+}
+
+/* ================= HAMBURGER HOVER ================= */
+
+.menu-btn:hover{
+  background:#145c46;
+}
+
+/* ================= LOGOUT BUTTON FIX ================= */
+
+.sidebar .logout-btn{
+  margin-top:auto;
+  margin-bottom:20px;
+  background:#145c46;
+  border:none;
+  color:white;
+  padding:12px;
+  border-radius:6px;
+  cursor:pointer;
+  text-align:center;
+}
+
+.sidebar .logout-btn:hover{
+  background:#1c7a5a;
+}
+
