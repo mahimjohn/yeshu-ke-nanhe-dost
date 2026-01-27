@@ -1,91 +1,114 @@
-/* GLOBAL */
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
 }
 
-/* =====================
-   TOP BAR
-===================== */
+/* TOP BAR */
 
-.top-bar {
-    background: #0b3d2e;
-    height: 40px;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.top-bar{
+    background:#0b3d2e;
+    height:40px;
+    padding:0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-/* LOGIN AREA */
+/* AUTH AREA */
 
-.login-area {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: white;
-    font-size: 14px;
+#auth-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:white;
 }
 
-.user-icon {
-    height: 22px;
+#loginLink{
+    color:white;
+    text-decoration:none;
+    font-size:14px;
 }
 
-.login-area a {
-    color: white;
-    text-decoration: none;
+#loginLink:hover{
+    text-decoration:underline;
 }
 
-.login-area a:hover {
-    text-decoration: underline;
+/* PROFILE */
+
+#profileBox{
+    display:none;
+    align-items:center;
+    gap:8px;
 }
 
-/* =====================
-   MAIN NAVBAR
-===================== */
-
-.main-navbar {
-    background: white;
-    height: 85px;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+#userAvatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    cursor:pointer;
 }
 
-/* LEFT */
-
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+#userName{
+    color:white;
+    font-size:14px;
 }
 
-.logo {
-    height: 45px;
+/* MAIN NAVBAR */
+
+.main-navbar{
+    background:white;
+    height:85px;
+    padding:0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 2px 4px rgba(0,0,0,0.1);
 }
 
-.brand {
-    font-size: 22px;
-    font-weight: bold;
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    height:45px;
+}
+
+.brand{
+    font-size:22px;
+    font-weight:bold;
 }
 
 /* CENTER MENU */
 
-.nav-center {
-    list-style: none;
-    display: flex;
-    gap: 30px;
+.nav-center{
+    list-style:none;
+    display:flex;
+    gap:30px;
 }
 
-.nav-center a {
-    text-decoration: none;
-    color: black;
-    font-size: 16px;
+.nav-center a{
+    text-decoration:none;
+    color:black;
+    font-size:16px;
 }
 
-.nav-center a:hover {
-    color: #f1c40f;
+.nav-center a:hover{
+    color:#f1c40f;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:60px;
+    padding:20px;
+    text-align:center;
+    background:#0b3d2e;
+}
+
+.footer a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
 }
