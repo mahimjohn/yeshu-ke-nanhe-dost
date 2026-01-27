@@ -13,7 +13,6 @@ const sideName = document.getElementById("sideName");
 const logoutBtn = document.getElementById("logoutBtn");
 
 /* CHECK LOGIN */
-
 auth.onAuthStateChanged(user => {
 
   if(!user){
@@ -31,7 +30,6 @@ auth.onAuthStateChanged(user => {
 });
 
 /* LOGOUT */
-
 logoutBtn.onclick = () => {
   auth.signOut().then(()=>{
     window.location.href="index.html";
@@ -39,7 +37,6 @@ logoutBtn.onclick = () => {
 };
 
 /* SIDEBAR TOGGLE */
-
 menuBtn.onclick = ()=>{
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
