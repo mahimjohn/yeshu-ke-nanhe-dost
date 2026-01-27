@@ -10,7 +10,8 @@ const blogTitle = document.getElementById("blogTitle");
 const blogContent = document.getElementById("blogContent");
 
 // LOAD BLOG LIST
-fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}`)
+fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=50`)
+
 .then(res => res.json())
 .then(data => {
 
