@@ -42,7 +42,7 @@ function googleLogin(){
   auth.signInWithPopup(provider)
     .then((result)=>{
       alert("Welcome " + result.user.displayName);
-      window.location.href = "Home.html";
+      window.location.href = "index.html";
     })
     .catch((error)=>{
       alert(error.message);
@@ -59,7 +59,7 @@ function facebookLogin(){
   auth.signInWithPopup(provider)
     .then((result)=>{
       alert("Welcome " + result.user.displayName);
-      window.location.href = "Home.html";
+      window.location.href = "index.html";
     })
     .catch((error)=>{
       alert(error.message);
@@ -76,7 +76,7 @@ function appleLogin(){
   auth.signInWithPopup(provider)
     .then((result)=>{
       alert("Welcome " + result.user.displayName);
-      window.location.href = "Home.html";
+      window.location.href = "index.html";
     })
     .catch((error)=>{
       alert(error.message);
