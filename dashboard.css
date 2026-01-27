@@ -22,11 +22,6 @@ body{
   flex-direction:column;
 }
 
-.sidebar .logo{
-  text-align:center;
-  margin-bottom:30px;
-}
-
 .sidebar a{
   color:white;
   text-decoration:none;
@@ -38,6 +33,27 @@ body{
 .sidebar a:hover,
 .sidebar a.active{
   background:#145c46;
+}
+
+/* PROFILE HEADER */
+
+.profile-header{
+  text-align:center;
+  padding:20px 10px;
+}
+
+.profile-header img{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid white;
+}
+
+.profile-header h3{
+  color:white;
+  margin-top:10px;
+  font-size:16px;
 }
 
 /* MAIN */
@@ -104,23 +120,3 @@ button{
 button:hover{
   background:#145c46;
 }
-
-.profile-header{
-  text-align:center;
-  padding:20px 10px;
-}
-
-.profile-header img{
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  object-fit:cover;
-  border:2px solid white;
-}
-
-.profile-header h3{
-  color:white;
-  margin-top:10px;
-  font-size:16px;
-}
-
