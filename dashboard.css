@@ -5,14 +5,12 @@ body{
 }
 
 /* LAYOUT */
-
 .layout{
   display:flex;
   min-height:100vh;
 }
 
 /* SIDEBAR */
-
 .sidebar{
   width:220px;
   background:#0b3d2e;
@@ -20,6 +18,17 @@ body{
   padding:20px;
   display:flex;
   flex-direction:column;
+  position:fixed;
+  left:0;
+  top:0;
+  height:100vh;
+  transform:translateX(-100%);
+  transition:0.3s;
+  z-index:1000;
+}
+
+.sidebar.show{
+  transform:translateX(0);
 }
 
 .sidebar a{
@@ -36,7 +45,6 @@ body{
 }
 
 /* PROFILE HEADER */
-
 .profile-header{
   text-align:center;
   padding:20px 10px;
@@ -57,22 +65,34 @@ body{
 }
 
 /* MAIN */
-
 .main{
   flex:1;
-  display:flex;
-  flex-direction:column;
+  margin-left:0;
+  transition:0.3s;
+}
+
+.main.shift{
+  margin-left:220px;
 }
 
 /* TOPBAR */
-
 .topbar{
   background:white;
-  padding:15px 25px;
+  padding:15px 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   box-shadow:0 2px 4px rgba(0,0,0,0.1);
+  position:sticky;
+  top:0;
+}
+
+.menu-btn{
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:#0b3d2e;
 }
 
 .profile{
@@ -88,7 +108,6 @@ body{
 }
 
 /* CONTENT */
-
 .content{
   padding:30px;
 }
@@ -119,67 +138,4 @@ button{
 
 button:hover{
   background:#145c46;
-}
-
-/* HAMBURGER BUTTON */
-
-.menu-btn{
-  font-size:26px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:#0b3d2e;
-}
-
-/* HIDE SIDEBAR BY DEFAULT */
-
-.sidebar{
-  transform: translateX(-100%);
-  transition: 0.3s ease;
-}
-
-/* SHOW SIDEBAR */
-
-.sidebar.show{
-  transform: translateX(0);
-}
-
-/* MOBILE FIX */
-
-@media(max-width:768px){
-  .sidebar{
-    position:fixed;
-    height:100vh;
-    z-index:1000;
-    left:0;
-    top:0;
-  }
-}
-
-/* MENU BUTTON */
-.menu-btn{
-  font-size:24px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:#0b3d2e;
-}
-
-/* SIDEBAR COLLAPSED */
-.sidebar{
-  transition:0.3s;
-}
-
-.sidebar.closed{
-  transform:translateX(-100%);
-  position:absolute;
-}
-
-/* MAIN EXPAND */
-.main{
-  transition:0.3s;
-}
-
-.main.full{
-  margin-left:0;
 }
