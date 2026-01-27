@@ -1,32 +1,27 @@
-const BLOGGER_API =
-"https://api.allorigins.win/raw?url=https://yeshukenanhedost.blogspot.com/feeds/posts/default?alt=json";
+const API_KEY = "AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
+const BLOG_ID = "571259613266997453";
 
 const blogsDiv = document.getElementById("blogs");
 const loading = document.getElementById("loading");
 const reader = document.getElementById("reader");
 const list = document.getElementById("list");
-const frame = document.getElementById("frame");
 
-fetch(BLOGGER_API)
+const blogTitle = document.getElementById("blogTitle");
+const blogContent = document.getElementById("blogContent");
+
+// LOAD BLOG LIST
+fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}`)
 .then(res => res.json())
 .then(data => {
 
   loading.remove();
-  const posts = data.feed.entry;
 
-  posts.forEach(post => {
+  data.items.forEach(post => {
 
-    const title = post.title.$t;
-    const content = post.content.$t;
-    const link = post.link.find(l => l.rel === "alternate").href;
-
-    const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-    const image = imgMatch ? imgMatch[1] :
-      "https://via.placeholder.com/400x250";
-
-    const text = content
-      .replace(/(<([^>]+)>)/gi,"")
-      .substring(0,120) + "...";
+    const temp = document.createElement("div");
+    temp.innerHTML = post.content;
+    const img = temp.querySelector("img");
+    const image = img ? img.src : "https://via.placeholder.com/400";
 
     const card = document.createElement("div");
     card.className = "blog-card";
@@ -34,12 +29,12 @@ fetch(BLOGGER_API)
     card.innerHTML = `
       <img src="${image}">
       <div class="blog-card-content">
-        <h3>${title}</h3>
-        <p>${text}</p>
+        <h3>${post.title}</h3>
+        <p>${post.published.split("T")[0]}</p>
       </div>
     `;
 
-    card.onclick = () => openBlog(link);
+    card.onclick = () => openBlog(post.id);
 
     blogsDiv.appendChild(card);
 
@@ -47,12 +42,24 @@ fetch(BLOGGER_API)
 
 });
 
-function openBlog(url){
-  list.style.display = "none";
-  reader.style.display = "block";
-  frame.src = url;
+// OPEN SINGLE BLOG
+function openBlog(postId){
+
+  fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/${postId}?key=${API_KEY}`)
+  .then(res => res.json())
+  .then(post => {
+
+    list.style.display = "none";
+    reader.style.display = "block";
+
+    blogTitle.innerText = post.title;
+    blogContent.innerHTML = post.content;
+
+  });
+
 }
 
+// BACK
 function goBack(){
   reader.style.display = "none";
   list.style.display = "block";
