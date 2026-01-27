@@ -14,73 +14,62 @@
 
 <body>
 
-<div class="layout">
+<!-- TOPBAR -->
+<div class="topbar">
 
-  <!-- TOP BAR -->
-  <div class="topbar">
+  <button id="menuBtn" class="menu-btn">☰</button>
 
-    <!-- Hamburger -->
-    <button id="menuBtn" class="menu-btn">☰</button>
-
-    <!-- User Profile -->
-    <div class="profile">
-      <img id="userPhoto">
-      <span id="userName"></span>
-    </div>
-
+  <div class="profile">
+    <img id="userPhoto">
+    <span id="userName"></span>
   </div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
+</div>
 
-    <div class="profile-header">
-      <img id="sidePhoto">
-      <h3 id="sideName">User</h3>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+  <div class="profile-header">
+    <img id="sidePhoto">
+    <h3 id="sideName">User</h3>
+  </div>
+
+  <a href="#" class="active">Dashboard</a>
+  <a href="#">Saved Blogs</a>
+  <a href="#">My Orders</a>
+  <a href="#">My Prayer Requests</a>
+  <a href="#">Forum</a>
+  <a href="#">Settings</a>
+
+  <button id="logoutBtn" class="logout-btn">Logout</button>
+
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+  <h1>Welcome Back</h1>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Continue Reading</h3>
+      <p>No saved reading yet.</p>
     </div>
 
-    <a href="#" class="active">Dashboard</a>
-    <a href="#">Saved Blogs</a>
-    <a href="#">My Orders</a>
-    <a href="#">My Prayer Requests</a>
-    <a href="#">Forum</a>
-    <a href="#">Settings</a>
+    <div class="card">
+      <h3>Saved Blogs</h3>
+      <p>0 blogs saved</p>
+    </div>
 
-  </aside>
+    <div class="card">
+      <h3>Prayer Requests</h3>
+      <p>No requests submitted</p>
+    </div>
 
-  <!-- MAIN -->
-  <div class="main">
-
-    <!-- CONTENT -->
-    <div class="content">
-
-      <h1>Welcome Back</h1>
-
-      <div class="cards">
-
-        <div class="card">
-          <h3>Continue Reading</h3>
-          <p>No saved reading yet.</p>
-        </div>
-
-        <div class="card">
-          <h3>Saved Blogs</h3>
-          <p>0 blogs saved</p>
-        </div>
-
-        <div class="card">
-          <h3>Prayer Requests</h3>
-          <p>No requests submitted</p>
-        </div>
-
-        <div class="card">
-          <h3>Orders</h3>
-          <p>No orders yet</p>
-        </div>
-
-      </div>
-
-      <button id="logoutBtn">Logout</button>
-
+    <div class="card">
+      <h3>Orders</h3>
+      <p>No orders yet</p>
     </div>
 
   </div>
