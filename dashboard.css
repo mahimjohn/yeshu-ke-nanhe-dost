@@ -4,42 +4,54 @@ body{
   background:#f3f3f3;
 }
 
-/* HAMBURGER */
-.menu-btn{
+/* ========== LAYOUT ========== */
+
+.layout{
+  display:flex;
+}
+
+/* ========== TOPBAR ========== */
+
+.topbar{
   position:fixed;
-  top:15px;
-  left:15px;
+  top:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:#ffffff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  box-shadow:0 2px 4px rgba(0,0,0,0.1);
+  z-index:2000;
+}
+
+.menu-btn{
   font-size:26px;
   background:none;
   border:none;
   cursor:pointer;
   color:#0b3d2e;
-  z-index:2000;
 }
 
-/* LAYOUT */
-.layout{
-  display:flex;
-  min-height:100vh;
-}
+/* ========== SIDEBAR ========== */
 
-/* SIDEBAR */
 .sidebar{
+  position:fixed;
+  top:70px;
+  left:0;
   width:220px;
+  height:calc(100vh - 70px);
   background:#0b3d2e;
   color:white;
   padding:20px;
   display:flex;
   flex-direction:column;
-  position:fixed;
-  left:0;
-  top:70px;          /* BELOW TOPBAR */
-  height:calc(100vh - 70px);
   transform:translateX(-100%);
-  transition:0.3s;
-  z-index:1000;
+  transition:0.3s ease;
+  z-index:1500;
 }
-
 
 .sidebar.show{
   transform:translateX(0);
@@ -58,7 +70,8 @@ body{
   background:#145c46;
 }
 
-/* PROFILE HEADER */
+/* Profile inside sidebar */
+
 .profile-header{
   text-align:center;
   padding:20px 10px;
@@ -73,55 +86,24 @@ body{
 }
 
 .profile-header h3{
-  color:white;
   margin-top:10px;
   font-size:16px;
 }
 
-/* MAIN */
+/* ========== MAIN CONTENT ========== */
+
 .main{
-  flex:1;
-  margin-left:0;
-  transition:0.3s;
+  margin-top:70px;
+  width:100%;
+  padding:30px;
+  transition:margin-left 0.3s ease;
 }
 
 .main.shift{
   margin-left:220px;
-  width:calc(100% - 220px);
 }
 
-/* TOPBAR */
-.topbar{
-  background:white;
-  height:70px;
-  padding:0 20px;
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
-  box-shadow:0 2px 4px rgba(0,0,0,0.1);
-  position:sticky;
-  top:0;
-  z-index:1200;
-}
-
-
-/* PROFILE */
-.profile{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.profile img{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-}
-
-/* CONTENT */
-.content{
-  padding:90px 30px 30px;
-}
+/* Cards */
 
 .cards{
   display:grid;
@@ -136,6 +118,22 @@ body{
   border-radius:10px;
   box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
+
+/* Profile top right */
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.profile img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+}
+
+/* Logout button */
 
 button{
   margin-top:30px;
