@@ -87,3 +87,19 @@ iframe{
 .back-btn:hover{
   background:#095c44;
 }
+
+#reader{
+  display:none;
+  padding:40px;
+  max-width:900px;
+  margin:auto;
+  background:white;
+}
+
+#blogTitle{
+  margin-bottom:20px;
+}
+
+#blogContent img{
+  max-width:100%;
+}
