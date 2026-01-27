@@ -1,92 +1,59 @@
-const params = new URLSearchParams(window.location.search);
-const postId = params.get("id");
+const BLOGGER_API =
+"https://yeshukenanhedost.blogspot.com/feeds/posts/default?alt=json";
 
-const blogTitle = document.getElementById("blogTitle");
-const blogContent = document.getElementById("blogContent");
+const blogsDiv = document.getElementById("blogs");
+const loading = document.getElementById("loading");
+const reader = document.getElementById("reader");
+const list = document.getElementById("list");
+const frame = document.getElementById("frame");
 
-// If user opens page directly
-if (!postId) {
-  blogTitle.innerText = "No blog selected";
-  blogContent.innerHTML = "<p>Please open a blog from homepage.</p>";
-} else {
+fetch(BLOGGER_API)
+.then(res => res.json())
+.then(data => {
 
-  fetch("https://yeshukenanhedost.blogspot.com/feeds/posts/default?alt=json")
-    .then(res => res.json())
-    .then(data => {
+  loading.remove();
+  const posts = data.feed.entry;
 
-      const posts = data.feed.entry;
+  posts.forEach(post => {
 
-      let foundPost = null;
+    const title = post.title.$t;
+    const content = post.content.$t;
+    const link = post.link.find(l => l.rel === "alternate").href;
 
-      posts.forEach(post => {
-        if (post.id.$t.includes(postId)) {
-          foundPost = post;
-        }
-      });
+    const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+    const image = imgMatch ? imgMatch[1] :
+      "https://via.placeholder.com/400x250";
 
-      if (!foundPost) {
-        blogTitle.innerText = "Post not found";
-        blogContent.innerHTML = "<p>This blog does not exist.</p>";
-        return;
-      }
+    const text = content
+      .replace(/(<([^>]+)>)/gi,"")
+      .substring(0,120) + "...";
 
-      const blogContainer = document.getElementById("blogContainer");
-const loadingText = document.getElementById("loadingText");
+    const card = document.createElement("div");
+    card.className = "blog-card";
 
-fetch("https://yeshukenanhedost.blogspot.com/feeds/posts/default?alt=json")
-  .then(res => res.json())
-  .then(data => {
+    card.innerHTML = `
+      <img src="${image}">
+      <div class="blog-card-content">
+        <h3>${title}</h3>
+        <p>${text}</p>
+      </div>
+    `;
 
-    loadingText.remove();
+    card.onclick = () => openBlog(link);
 
-    const posts = data.feed.entry.slice(0,6); // show 6 blogs
+    blogsDiv.appendChild(card);
 
-    posts.forEach(post => {
-
-      const title = post.title.$t;
-      const content = post.content.$t;
-      const link = post.link.find(l => l.rel === "alternate").href;
-
-      // get first image
-      const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-      const image = imgMatch ? imgMatch[1] : "https://via.placeholder.com/400x250";
-
-      // remove html tags
-      const text = content.replace(/(<([^>]+)>)/gi, "").substring(0,120) + "...";
-
-      const card = document.createElement("div");
-      card.className = "blog-card";
-      card.innerHTML = `
-        <img src="${image}">
-        <div class="blog-card-content">
-          <h3>${title}</h3>
-          <p>${text}</p>
-        </div>
-      `;
-
-      card.onclick = () => {
-        window.location.href = `blog.html?url=${encodeURIComponent(link)}`;
-      };
-
-      blogContainer.appendChild(card);
-
-    });
-
-  })
-  .catch(err => {
-    loadingText.innerText = "Failed to load blogs.";
-    console.error(err);
   });
 
+});
 
-      blogTitle.innerText = foundPost.title.$t;
-      blogContent.innerHTML = foundPost.content.$t;
+function openBlog(url){
+  list.style.display = "none";
+  reader.style.display = "block";
+  frame.src = url;
+}
 
-    })
-    .catch(err => {
-      blogTitle.innerText = "Error loading blog";
-      blogContent.innerHTML = "<p>Unable to load post.</p>";
-      console.log(err);
-    });
-
+function goBack(){
+  reader.style.display = "none";
+  list.style.display = "block";
 }
