@@ -156,3 +156,30 @@ button:hover{
   }
 }
 
+/* MENU BUTTON */
+.menu-btn{
+  font-size:24px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:#0b3d2e;
+}
+
+/* SIDEBAR COLLAPSED */
+.sidebar{
+  transition:0.3s;
+}
+
+.sidebar.closed{
+  transform:translateX(-100%);
+  position:absolute;
+}
+
+/* MAIN EXPAND */
+.main{
+  transition:0.3s;
+}
+
+.main.full{
+  margin-left:0;
+}
