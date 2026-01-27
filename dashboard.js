@@ -46,3 +46,13 @@ logoutBtn.addEventListener("click", () => {
 menuBtn.onclick = () => {
   sidebar.classList.toggle("show");
 };
+
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+const main = document.querySelector(".main");
+
+menuBtn.onclick = ()=>{
+  sidebar.classList.toggle("closed");
+  main.classList.toggle("full");
+};
+
