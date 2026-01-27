@@ -1,0 +1,12 @@
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyB6-aF6ycLVrmLBAr-1X4fL6ZVgwF0agFc",
+  authDomain: "yeshu-ke-nanhe-dost.firebaseapp.com",
+  projectId: "yeshu-ke-nanhe-dost",
+  storageBucket: "yeshu-ke-nanhe-dost.appspot.com",
+  messagingSenderId: "496839768513",
+  appId: "1:496839768513:web:e49e55eb2d196c8e095740"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
