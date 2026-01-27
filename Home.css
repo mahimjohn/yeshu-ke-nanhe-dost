@@ -68,9 +68,9 @@ body{
     gap:10px;
 }
 
-.logo{
-    height:45px;
-    border-radius: 45px;
+.logo {
+    height: 32px;
+    width: auto;
 }
 
 .brand{
