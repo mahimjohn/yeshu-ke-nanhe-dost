@@ -4,6 +4,19 @@ body{
   background:#f3f3f3;
 }
 
+/* HAMBURGER */
+.menu-btn{
+  position:fixed;
+  top:15px;
+  left:15px;
+  font-size:26px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  color:#0b3d2e;
+  z-index:2000;
+}
+
 /* LAYOUT */
 .layout{
   display:flex;
@@ -73,6 +86,7 @@ body{
 
 .main.shift{
   margin-left:220px;
+  width:calc(100% - 220px);
 }
 
 /* TOPBAR */
@@ -80,21 +94,14 @@ body{
   background:white;
   padding:15px 20px;
   display:flex;
-  justify-content:space-between;
+  justify-content:flex-end;
   align-items:center;
   box-shadow:0 2px 4px rgba(0,0,0,0.1);
   position:sticky;
   top:0;
 }
 
-.menu-btn{
-  font-size:26px;
-  background:none;
-  border:none;
-  cursor:pointer;
-  color:#0b3d2e;
-}
-
+/* PROFILE */
 .profile{
   display:flex;
   align-items:center;
@@ -109,7 +116,7 @@ body{
 
 /* CONTENT */
 .content{
-  padding:30px;
+  padding:90px 30px 30px;
 }
 
 .cards{
