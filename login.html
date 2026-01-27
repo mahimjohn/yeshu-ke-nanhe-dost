@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Yeshu Ke Nanhe Dost</title>
+<link rel="stylesheet" href="login.css">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+</head>
+
+<body>
+
+<div class="page">
+<div class="card">
+
+<!-- LEFT PANEL -->
+<div class="left">
+
+<div class="login-header">
+    <img src="logos/logo.png" class="login-logo">
+    <h2>Yeshu Ke Nanhe Dost</h2>
+</div>
+
+<p class="sub">Welcome Back!</p>
+
+<!-- TOGGLE TABS -->
+<div class="tabs">
+    <div class="slider"></div>
+    <button id="signinBtn" class="tab active">Sign In</button>
+    <button id="signupBtn" class="tab">Sign Up</button>
+</div>
+
+<input type="email" placeholder="Enter your email">
+<input type="password" placeholder="Enter your password">
+
+<div class="options">
+    <label><input type="checkbox"> Remember me</label>
+    <a href="#">Forgot Password?</a>
+</div>
+
+<button class="login-btn">Login</button>
+
+<div class="or">OR</div>
+
+<div class="social-login">
+
+<button class="social-btn google-btn" onclick="googleLogin()">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+    <span>Log in with Google</span>
+</button>
+
+<button class="social-btn apple-btn" onclick="appleLogin()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg">
+    <span>Log in with Apple</span>
+</button>
+
+<button class="social-btn facebook-btn" onclick="facebookLogin()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png">
+    <span>Log in with Facebook</span>
+</button>
+
+<button class="social-btn instagram-btn" onclick="instagramLogin()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+    <span>Log in with Instagram</span>
+</button>
+
+</div>
+
+
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right">
+<h2>Helping Children Grow in Christ</h2>
+<p>
+Guiding children in spiritual knowledge, faith,
+love and Christ-centered living.
+</p>
+</div>
+
+</div>
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>

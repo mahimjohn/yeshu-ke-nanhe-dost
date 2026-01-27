@@ -1,0 +1,91 @@
+/* GLOBAL */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* =====================
+   TOP BAR
+===================== */
+
+.top-bar {
+    background: #0b3d2e;
+    height: 40px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGIN AREA */
+
+.login-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+.user-icon {
+    height: 22px;
+}
+
+.login-area a {
+    color: white;
+    text-decoration: none;
+}
+
+.login-area a:hover {
+    text-decoration: underline;
+}
+
+/* =====================
+   MAIN NAVBAR
+===================== */
+
+.main-navbar {
+    background: white;
+    height: 85px;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* LEFT */
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    height: 45px;
+}
+
+.brand {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* CENTER MENU */
+
+.nav-center {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-center a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+.nav-center a:hover {
+    color: #f1c40f;
+}

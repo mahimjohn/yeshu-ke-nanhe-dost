@@ -1,0 +1,233 @@
+*{
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+margin:0;
+background: linear-gradient(135deg,#0b3d2e,#1abc9c);
+min-height:100vh;
+}
+
+/* PAGE CENTER */
+
+.page{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px 0;
+}
+
+/* CARD */
+
+.card{
+width:900px;
+max-width:95%;
+background: rgba(255,255,255,0.15);
+backdrop-filter: blur(12px);
+border-radius:20px;
+display:flex;
+overflow:hidden;
+box-shadow:0 15px 40px rgba(0,0,0,0.4);
+}
+
+/* LEFT */
+
+.left{
+width:50%;
+background:#f9f9f9;
+padding:50px;
+max-height:520px;
+overflow-y:auto;
+}
+
+/* RIGHT */
+
+.right{
+width:50%;
+background: linear-gradient(135deg,#0b3d2e,#1abc9c);
+color:white;
+padding:60px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+/* TEXT */
+
+.left h1{
+margin:0;
+color:#0b3d2e;
+}
+
+.sub{
+color:#555;
+margin-bottom:25px;
+}
+
+/* TABS */
+
+.tabs{
+position:relative;
+display:flex;
+background:#e5e5e5;
+border-radius:30px;
+overflow:hidden;
+margin-bottom:25px;
+height:40px;
+}
+
+.slider{
+position:absolute;
+top:0;
+left:0;
+width:50%;
+height:100%;
+background:#0b3d2e;
+border-radius:30px;
+transition:0.3s;
+}
+
+.tab{
+flex:1;
+border:none;
+background:none;
+cursor:pointer;
+z-index:2;
+font-size:14px;
+}
+
+.tab.active{
+color:white;
+}
+
+/* INPUTS */
+
+.left input{
+width:100%;
+padding:12px;
+border-radius:30px;
+border:1px solid #ccc;
+margin-bottom:15px;
+}
+
+/* OPTIONS */
+
+.options{
+display:flex;
+justify-content:space-between;
+font-size:13px;
+margin-bottom:25px;
+}
+
+.options a{
+color:#0b3d2e;
+text-decoration:none;
+}
+
+/* LOGIN BUTTON */
+
+.login-btn{
+width:100%;
+padding:12px;
+border-radius:30px;
+border:none;
+background:#0b3d2e;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* OR */
+
+.or{
+text-align:center;
+margin:20px 0;
+color:#777;
+}
+
+/* SOCIAL LOGIN */
+
+.social-login{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.social-btn{
+width:100%;
+padding:12px;
+border-radius:30px;
+border:1px solid #ccc;
+background:white;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+font-size:14px;
+}
+
+/* SOCIAL COLORS */
+
+.apple-btn{
+background:black;
+color:white;
+border:none;
+}
+
+.apple-btn img{
+height:18px;
+filter:invert(1);
+}
+
+.google-btn img,
+.facebook-btn img,
+.instagram-btn img{
+height:18px;
+}
+
+.facebook-btn{
+border-color:#1877f2;
+color:#1877f2;
+}
+
+.instagram-btn{
+border-color:#e84393;
+color:#e84393;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+.card{
+flex-direction:column;
+}
+
+.left,.right{
+width:100%;
+max-height:none;
+}
+}
+
+.social-btn img{
+    height:18px;
+    width:18px;
+    object-fit:contain;
+}
+
+/* LOGIN HEADER LOGO */
+
+.login-header{
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:10px;
+}
+
+.login-logo{
+height:45px;
+width:45px;
+border-radius:50%;
+}
