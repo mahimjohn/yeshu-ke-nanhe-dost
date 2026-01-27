@@ -1,46 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Blog</title>
+<title>Blogs | Yeshu Ke Nanhe Dost</title>
 
-<style>
-body{
-  font-family: Arial, sans-serif;
-  margin:0;
-}
-
-header{
-  padding:20px 40px;
-  box-shadow:0 2px 4px rgba(0,0,0,0.1);
-}
-
-iframe{
-  width:100%;
-  height:90vh;
-  border:none;
-}
-</style>
-
+<link rel="stylesheet" href="blog.css">
 </head>
+
 <body>
 
 <header>
-  <h2>Yeshu Ke Nanhe Dost</h2>
+  <h2>Yeshu Ke Nanhe Dost - Blogs</h2>
 </header>
 
-<iframe id="blogFrame"></iframe>
+<!-- BLOG LIST -->
+<section id="list" class="blog-section">
+  <h2>All Blogs</h2>
 
-<script>
-const params = new URLSearchParams(window.location.search);
-const url = params.get("url");
+  <div id="blogs" class="blog-grid">
+    <p id="loading">Loading blogs...</p>
+  </div>
+</section>
 
-if(url){
-  document.getElementById("blogFrame").src = url;
-}else{
-  document.body.innerHTML = "<h2 style='padding:40px'>No blog selected</h2>";
-}
-</script>
+<!-- BLOG READER -->
+<section id="reader">
+  <button class="back-btn" onclick="goBack()">← Back to Blogs</button>
+  <iframe id="frame"></iframe>
+</section>
 
+<script src="blog.js"></script>
 </body>
 </html>
