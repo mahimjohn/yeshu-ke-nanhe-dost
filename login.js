@@ -8,8 +8,11 @@ const firebaseConfig = {
   appId: "1:496839768513:web:e49e55eb2d196c8e095740"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase safely
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 const auth = firebase.auth();
 
 /* ==========================
@@ -82,3 +85,13 @@ function appleLogin(){
       alert(error.message);
     });
 }
+
+/* ==========================
+   AUTO REDIRECT IF LOGGED IN
+========================== */
+
+auth.onAuthStateChanged(user=>{
+  if(user){
+    window.location.href="dashboard.html";
+  }
+});
