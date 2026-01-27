@@ -1,13 +1,22 @@
-// FIREBASE CONFIG (paste your own keys here)
+// ===============================
+// FIREBASE CONFIGURATION
+// ===============================
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyB6-aF6ycLVrmLBAr-1X4fL6ZVgwF0agFc",
   authDomain: "yeshu-ke-nanhe-dost.firebaseapp.com",
   projectId: "yeshu-ke-nanhe-dost",
-  appId: "YOUR_APP_ID"
+  storageBucket: "yeshu-ke-nanhe-dost.firebasestorage.app",
+  messagingSenderId: "496839768513",
+  appId: "1:496839768513:web:e49e55eb2d196c8e095740"
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+// ===============================
+// AUTH & ELEMENTS
+// ===============================
 
 const auth = firebase.auth();
 
@@ -16,26 +25,35 @@ const profileBox = document.getElementById("profileBox");
 const userAvatar = document.getElementById("userAvatar");
 const userName = document.getElementById("userName");
 
-/* CHECK LOGIN STATUS */
+// ===============================
+// CHECK LOGIN STATUS
+// ===============================
 
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged((user) => {
 
-    if(user){
-        loginLink.style.display = "none";
-        profileBox.style.display = "flex";
+  console.log("Auth state:", user);
 
-        userAvatar.src = user.photoURL;
-        userName.textContent = user.displayName;
-    }
-    else{
-        loginLink.style.display = "block";
-        profileBox.style.display = "none";
-    }
+  if (user) {
+    // User logged in
+    loginLink.style.display = "none";
+    profileBox.style.display = "flex";
+
+    userAvatar.src = user.photoURL || "logos/logo.png";
+    userName.textContent = user.displayName || "User";
+  } 
+  else {
+    // User logged out
+    loginLink.style.display = "block";
+    profileBox.style.display = "none";
+  }
 
 });
 
-/* LOGOUT */
+// ===============================
+// LOGOUT
+// ===============================
 
-userAvatar.onclick = function(){
-    auth.signOut();
-};
+userAvatar.addEventListener("click", () => {
+  auth.signOut();
+  alert("Logged out successfully");
+});
