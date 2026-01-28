@@ -116,6 +116,7 @@ body{
 
 .sidebar .logout-btn{
   margin-top:auto;
+  margin-bottom:20px;
   background:#145c46;
   border:none;
   color:white;
