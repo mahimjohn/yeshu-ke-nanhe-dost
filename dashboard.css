@@ -36,10 +36,16 @@ body{
   align-items:center;
   justify-content:center;
   font-size:26px;
-  background:#0b3d2e;
+  background:transparent;   /* no green by default */
   border:none;
   border-radius:6px;
   cursor:pointer;
+  color:#0b3d2e;
+  transition:0.2s;
+}
+
+.menu-btn:hover{
+  background:#0b3d2e;  /* green only on hover */
   color:white;
 }
 
@@ -157,7 +163,7 @@ body{
 
 /* When sidebar open, push content */
 .main.shift{
-  margin-left:220px;
+  margin-left:240px;
   padding-left:40px;
 }
 
