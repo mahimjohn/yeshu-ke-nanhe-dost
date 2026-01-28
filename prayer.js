@@ -69,3 +69,15 @@ logoutBtn.onclick=()=>{
     window.location.href="index.html";
   });
 };
+
+/* SIDEBAR TOGGLE */
+
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+const main = document.querySelector(".main");
+
+menuBtn.onclick = ()=>{
+  sidebar.classList.toggle("show");
+  main.classList.toggle("shift");
+};
+
