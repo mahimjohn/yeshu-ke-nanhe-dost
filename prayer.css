@@ -67,3 +67,59 @@ h2{
   color:#0b3d2e;
   font-weight:bold;
 }
+
+ /* ================= PRAYER FORM ================= */
+
+.prayer-form-card{
+  max-width:600px;
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  margin-top:20px;
+}
+
+.prayer-form-card h2{
+  margin-bottom:20px;
+}
+
+/* Inputs */
+
+.prayer-form-card label{
+  display:block;
+  margin-bottom:6px;
+  font-weight:600;
+}
+
+.prayer-form-card input,
+.prayer-form-card select,
+.prayer-form-card textarea{
+  width:100%;
+  padding:12px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  margin-bottom:18px;
+  font-size:14px;
+}
+
+.prayer-form-card textarea{
+  resize:vertical;
+  min-height:120px;
+}
+
+/* Submit Button */
+
+.submit-btn{
+  background:#0b3d2e;
+  color:white;
+  border:none;
+  padding:12px 20px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.submit-btn:hover{
+  background:#145c46;
+}
+
