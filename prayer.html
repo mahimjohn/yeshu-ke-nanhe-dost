@@ -46,15 +46,47 @@
 <!-- MAIN -->
 <div class="main">
 
-<h2>My Prayer Requests</h2>
+<h1>My Prayer Requests</h1>
 
-<form id="prayerForm">
-<textarea id="prayerInput" placeholder="Write your prayer request..." required></textarea>
-<button type="submit">Submit Prayer Request</button>
-</form>
+<div class="prayer-form-card">
 
-<h3>Your Requests</h3>
-<div id="requestList"></div>
+  <h2>Submit a Prayer Request</h2>
+
+  <form id="prayerForm">
+
+    <!-- Name -->
+    <label>Person Name (optional)</label>
+    <input type="text" id="personName" placeholder="Enter name (optional)">
+
+    <!-- Topic -->
+    <label>Prayer Request Topic</label>
+    <select id="prayerTopic" required>
+      <option value="">Select topic</option>
+      <option>Birthday</option>
+      <option>Anniversary</option>
+      <option>Birth of Child</option>
+      <option>Death / Loss</option>
+      <option>Health Issues</option>
+      <option>Accident Recovery</option>
+      <option>Exams / Studies</option>
+      <option>Job / Career</option>
+      <option>Family Problems</option>
+      <option>Other</option>
+    </select>
+
+    <!-- Description -->
+    <label>Description</label>
+    <textarea id="prayerDescription" placeholder="Write your prayer request..." required></textarea>
+
+    <!-- Submit -->
+    <button type="submit" class="submit-btn">
+      Submit Prayer Request
+    </button>
+
+  </form>
+
+</div>
+
 
 </div>
 
