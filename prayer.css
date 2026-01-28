@@ -1,0 +1,31 @@
+#prayerForm{
+  max-width:600px;
+  margin-top:20px;
+}
+
+#prayerInput{
+  width:100%;
+  min-height:120px;
+  padding:12px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+
+#requestList{
+  margin-top:25px;
+}
+
+.request-card{
+  background:white;
+  padding:12px;
+  border-radius:6px;
+  margin-bottom:10px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.status{
+  font-size:12px;
+  font-weight:bold;
+  color:#0b3d2e;
+}
