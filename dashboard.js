@@ -1,9 +1,15 @@
+/* ================= SIDEBAR ELEMENTS ================= */
+
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.querySelector(".sidebar");
 const main = document.querySelector(".main");
 
+/* ================= FIREBASE ================= */
+
 const auth = firebase.auth();
-const db = firebase.database();   // ✅ IMPORTANT
+const db = firebase.database();
+
+/* ================= USER UI ================= */
 
 const userPhoto = document.getElementById("userPhoto");
 const userName = document.getElementById("userName");
@@ -13,51 +19,61 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 const prayerCountText = document.getElementById("prayerCount");
 
-/* ================= AUTH ================= */
+/* ================= AUTH CHECK ================= */
 
 auth.onAuthStateChanged(user => {
 
-  if(!user){
-    window.location.href="index.html";
+  if (!user) {
+    window.location.href = "index.html";
     return;
   }
 
+  // Profile info
   userPhoto.src = user.photoURL || "logos/logo.png";
-  userName.innerText = user.displayName || "User";
-
   sidePhoto.src = user.photoURL || "logos/logo.png";
+
+  userName.innerText = user.displayName || "User";
   sideName.innerText = user.displayName || "User";
 
-  /* 🔥 PRAYER COUNT */
-  db.ref("prayers/" + user.uid).on("value", snap => {
+  // Load prayer request count
+  loadPrayerCount(user.uid);
 
-    const count = snap.numChildren();
+});
 
-    if(count === 0){
+/* ================= PRAYER COUNT ================= */
+
+function loadPrayerCount(uid) {
+
+  db.ref("prayers/" + uid).on("value", snapshot => {
+
+    if (!snapshot.exists()) {
       prayerCountText.innerText = "No requests submitted";
+      return;
     }
-    else if(count === 1){
+
+    const count = snapshot.numChildren();
+
+    if (count === 1) {
       prayerCountText.innerText = "1 request submitted";
-    }
-    else{
+    } else {
       prayerCountText.innerText = count + " requests submitted";
     }
 
   });
 
-});
+}
 
 /* ================= LOGOUT ================= */
 
 logoutBtn.onclick = () => {
-  auth.signOut().then(()=>{
-    window.location.href="index.html";
+  auth.signOut().then(() => {
+    window.location.href = "index.html";
   });
 };
 
-/* ================= SIDEBAR ================= */
+/* ================= SIDEBAR TOGGLE ================= */
 
-menuBtn.onclick = ()=>{
+menuBtn.onclick = () => {
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
