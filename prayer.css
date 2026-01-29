@@ -69,14 +69,16 @@
   transition:margin-left 0.3s ease;
 }
 
-/* Top Gradient Bar */
+/* Top Bar */
 
 .history-title{
   background:linear-gradient(to right,#0b3d2e,#145c46);
   color:white;
-  padding:12px;
+  padding:14px;
+  font-size:18px;
   font-weight:bold;
-  border-radius:6px 6px 0 0;
+  border-radius:8px 8px 0 0;
+  border-bottom:4px solid #f2c94c;   /* Yellow accent */
 }
 
 /* Table */
@@ -92,33 +94,36 @@
 .history-table th{
   background:#0b3d2e;
   color:white;
-  padding:12px;
+  padding:14px;
   text-align:left;
   font-weight:600;
+  border-bottom:3px solid #f2c94c;   /* Yellow line */
 }
 
 /* Data Cells */
 
 .history-table td{
-  padding:12px;
-  border-top:1px solid #ddd;
+  padding:14px;
+  border-top:1px solid #e0e0e0;
 }
 
 /* Status Badge */
 
 .status-badge{
-  background:#145c46;
-  color:white;
-  padding:5px 12px;
+  background:#f2c94c;   /* Yellow */
+  color:#0b3d2e;        /* Dark green text */
+  padding:6px 14px;
   border-radius:20px;
-  font-size:12px;
+  font-size:13px;
+  font-weight:600;
 }
 
-/* Move history when sidebar opens */
+/* Shift with sidebar */
 
 .sidebar.show ~ .main .request-history-wrapper{
   margin-left:220px;
 }
+
 
 .prayer-form-card label{
   font-weight:600;
