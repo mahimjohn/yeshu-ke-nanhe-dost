@@ -89,7 +89,7 @@ function loadHistory(uid){
         <td>${data.name}</td>
         <td>${data.topic}</td>
         <td>${data.description}</td>
-        <td class="status">${data.status}</td>
+        <td class="status ${data.status}">${data.status}</td>
       `;
 
       historyBody.appendChild(row);
