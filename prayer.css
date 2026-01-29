@@ -1,11 +1,15 @@
 .prayer-form-card{
   max-width:600px;
   background:white;
-  padding:25px;
+  padding:35px;              /* more inner space */
   border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
   margin-top:20px;
+
+  /* cleaner look */
+  box-shadow:none;
+  border:1px solid #e5e5e5;
 }
+
 
 .prayer-form-card label{
   font-weight:600;
@@ -17,16 +21,20 @@
 .prayer-form-card select,
 .prayer-form-card textarea{
   width:100%;
-  padding:12px;
+  height:46px;               /* same height */
+  padding:10px 12px;
   border-radius:6px;
   border:1px solid #ccc;
   margin-bottom:18px;
   font-size:14px;
+  box-sizing:border-box;
 }
 
 .prayer-form-card textarea{
-  min-height:120px;
+  height:140px;              /* bigger textarea */
+  resize:vertical;
 }
+
 
 .submit-btn{
   background:#0b3d2e;
