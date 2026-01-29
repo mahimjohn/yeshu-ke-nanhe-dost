@@ -78,7 +78,7 @@
   font-size:18px;
   font-weight:bold;
   border-radius:8px 8px 0 0;
-  border-bottom:4px solid #f2c94c;   /* Yellow accent */
+  border-bottom:3px solid #f2c94c;   /* Yellow accent */
 }
 
 /* Table */
@@ -87,6 +87,10 @@
   width:100%;
   border-collapse:collapse;
   background:white;
+}
+
+.history-table tr:hover td{
+  background:#f9faf9;
 }
 
 /* Header Row */
