@@ -18,6 +18,7 @@
 <!-- TOPBAR -->
 <div class="topbar">
   <button id="menuBtn" class="menu-btn">☰</button>
+
   <div class="profile">
     <img id="userPhoto">
     <span id="userName"></span>
@@ -40,55 +41,75 @@
   <a href="#">Settings</a>
 
   <button id="logoutBtn" class="logout-btn">Logout</button>
+
 </aside>
 
 <!-- MAIN -->
 <div class="main">
 
-  <h1>My Prayer Requests</h1>
+<h1>My Prayer Requests</h1>
 
-  <!-- FORM -->
-  <div class="prayer-form-card">
-    <h2>Need Prayer? Want to Connect?</h2>
+<!-- FORM -->
+<div class="prayer-form-card">
 
-<p class="prayer-intro">
-  Whether you're looking for prayer, want to share your testimony, or simply need someone to stand with you in faith — we are here for you.
+<h2>Submit a Prayer Request</h2>
+
+<p class="form-desc">
+Need Prayer? Want to Connect?<br>
+We are here to pray with you.
 </p>
 
-<p class="prayer-subtext">
-  Your request will be received with care and lifted up in prayer.
-</p>
+<form id="prayerForm">
 
+<label>Person Name</label>
+<input type="text" id="personName" required>
 
-    <form id="prayerForm">
+<label>Prayer Request Topic</label>
+<select id="prayerTopic" required>
+  <option value="">Select topic</option>
+  <option>Birthday</option>
+  <option>Anniversary</option>
+  <option>Birth of Child</option>
+  <option>Death / Loss</option>
+  <option>Health Issues</option>
+  <option>Accident Recovery</option>
+  <option>Exams / Studies</option>
+  <option>Job / Career</option>
+  <option>Family Problems</option>
+  <option>Other</option>
+</select>
 
-      <label>Person Name</label>
-      <input type="text" id="personName" required>
+<label>Description</label>
+<textarea id="prayerDescription" required></textarea>
 
-      <label>Prayer Request Topic</label>
-      <select id="prayerTopic" required>
-        <option value="">Select topic</option>
-        <option>Birthday</option>
-        <option>Anniversary</option>
-        <option>Birth of Child</option>
-        <option>Death / Loss</option>
-        <option>Health Issues</option>
-        <option>Accident Recovery</option>
-        <option>Exams / Studies</option>
-        <option>Job / Career</option>
-        <option>Family Problems</option>
-        <option>Other</option>
-      </select>
+<button type="submit" class="submit-btn">Submit Prayer Request</button>
 
-      <label>Description</label>
-      <textarea id="prayerDescription" required></textarea>
+</form>
 
-      <button type="submit" class="submit-btn">Submit Prayer Request</button>
-    </form>
-  </div>
+</div>
 
-  <!-- LIST -->
-  <div id="requestList"></div>
+<!-- HISTORY -->
+<div class="request-history-wrapper">
+
+<div class="history-title">YOUR REQUEST HISTORY</div>
+
+<table class="history-table">
+<thead>
+<tr>
+  <th>#</th>
+  <th>Name</th>
+  <th>Topic</th>
+  <th>Description</th>
+  <th>Status</th>
+</tr>
+</thead>
+
+<tbody id="requestList">
+</tbody>
+
+</table>
+
+</div>
 
 </div>
 
