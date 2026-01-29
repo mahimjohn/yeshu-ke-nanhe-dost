@@ -49,10 +49,10 @@ function loadPrayerCount(uid){
 
     const count = snap.numChildren();
 
-    if(count===1){
-      prayerCountText.innerText="1 request submitted";
+    if(count === 1){
+      prayerCountText.innerText = "1 request submitted";
     }else{
-      prayerCountText.innerText= count + " requests submitted";
+      prayerCountText.innerText = count + " requests submitted";
     }
 
   });
@@ -61,7 +61,7 @@ function loadPrayerCount(uid){
 
 /* ================= LOGOUT ================= */
 
-logoutBtn.onclick=()=>{
+logoutBtn.onclick = ()=>{
   auth.signOut().then(()=>{
     window.location.href="index.html";
   });
@@ -69,14 +69,14 @@ logoutBtn.onclick=()=>{
 
 /* ================= SIDEBAR TOGGLE ================= */
 
-menuBtn.onclick=()=>{
+menuBtn.onclick = ()=>{
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
 
 /* ================= VERSE OF THE DAY ================= */
 
-const verses=[
+const verses = [
  {text:"The Lord is my shepherd; I shall not want.",ref:"Psalm 23:1"},
  {text:"I can do all things through Christ who strengthens me.",ref:"Philippians 4:13"},
  {text:"For God so loved the world that He gave His only Son.",ref:"John 3:16"},
@@ -84,41 +84,51 @@ const verses=[
  {text:"Trust in the Lord with all your heart.",ref:"Proverbs 3:5"}
 ];
 
-const today=new Date().getDate();
-const verse=verses[today % verses.length];
+const today = new Date().getDate();
+const verse = verses[today % verses.length];
 
-document.getElementById("verseText").innerText=verse.text;
-document.getElementById("verseRef").innerText=verse.ref;
+document.getElementById("verseText").innerText = verse.text;
+document.getElementById("verseRef").innerText = verse.ref;
 
 /* ================= FEATURED BLOGS ================= */
 
-const API_KEY="AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
-const BLOG_ID="571259613266997453";
+const API_KEY = "AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
+const BLOG_ID = "571259613266997453";
 
-const featuredBlogs=document.getElementById("featuredBlogs");
+const featuredBlogs = document.getElementById("featuredBlogs");
 
 fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=100`)
-.then(res=>res.json())
-.then(data=>{
+.then(res => res.json())
+.then(data => {
 
-  const posts=data.items.sort(()=>0.5-Math.random()).slice(0,5);
+  const allPosts = data.items;
 
-  posts.forEach(post=>{
+  /* 🔁 DAILY ROTATION LOGIC */
+  const dayIndex = new Date().getDate();
+  const start = dayIndex % allPosts.length;
 
-    const temp=document.createElement("div");
-    temp.innerHTML=post.content;
-    const img=temp.querySelector("img");
-    const image=img?img.src:"https://via.placeholder.com/300";
+  let posts = [];
 
-    const card=document.createElement("div");
-    card.className="blog-card";
+  for(let i=0;i<5;i++){
+    posts.push(allPosts[(start + i) % allPosts.length]);
+  }
 
-    card.innerHTML=`
+  posts.forEach(post => {
+
+    const temp = document.createElement("div");
+    temp.innerHTML = post.content;
+    const img = temp.querySelector("img");
+    const image = img ? img.src : "https://via.placeholder.com/300";
+
+    const card = document.createElement("div");
+    card.className = "blog-card";
+
+    card.innerHTML = `
       <img src="${image}">
       <h3>${post.title}</h3>
     `;
 
-    card.onclick=()=>{
+    card.onclick = ()=>{
       window.location.href="blog.html";
     };
 
