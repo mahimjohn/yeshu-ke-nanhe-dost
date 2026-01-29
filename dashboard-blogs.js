@@ -19,13 +19,18 @@ const blogTitle = document.getElementById("blogTitle");
 const blogContent = document.getElementById("blogContent");
 const saveBtn = document.getElementById("saveBtn");
 
-/* ================= AUTH CHECK ================= */
+/* ================= AUTH ================= */
 
 auth.onAuthStateChanged(user=>{
   if(!user){
     window.location.href="login.html";
   }
 });
+
+/* ================= URL PARAM CHECK ================= */
+
+const params = new URLSearchParams(window.location.search);
+const openPostId = params.get("postId");
 
 /* ================= LOAD BLOG LIST ================= */
 
@@ -50,11 +55,19 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
       <h3>${post.title}</h3>
     `;
 
-    card.onclick=()=>openBlog(post.id);
+    card.onclick=()=>{
+      window.location.href=
+        "dashboard-blogs.html?postId="+post.id;
+    };
 
     blogsDiv.appendChild(card);
 
   });
+
+  // ✅ If postId in URL → open directly
+  if(openPostId){
+    openBlog(openPostId);
+  }
 
 });
 
@@ -72,7 +85,9 @@ function openBlog(postId){
     blogTitle.innerText=post.title;
     blogContent.innerHTML=post.content;
 
-    saveBtn.onclick=()=>saveBlog(post.id,post.title);
+    saveBtn.onclick=()=>{
+      saveBlog(post.id,post.title);
+    };
 
   });
 
@@ -103,4 +118,7 @@ function saveBlog(postId,title){
 function goBack(){
   reader.style.display="none";
   list.style.display="block";
+
+  // remove URL param
+  history.replaceState({}, document.title, "dashboard-blogs.html");
 }
