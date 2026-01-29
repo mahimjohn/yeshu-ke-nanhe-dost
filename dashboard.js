@@ -147,8 +147,9 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
 
     /* Open exact blog */
     card.onclick=()=>{
-      window.location.href="blog.html?post="+post.id;
-    };
+  window.location.href="dashboard-blogs.html?postId="+post.id;
+};
+
 
     featuredBlogs.appendChild(card);
 
