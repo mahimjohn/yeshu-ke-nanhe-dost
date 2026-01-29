@@ -65,3 +65,23 @@ function goBack(){
   reader.style.display = "none";
   list.style.display = "block";
 }
+
+function saveBlog(postId,title){
+
+  const user=firebase.auth().currentUser;
+
+  if(!user){
+    alert("Please login first");
+    return;
+  }
+
+  firebase.database()
+  .ref("savedBlogs/"+user.uid)
+  .push({
+    postId:postId,
+    title:title
+  });
+
+  alert("Blog Saved!");
+}
+
