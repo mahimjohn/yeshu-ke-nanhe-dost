@@ -1,4 +1,4 @@
-/* ================= SIDEBAR ELEMENTS ================= */
+/* ================= SIDEBAR ================= */
 
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.querySelector(".sidebar");
@@ -9,7 +9,7 @@ const main = document.querySelector(".main");
 const auth = firebase.auth();
 const db = firebase.database();
 
-/* ================= USER UI ================= */
+/* ================= USER ================= */
 
 const userPhoto = document.getElementById("userPhoto");
 const userName = document.getElementById("userName");
@@ -19,44 +19,40 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 const prayerCountText = document.getElementById("prayerCount");
 
-/* ================= AUTH CHECK ================= */
+/* ================= AUTH ================= */
 
 auth.onAuthStateChanged(user => {
 
-  if (!user) {
-    window.location.href = "index.html";
+  if(!user){
+    window.location.href="index.html";
     return;
   }
 
-  // Profile info
   userPhoto.src = user.photoURL || "logos/logo.png";
   sidePhoto.src = user.photoURL || "logos/logo.png";
-
   userName.innerText = user.displayName || "User";
   sideName.innerText = user.displayName || "User";
 
-  // Load prayer request count
   loadPrayerCount(user.uid);
-
 });
 
 /* ================= PRAYER COUNT ================= */
 
-function loadPrayerCount(uid) {
+function loadPrayerCount(uid){
 
-  db.ref("prayers/" + uid).on("value", snapshot => {
+  db.ref("prayers/" + uid).on("value", snap => {
 
-    if (!snapshot.exists()) {
-      prayerCountText.innerText = "No requests submitted";
+    if(!snap.exists()){
+      prayerCountText.innerText="No requests submitted";
       return;
     }
 
-    const count = snapshot.numChildren();
+    const count = snap.numChildren();
 
-    if (count === 1) {
-      prayerCountText.innerText = "1 request submitted";
-    } else {
-      prayerCountText.innerText = count + " requests submitted";
+    if(count===1){
+      prayerCountText.innerText="1 request submitted";
+    }else{
+      prayerCountText.innerText= count + " requests submitted";
     }
 
   });
@@ -65,31 +61,69 @@ function loadPrayerCount(uid) {
 
 /* ================= LOGOUT ================= */
 
-logoutBtn.onclick = () => {
-  auth.signOut().then(() => {
-    window.location.href = "index.html";
+logoutBtn.onclick=()=>{
+  auth.signOut().then(()=>{
+    window.location.href="index.html";
   });
 };
 
 /* ================= SIDEBAR TOGGLE ================= */
 
-menuBtn.onclick = () => {
+menuBtn.onclick=()=>{
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
 
-/* ========== VERSE OF THE DAY ========== */
+/* ================= VERSE OF THE DAY ================= */
 
-const verses = [
-  { text:"The Lord is my shepherd; I shall not want.", ref:"Psalm 23:1" },
-  { text:"I can do all things through Christ who strengthens me.", ref:"Philippians 4:13" },
-  { text:"For God so loved the world that He gave His only Son.", ref:"John 3:16" },
-  { text:"Be still, and know that I am God.", ref:"Psalm 46:10" },
-  { text:"Trust in the Lord with all your heart.", ref:"Proverbs 3:5" }
+const verses=[
+ {text:"The Lord is my shepherd; I shall not want.",ref:"Psalm 23:1"},
+ {text:"I can do all things through Christ who strengthens me.",ref:"Philippians 4:13"},
+ {text:"For God so loved the world that He gave His only Son.",ref:"John 3:16"},
+ {text:"Be still, and know that I am God.",ref:"Psalm 46:10"},
+ {text:"Trust in the Lord with all your heart.",ref:"Proverbs 3:5"}
 ];
 
-const today = new Date().getDate();
-const verse = verses[today % verses.length];
+const today=new Date().getDate();
+const verse=verses[today % verses.length];
 
-document.getElementById("verseText").innerText = verse.text;
-document.getElementById("verseRef").innerText = verse.ref;
+document.getElementById("verseText").innerText=verse.text;
+document.getElementById("verseRef").innerText=verse.ref;
+
+/* ================= FEATURED BLOGS ================= */
+
+const API_KEY="AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
+const BLOG_ID="571259613266997453";
+
+const featuredBlogs=document.getElementById("featuredBlogs");
+
+fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=100`)
+.then(res=>res.json())
+.then(data=>{
+
+  const posts=data.items.sort(()=>0.5-Math.random()).slice(0,5);
+
+  posts.forEach(post=>{
+
+    const temp=document.createElement("div");
+    temp.innerHTML=post.content;
+    const img=temp.querySelector("img");
+    const image=img?img.src:"https://via.placeholder.com/300";
+
+    const card=document.createElement("div");
+    card.className="blog-card";
+
+    card.innerHTML=`
+      <img src="${image}">
+      <h3>${post.title}</h3>
+    `;
+
+    card.onclick=()=>{
+      window.location.href="blog.html";
+    };
+
+    featuredBlogs.appendChild(card);
+
+  });
+
+});
