@@ -2,7 +2,9 @@ const auth = firebase.auth();
 const db = firebase.database();
 
 const prayerForm = document.getElementById("prayerForm");
-const prayerInput = document.getElementById("prayerInput");
+const personName = document.getElementById("personName");
+const prayerTopic = document.getElementById("prayerTopic");
+const prayerDescription = document.getElementById("prayerDescription");
 const requestList = document.getElementById("requestList");
 
 const userPhoto = document.getElementById("userPhoto");
@@ -11,60 +13,63 @@ const sidePhoto = document.getElementById("sidePhoto");
 const sideName = document.getElementById("sideName");
 const logoutBtn = document.getElementById("logoutBtn");
 
+/* AUTH */
+
 auth.onAuthStateChanged(user=>{
   if(!user){
     window.location.href="login.html";
   }else{
-    userPhoto.src=user.photoURL;
-    sidePhoto.src=user.photoURL;
-    userName.innerText=user.displayName;
-    sideName.innerText=user.displayName;
+    userPhoto.src = user.photoURL || "logos/logo.png";
+    sidePhoto.src = user.photoURL || "logos/logo.png";
+    userName.innerText = user.displayName || "User";
+    sideName.innerText = user.displayName || "User";
 
     loadRequests(user.uid);
   }
 });
 
-/* Submit */
+/* SUBMIT PRAYER */
 
 prayerForm.addEventListener("submit", e=>{
   e.preventDefault();
 
-  const text=prayerInput.value.trim();
-  if(text==="") return;
+  const user = auth.currentUser;
 
-  const user=auth.currentUser;
-
-  db.ref("prayers/"+user.uid).push({
-    text:text,
-    status:"Submitted",
-    time:Date.now()
+  db.ref("prayers/" + user.uid).push({
+    name: personName.value,
+    topic: prayerTopic.value,
+    description: prayerDescription.value,
+    status: "Submitted",
+    time: Date.now()
   });
 
-  prayerInput.value="";
+  prayerForm.reset();
 });
 
-/* Load */
+/* LOAD REQUESTS */
 
 function loadRequests(uid){
-  db.ref("prayers/"+uid).on("value", snap=>{
+  db.ref("prayers/" + uid).on("value", snap=>{
     requestList.innerHTML="";
     snap.forEach(child=>{
-      const data=child.val();
+      const d = child.val();
 
-      const div=document.createElement("div");
+      const div = document.createElement("div");
       div.className="request-card";
-      div.innerHTML=`
-        <p>${data.text}</p>
-        <span class="status">Status: ${data.status}</span>
+      div.innerHTML = `
+        <strong>${d.name}</strong><br>
+        <em>${d.topic}</em>
+        <p>${d.description}</p>
+        <span class="status">Status: ${d.status}</span>
       `;
       requestList.appendChild(div);
     });
   });
 }
 
-/* Logout */
+/* LOGOUT */
 
-logoutBtn.onclick=()=>{
+logoutBtn.onclick = ()=>{
   auth.signOut().then(()=>{
     window.location.href="index.html";
   });
@@ -80,4 +85,3 @@ menuBtn.onclick = ()=>{
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
-
