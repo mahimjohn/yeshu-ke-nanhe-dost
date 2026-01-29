@@ -1,9 +1,12 @@
+/* ================= FIREBASE ================= */
+
 const auth = firebase.auth();
 const db = firebase.database();
 
-/* UI */
+/* ================= UI ================= */
 
 const savedBlogsDiv = document.getElementById("savedBlogs");
+
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.querySelector(".sidebar");
 const main = document.querySelector(".main");
@@ -14,31 +17,31 @@ const sidePhoto = document.getElementById("sidePhoto");
 const sideName = document.getElementById("sideName");
 const logoutBtn = document.getElementById("logoutBtn");
 
-/* Sidebar */
+/* ================= SIDEBAR ================= */
 
-menuBtn.onclick=()=>{
+menuBtn.onclick = () => {
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
 
-/* Auth */
+/* ================= AUTH ================= */
 
-auth.onAuthStateChanged(user=>{
+auth.onAuthStateChanged(user => {
 
   if(!user){
     window.location.href="index.html";
     return;
   }
 
-  userPhoto.src=user.photoURL;
-  sidePhoto.src=user.photoURL;
-  userName.innerText=user.displayName;
-  sideName.innerText=user.displayName;
+  userPhoto.src = user.photoURL || "logos/logo.png";
+  sidePhoto.src = user.photoURL || "logos/logo.png";
+  userName.innerText = user.displayName || "User";
+  sideName.innerText = user.displayName || "User";
 
   loadSavedBlogs(user.uid);
 });
 
-/* Load Saved Blogs */
+/* ================= LOAD SAVED BLOGS ================= */
 
 function loadSavedBlogs(uid){
 
@@ -53,16 +56,27 @@ function loadSavedBlogs(uid){
 
     snap.forEach(child=>{
 
-      const blog=child.val();
+      const blog = child.val();
 
-      const card=document.createElement("div");
+      const card = document.createElement("div");
       card.className="card";
 
-      card.innerHTML=`
+      card.innerHTML = `
         <h3>${blog.title}</h3>
-        <button onclick="openBlog('${blog.postId}')">Open</button>
-        <button onclick="removeBlog('${child.key}')">Remove</button>
+        <div class="actions">
+          <button class="open-btn">Open</button>
+          <button class="remove-btn">Remove</button>
+        </div>
       `;
+
+      card.querySelector(".open-btn").onclick = ()=>{
+        window.location.href =
+          "dashboard-blogs.html?postId="+blog.postId;
+      };
+
+      card.querySelector(".remove-btn").onclick = ()=>{
+        removeBlog(uid, child.key);
+      };
 
       savedBlogsDiv.appendChild(card);
 
@@ -72,25 +86,15 @@ function loadSavedBlogs(uid){
 
 }
 
-/* Open Blog */
+/* ================= REMOVE BLOG ================= */
 
-function openBlog(postId){
-  window.location.href="blog.html?post="+postId;
+function removeBlog(uid,key){
+  db.ref("savedBlogs/"+uid+"/"+key).remove();
 }
 
-/* Remove Blog */
+/* ================= LOGOUT ================= */
 
-function removeBlog(key){
-
-  const user=auth.currentUser;
-
-  db.ref("savedBlogs/"+user.uid+"/"+key).remove();
-
-}
-
-/* Logout */
-
-logoutBtn.onclick=()=>{
+logoutBtn.onclick = ()=>{
   auth.signOut().then(()=>{
     window.location.href="index.html";
   });
