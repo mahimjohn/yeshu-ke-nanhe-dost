@@ -2,6 +2,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyB6-aF6ycLVrmLBAr-1X4fL6ZVgwF0agFc",
   authDomain: "yeshu-ke-nanhe-dost.firebaseapp.com",
+  databaseURL: "https://yeshu-ke-nanhe-dost-default-rtdb.firebaseio.com",
   projectId: "yeshu-ke-nanhe-dost",
   storageBucket: "yeshu-ke-nanhe-dost.appspot.com",
   messagingSenderId: "496839768513",
