@@ -38,3 +38,26 @@ menuBtn.onclick = ()=>{
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
+
+const prayerCountText = document.getElementById("prayerCount");
+
+auth.onAuthStateChanged(user => {
+
+  if(user){
+    db.ref("prayers/" + user.uid).on("value", snap => {
+
+      const count = snap.numChildren();
+
+      if(count === 0){
+        prayerCountText.innerText = "No requests submitted";
+      }else if(count === 1){
+        prayerCountText.innerText = "1 request submitted";
+      }else{
+        prayerCountText.innerText = count + " requests submitted";
+      }
+
+    });
+  }
+
+});
+
