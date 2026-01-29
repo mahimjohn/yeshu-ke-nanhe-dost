@@ -1,75 +1,3 @@
-/* PAGE TITLE */
-h2{
-  font-size:26px;
-  margin-bottom:15px;
-}
-
-/* FORM BOX */
-#prayerForm{
-  max-width:600px;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* TEXTAREA */
-#prayerInput{
-  width:100%;
-  min-height:140px;
-  padding:12px;
-  font-size:15px;
-  border-radius:6px;
-  border:1px solid #ccc;
-  resize:none;
-}
-
-#prayerInput:focus{
-  outline:none;
-  border-color:#0b3d2e;
-}
-
-/* SUBMIT BUTTON */
-#prayerForm button{
-  margin-top:12px;
-  background:#0b3d2e;
-  color:white;
-  border:none;
-  padding:10px 20px;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-#prayerForm button:hover{
-  background:#145c46;
-}
-
-/* REQUEST LIST */
-#requestList{
-  margin-top:25px;
-  max-width:600px;
-}
-
-/* REQUEST CARD */
-.request-card{
-  background:white;
-  padding:15px;
-  border-radius:8px;
-  margin-bottom:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
-}
-
-/* STATUS */
-.status{
-  display:inline-block;
-  margin-top:8px;
-  font-size:13px;
-  color:#0b3d2e;
-  font-weight:bold;
-}
-
- /* ================= PRAYER FORM ================= */
-
 .prayer-form-card{
   max-width:600px;
   background:white;
@@ -79,16 +7,10 @@ h2{
   margin-top:20px;
 }
 
-.prayer-form-card h2{
-  margin-bottom:20px;
-}
-
-/* Inputs */
-
 .prayer-form-card label{
-  display:block;
-  margin-bottom:6px;
   font-weight:600;
+  margin-bottom:6px;
+  display:block;
 }
 
 .prayer-form-card input,
@@ -103,23 +25,39 @@ h2{
 }
 
 .prayer-form-card textarea{
-  resize:vertical;
   min-height:120px;
 }
-
-/* Submit Button */
 
 .submit-btn{
   background:#0b3d2e;
   color:white;
   border:none;
-  padding:12px 20px;
+  padding:12px;
   border-radius:6px;
   cursor:pointer;
-  font-size:15px;
 }
 
 .submit-btn:hover{
   background:#145c46;
 }
 
+/* REQUEST LIST */
+
+#requestList{
+  max-width:600px;
+  margin-top:30px;
+}
+
+.request-card{
+  background:white;
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.status{
+  font-size:13px;
+  font-weight:bold;
+  color:#0b3d2e;
+}
