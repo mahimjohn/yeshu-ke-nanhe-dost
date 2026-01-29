@@ -72,6 +72,8 @@ function loadSavedBlogsCount(uid){
 
     if(count===0){
       savedBlogText.innerText="0 blogs saved";
+    }else if(count===1){
+      savedBlogText.innerText="1 blog saved";
     }else{
       savedBlogText.innerText= count + " blogs saved";
     }
@@ -122,13 +124,14 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
 .then(res=>res.json())
 .then(data=>{
 
-  /* Same blogs whole day */
-  const daySeed = new Date().toDateString();
+  // Same blogs whole day
+  const seed = new Date().toDateString();
+
   data.items.sort((a,b)=>{
-    return (a.id + daySeed).localeCompare(b.id + daySeed);
+    return (a.id+seed).localeCompare(b.id+seed);
   });
 
-  const posts = data.items.slice(0,5);
+  const posts=data.items.slice(0,5);
 
   posts.forEach(post=>{
 
@@ -145,11 +148,11 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
       <h3>${post.title}</h3>
     `;
 
-    /* Open exact blog */
+    // ✅ Open exact blog
     card.onclick=()=>{
-  window.location.href="dashboard-blogs.html?postId="+post.id;
-};
-
+      window.location.href=
+        "dashboard-blogs.html?postId="+post.id;
+    };
 
     featuredBlogs.appendChild(card);
 
