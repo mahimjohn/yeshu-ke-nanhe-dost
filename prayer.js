@@ -13,11 +13,14 @@ const sidePhoto = document.getElementById("sidePhoto");
 const sideName = document.getElementById("sideName");
 const logoutBtn = document.getElementById("logoutBtn");
 
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+
 /* AUTH */
 
 auth.onAuthStateChanged(user=>{
   if(!user){
-    window.location.href="login.html";
+    window.location.href="index.html";
   }else{
     userPhoto.src = user.photoURL || "logos/logo.png";
     sidePhoto.src = user.photoURL || "logos/logo.png";
@@ -28,60 +31,58 @@ auth.onAuthStateChanged(user=>{
   }
 });
 
-/* SUBMIT PRAYER */
+/* SUBMIT */
 
 prayerForm.addEventListener("submit", e=>{
   e.preventDefault();
 
   const user = auth.currentUser;
 
-  db.ref("prayers/" + user.uid).push({
+  db.ref("prayers/"+user.uid).push({
     name: personName.value,
     topic: prayerTopic.value,
     description: prayerDescription.value,
-    status: "Submitted",
-    time: Date.now()
+    status:"Submitted",
+    time:Date.now()
   });
 
   prayerForm.reset();
 });
 
-/* LOAD REQUESTS */
+/* LOAD */
 
 function loadRequests(uid){
-  db.ref("prayers/" + uid).on("value", snap=>{
+  db.ref("prayers/"+uid).on("value", snap=>{
     requestList.innerHTML="";
-    snap.forEach(child=>{
-      const d = child.val();
+    let count=1;
 
-      const div = document.createElement("div");
-      div.className="request-card";
-      div.innerHTML = `
-        <strong>${d.name}</strong><br>
-        <em>${d.topic}</em>
-        <p>${d.description}</p>
-        <span class="status">Status: ${d.status}</span>
+    snap.forEach(child=>{
+      const d=child.val();
+
+      const row=document.createElement("tr");
+      row.innerHTML=`
+        <td>${count++}</td>
+        <td>${d.name}</td>
+        <td>${d.topic}</td>
+        <td>${d.description}</td>
+        <td><span class="status-badge">${d.status}</span></td>
       `;
-      requestList.appendChild(div);
+
+      requestList.appendChild(row);
     });
   });
 }
 
 /* LOGOUT */
 
-logoutBtn.onclick = ()=>{
+logoutBtn.onclick=()=>{
   auth.signOut().then(()=>{
     window.location.href="index.html";
   });
 };
 
-/* SIDEBAR TOGGLE */
+/* SIDEBAR */
 
-const menuBtn = document.getElementById("menuBtn");
-const sidebar = document.querySelector(".sidebar");
-const main = document.querySelector(".main");
-
-menuBtn.onclick = ()=>{
+menuBtn.onclick=()=>{
   sidebar.classList.toggle("show");
-  main.classList.toggle("shift");
 };
