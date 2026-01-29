@@ -18,6 +18,7 @@ const sideName = document.getElementById("sideName");
 const logoutBtn = document.getElementById("logoutBtn");
 
 const prayerCountText = document.getElementById("prayerCount");
+const savedBlogText = document.getElementById("savedBlogCount");
 
 /* ================= AUTH ================= */
 
@@ -30,10 +31,12 @@ auth.onAuthStateChanged(user => {
 
   userPhoto.src = user.photoURL || "logos/logo.png";
   sidePhoto.src = user.photoURL || "logos/logo.png";
+
   userName.innerText = user.displayName || "User";
   sideName.innerText = user.displayName || "User";
 
   loadPrayerCount(user.uid);
+  loadSavedBlogsCount(user.uid);
 });
 
 /* ================= PRAYER COUNT ================= */
@@ -49,10 +52,28 @@ function loadPrayerCount(uid){
 
     const count = snap.numChildren();
 
-    if(count === 1){
-      prayerCountText.innerText = "1 request submitted";
+    if(count===1){
+      prayerCountText.innerText="1 request submitted";
     }else{
-      prayerCountText.innerText = count + " requests submitted";
+      prayerCountText.innerText= count + " requests submitted";
+    }
+
+  });
+
+}
+
+/* ================= SAVED BLOG COUNT ================= */
+
+function loadSavedBlogsCount(uid){
+
+  db.ref("savedBlogs/" + uid).on("value", snap => {
+
+    const count = snap.numChildren();
+
+    if(count===0){
+      savedBlogText.innerText="0 blogs saved";
+    }else{
+      savedBlogText.innerText= count + " blogs saved";
     }
 
   });
@@ -61,7 +82,7 @@ function loadPrayerCount(uid){
 
 /* ================= LOGOUT ================= */
 
-logoutBtn.onclick = ()=>{
+logoutBtn.onclick=()=>{
   auth.signOut().then(()=>{
     window.location.href="index.html";
   });
@@ -69,14 +90,14 @@ logoutBtn.onclick = ()=>{
 
 /* ================= SIDEBAR TOGGLE ================= */
 
-menuBtn.onclick = ()=>{
+menuBtn.onclick=()=>{
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
 
 /* ================= VERSE OF THE DAY ================= */
 
-const verses = [
+const verses=[
  {text:"The Lord is my shepherd; I shall not want.",ref:"Psalm 23:1"},
  {text:"I can do all things through Christ who strengthens me.",ref:"Philippians 4:13"},
  {text:"For God so loved the world that He gave His only Son.",ref:"John 3:16"},
@@ -84,52 +105,49 @@ const verses = [
  {text:"Trust in the Lord with all your heart.",ref:"Proverbs 3:5"}
 ];
 
-const today = new Date().getDate();
-const verse = verses[today % verses.length];
+const today=new Date().getDate();
+const verse=verses[today % verses.length];
 
-document.getElementById("verseText").innerText = verse.text;
-document.getElementById("verseRef").innerText = verse.ref;
+document.getElementById("verseText").innerText=verse.text;
+document.getElementById("verseRef").innerText=verse.ref;
 
 /* ================= FEATURED BLOGS ================= */
 
-const API_KEY = "AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
-const BLOG_ID = "571259613266997453";
+const API_KEY="AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
+const BLOG_ID="571259613266997453";
 
-const featuredBlogs = document.getElementById("featuredBlogs");
+const featuredBlogs=document.getElementById("featuredBlogs");
 
 fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=100`)
-.then(res => res.json())
-.then(data => {
+.then(res=>res.json())
+.then(data=>{
 
-  const allPosts = data.items;
+  /* Same blogs whole day */
+  const daySeed = new Date().toDateString();
+  data.items.sort((a,b)=>{
+    return (a.id + daySeed).localeCompare(b.id + daySeed);
+  });
 
-  /* 🔁 DAILY ROTATION LOGIC */
-  const dayIndex = new Date().getDate();
-  const start = dayIndex % allPosts.length;
+  const posts = data.items.slice(0,5);
 
-  let posts = [];
+  posts.forEach(post=>{
 
-  for(let i=0;i<5;i++){
-    posts.push(allPosts[(start + i) % allPosts.length]);
-  }
+    const temp=document.createElement("div");
+    temp.innerHTML=post.content;
+    const img=temp.querySelector("img");
+    const image=img?img.src:"https://via.placeholder.com/300";
 
-  posts.forEach(post => {
+    const card=document.createElement("div");
+    card.className="blog-card";
 
-    const temp = document.createElement("div");
-    temp.innerHTML = post.content;
-    const img = temp.querySelector("img");
-    const image = img ? img.src : "https://via.placeholder.com/300";
-
-    const card = document.createElement("div");
-    card.className = "blog-card";
-
-    card.innerHTML = `
+    card.innerHTML=`
       <img src="${image}">
       <h3>${post.title}</h3>
     `;
 
-    card.onclick = ()=>{
-      window.location.href="blog.html";
+    /* Open exact blog */
+    card.onclick=()=>{
+      window.location.href="blog.html?post="+post.id;
     };
 
     featuredBlogs.appendChild(card);
