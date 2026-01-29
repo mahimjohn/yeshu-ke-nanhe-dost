@@ -191,3 +191,17 @@ body{
   background:#1c7a5a;
 }
 
+/* Clickable Card */
+
+.link-card{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+
+.link-card:hover{
+  transform: translateY(-3px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.15);
+  transition:0.2s ease;
+  cursor:pointer;
+}
