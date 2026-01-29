@@ -273,3 +273,22 @@
   color:#0b3d2e;
   font-weight:600;
 }
+
+.status{
+  font-weight:600;
+}
+
+/* STATUS COLORS */
+
+.status.Submitted{
+  color:#f0ad4e;   /* orange */
+}
+
+.status.Praying{
+  color:#0b3d2e;   /* green */
+}
+
+.status.Answered{
+  color:#2e7d32;   /* dark green */
+}
+
