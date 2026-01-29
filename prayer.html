@@ -40,53 +40,46 @@
   <a href="#">Settings</a>
 
   <button id="logoutBtn" class="logout-btn">Logout</button>
-
 </aside>
 
 <!-- MAIN -->
 <div class="main">
 
-<h1>My Prayer Requests</h1>
+  <h1>My Prayer Requests</h1>
 
-<div class="prayer-form-card">
+  <!-- FORM -->
+  <div class="prayer-form-card">
+    <h2>Submit a Prayer Request</h2>
 
-  <h2>Submit a Prayer Request</h2>
+    <form id="prayerForm">
 
-  <form id="prayerForm">
+      <label>Person Name</label>
+      <input type="text" id="personName" required>
 
-    <!-- Name -->
-    <label>Person Name </label>
-    <input type="text" id="personName" placeholder="Enter name" required>
+      <label>Prayer Request Topic</label>
+      <select id="prayerTopic" required>
+        <option value="">Select topic</option>
+        <option>Birthday</option>
+        <option>Anniversary</option>
+        <option>Birth of Child</option>
+        <option>Death / Loss</option>
+        <option>Health Issues</option>
+        <option>Accident Recovery</option>
+        <option>Exams / Studies</option>
+        <option>Job / Career</option>
+        <option>Family Problems</option>
+        <option>Other</option>
+      </select>
 
-    <!-- Topic -->
-    <label>Prayer Request Topic</label>
-    <select id="prayerTopic" required>
-      <option value="">Select topic</option>
-      <option>Birthday</option>
-      <option>Anniversary</option>
-      <option>Birth of Child</option>
-      <option>Death / Loss</option>
-      <option>Health Issues</option>
-      <option>Accident Recovery</option>
-      <option>Exams / Studies</option>
-      <option>Job / Career</option>
-      <option>Family Problems</option>
-      <option>Other</option>
-    </select>
+      <label>Description</label>
+      <textarea id="prayerDescription" required></textarea>
 
-    <!-- Description -->
-    <label>Description</label>
-    <textarea id="prayerDescription" placeholder="Write your prayer request..." required></textarea>
+      <button type="submit" class="submit-btn">Submit Prayer Request</button>
+    </form>
+  </div>
 
-    <!-- Submit -->
-    <button type="submit" class="submit-btn">
-      Submit Prayer Request
-    </button>
-
-  </form>
-
-</div>
-
+  <!-- LIST -->
+  <div id="requestList"></div>
 
 </div>
 
