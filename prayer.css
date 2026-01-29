@@ -69,3 +69,17 @@
   font-weight:bold;
   color:#0b3d2e;
 }
+
+.prayer-intro{
+  color:#444;
+  font-size:15px;
+  line-height:1.6;
+  margin-bottom:10px;
+}
+
+.prayer-subtext{
+  color:#666;
+  font-size:14px;
+  margin-bottom:25px;
+}
+
