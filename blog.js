@@ -9,7 +9,8 @@ const list = document.getElementById("list");
 const blogTitle = document.getElementById("blogTitle");
 const blogContent = document.getElementById("blogContent");
 
-// LOAD BLOG LIST
+/* ================= LOAD BLOG LIST ================= */
+
 fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=100&timestamp=${new Date().getTime()}`)
 
 .then(res => res.json())
@@ -43,7 +44,8 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
 
 });
 
-// OPEN SINGLE BLOG
+/* ================= OPEN SINGLE BLOG ================= */
+
 function openBlog(postId){
 
   fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/${postId}?key=${API_KEY}`)
@@ -54,21 +56,43 @@ function openBlog(postId){
     reader.style.display = "block";
 
     blogTitle.innerText = post.title;
-    blogContent.innerHTML = post.content;
+
+    // Clear first
+    blogContent.innerHTML = "";
+
+    // CREATE SAVE BUTTON
+    const saveBtn = document.createElement("button");
+    saveBtn.innerText = "Save Blog";
+    saveBtn.style.marginBottom = "15px";
+    saveBtn.style.background = "#0b3d2e";
+    saveBtn.style.color = "white";
+    saveBtn.style.border = "none";
+    saveBtn.style.padding = "10px 18px";
+    saveBtn.style.borderRadius = "6px";
+    saveBtn.style.cursor = "pointer";
+
+    saveBtn.onclick = () => saveBlog(post.id, post.title);
+
+    // ADD BUTTON + BLOG CONTENT
+    blogContent.appendChild(saveBtn);
+    blogContent.innerHTML += post.content;
 
   });
 
 }
 
-// BACK
+/* ================= BACK ================= */
+
 function goBack(){
   reader.style.display = "none";
   list.style.display = "block";
 }
 
-function saveBlog(postId,title){
+/* ================= SAVE BLOG ================= */
 
-  const user=firebase.auth().currentUser;
+function saveBlog(postId, title){
+
+  const user = firebase.auth().currentUser;
 
   if(!user){
     alert("Please login first");
@@ -76,12 +100,11 @@ function saveBlog(postId,title){
   }
 
   firebase.database()
-  .ref("savedBlogs/"+user.uid)
+  .ref("savedBlogs/" + user.uid)
   .push({
-    postId:postId,
-    title:title
+    postId: postId,
+    title: title
   });
 
-  alert("Blog Saved!");
+  alert("Blog Saved Successfully!");
 }
-
