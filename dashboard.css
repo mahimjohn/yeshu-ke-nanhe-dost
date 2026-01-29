@@ -205,3 +205,85 @@ body{
   transition:0.2s ease;
   cursor:pointer;
 }
+
+/* ================= EXTRAS ================= */
+
+.extras{
+  margin-top:50px;
+}
+
+/* VERSE BOX */
+
+.verse-box{
+  background:linear-gradient(120deg,#0b3d2e,#145c46);
+  color:white;
+  padding:30px;
+  border-radius:16px;
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.verse-box h2{
+  margin-bottom:15px;
+}
+
+.verse-box p{
+  font-size:18px;
+  font-style:italic;
+}
+
+.verse-box span{
+  display:block;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+/* SECTION HEADER */
+
+.section-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.view-all{
+  text-decoration:none;
+  color:#0b3d2e;
+  font-weight:600;
+}
+
+/* BLOG SLIDER */
+
+.blog-slider{
+  display:flex;
+  gap:15px;
+  overflow-x:auto;
+  padding-bottom:10px;
+  margin-bottom:40px;
+}
+
+.blog-card{
+  min-width:220px;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+/* MERCH GRID */
+
+.merch-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+.merch-card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  text-align:center;
+}
