@@ -213,3 +213,17 @@
   font-size:14px;
   margin-bottom:25px;
 }
+
+/* FORM HEADER STRIP */
+
+.form-header{
+  background:#0b3d2e;
+  color:white;
+  padding:14px 20px;
+  border-radius:12px 12px 0 0;
+  font-size:16px;
+  font-weight:600;
+  text-align:left;
+  margin:-25px -25px 20px -25px;
+}
+
