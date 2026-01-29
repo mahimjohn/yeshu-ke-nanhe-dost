@@ -125,7 +125,7 @@
 /* Shift with sidebar */
 
 .sidebar.show ~ .main .request-history-wrapper{
-  margin-left:220px;
+  margin-right:220px;
 }
 
 
