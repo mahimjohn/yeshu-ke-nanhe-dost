@@ -8,7 +8,107 @@
   /* cleaner look */
   box-shadow:none;
   border:1px solid #e5e5e5;
+}/* ================= FORM ================= */
+
+.prayer-form-card{
+  max-width:650px;
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  margin:20px auto;
 }
+
+.prayer-form-card h2{
+  margin-bottom:10px;
+}
+
+.form-desc{
+  color:#555;
+  margin-bottom:20px;
+}
+
+.prayer-form-card label{
+  font-weight:600;
+  display:block;
+  margin-bottom:6px;
+}
+
+.prayer-form-card input,
+.prayer-form-card select,
+.prayer-form-card textarea{
+  width:100%;
+  padding:12px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  margin-bottom:18px;
+  font-size:14px;
+}
+
+.prayer-form-card textarea{
+  min-height:130px;
+}
+
+.submit-btn{
+  background:#0b3d2e;
+  color:white;
+  border:none;
+  padding:12px 22px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.submit-btn:hover{
+  background:#145c46;
+}
+
+/* ================= HISTORY ================= */
+
+.request-history-wrapper{
+  max-width:900px;
+  margin:50px auto;
+  transition:margin-left 0.3s ease;
+}
+
+.history-title{
+  background:linear-gradient(to right,#43cea2,#185a9d);
+  color:white;
+  padding:12px;
+  font-weight:bold;
+  border-radius:6px 6px 0 0;
+}
+
+.history-table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+}
+
+.history-table th{
+  background:#1f9bd1;
+  color:white;
+  padding:10px;
+  text-align:left;
+}
+
+.history-table td{
+  padding:10px;
+  border-top:1px solid #ddd;
+}
+
+.status-badge{
+  background:#0b3d2e;
+  color:white;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:12px;
+}
+
+/* Move only history with sidebar */
+
+.sidebar.show ~ .main .request-history-wrapper{
+  margin-left:220px;
+}
+
 
 
 .prayer-form-card label{
