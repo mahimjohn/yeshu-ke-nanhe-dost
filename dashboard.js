@@ -77,3 +77,19 @@ menuBtn.onclick = () => {
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
+
+/* ========== VERSE OF THE DAY ========== */
+
+const verses = [
+  { text:"The Lord is my shepherd; I shall not want.", ref:"Psalm 23:1" },
+  { text:"I can do all things through Christ who strengthens me.", ref:"Philippians 4:13" },
+  { text:"For God so loved the world that He gave His only Son.", ref:"John 3:16" },
+  { text:"Be still, and know that I am God.", ref:"Psalm 46:10" },
+  { text:"Trust in the Lord with all your heart.", ref:"Proverbs 3:5" }
+];
+
+const today = new Date().getDate();
+const verse = verses[today % verses.length];
+
+document.getElementById("verseText").innerText = verse.text;
+document.getElementById("verseRef").innerText = verse.ref;
