@@ -49,7 +49,7 @@ a{
   color:white;
 }
 
-/* Profile (Topbar) */
+/* Profile */
 
 .profile{
   display:flex;
@@ -76,7 +76,14 @@ a{
   padding:20px;
   display:flex;
   flex-direction:column;
+  transform:translateX(-100%);
+  transition:0.3s ease;
   z-index:900;
+}
+
+/* When sidebar open */
+.sidebar.show{
+  transform:translateX(0);
 }
 
 /* Sidebar links */
@@ -114,9 +121,15 @@ a{
 
 .main{
   margin-top:60px;
-  margin-left:220px;   /* Space for sidebar */
+  margin-left:0;
   padding:30px;
   max-width:1200px;
+  transition:0.3s ease;
+}
+
+/* When sidebar open shift content */
+.main.shift{
+  margin-left:220px;
 }
 
 /* ================= SAVED BLOG GRID ================= */
@@ -186,23 +199,4 @@ a{
 
 .saved-blog-card i:hover{
   color:#1c7a5a;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:900px){
-
-  .sidebar{
-    transform:translateX(-100%);
-    transition:0.3s ease;
-  }
-
-  .sidebar.show{
-    transform:translateX(0);
-  }
-
-  .main{
-    margin-left:0;
-  }
-
 }
