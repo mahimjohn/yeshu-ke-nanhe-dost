@@ -13,6 +13,56 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
 <script src="firebase.js"></script>
+
+<!-- 🔹 Skeleton & Loader Styles -->
+<style>
+
+#reader {
+  display: none;
+}
+
+/* Skeleton Wrapper */
+#skeleton {
+  padding: 20px;
+}
+
+#skeleton div {
+  background: linear-gradient(
+    90deg,
+    #eeeeee 25%,
+    #f5f5f5 37%,
+    #eeeeee 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+.sk-title {
+  height: 32px;
+  width: 70%;
+}
+
+.sk-image {
+  height: 200px;
+}
+
+.sk-line {
+  height: 14px;
+}
+
+.sk-line.short {
+  width: 50%;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+</style>
+
 </head>
 
 <body>
@@ -29,16 +79,34 @@
   <div id="blogs"></div>
 </div>
 
+<!-- 🔹 SKELETON LOADER -->
+<div id="skeleton">
+  <div class="sk-title"></div>
+  <div class="sk-image"></div>
+  <div class="sk-line"></div>
+  <div class="sk-line"></div>
+  <div class="sk-line short"></div>
+</div>
+
 <!-- BLOG READER -->
-<div id="reader" style="display:none">
+<div id="reader">
 
   <h2 id="blogTitle"></h2>
 
-  <!-- Bookmark icon is injected by JS -->
+  <!-- Bookmark icon injected by JS -->
   <div id="blogContent"></div>
 
 </div>
 
 <script src="dashboard-blogs.js"></script>
+
+<!-- 🔹 Hide skeleton when blog loads -->
+<script>
+  function showBlogReader(){
+    document.getElementById("skeleton").style.display = "none";
+    document.getElementById("reader").style.display = "block";
+  }
+</script>
+
 </body>
 </html>
