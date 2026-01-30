@@ -33,7 +33,6 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
 .then(res=>res.json())
 .then(data=>{
 
-  loading.remove();
 
   data.items.forEach(post=>{
 
