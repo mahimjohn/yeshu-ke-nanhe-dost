@@ -73,14 +73,12 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
 
 function openBlog(postId){
 
-  // Hide list, show skeleton
-  list.style.display="none";
-  document.getElementById("skeleton").style.display="block";
-  reader.style.display="none";
-
   fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/${postId}?key=${API_KEY}`)
   .then(res=>res.json())
   .then(post=>{
+
+    list.style.display="none";
+    reader.style.display="block";
 
     blogTitle.innerText = post.title;
 
@@ -100,9 +98,6 @@ function openBlog(postId){
     `;
 
     checkSaved(post.id, post.title, image);
-
-    // ✅ Show reader smoothly
-    showBlogReader();
 
   });
 
@@ -168,7 +163,6 @@ function toggleSave(postId,title,image){
 
 function goBack(){
   reader.style.display="none";
-  document.getElementById("skeleton").style.display="none";
   list.style.display="block";
   history.replaceState({}, document.title, "dashboard-blogs.html");
 }
