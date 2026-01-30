@@ -385,3 +385,64 @@ body{
 .remove-btn:hover{
   background:#999;
 }
+
+/* SAVED BLOG GRID */
+
+#savedBlogs{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+/* CARD */
+
+.saved-blog-card{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  text-align:center;
+  position:relative;
+  transition:0.2s ease;
+}
+
+.saved-blog-card:hover{
+  transform:translateY(-4px);
+}
+
+/* IMAGE */
+
+.saved-blog-card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+/* TITLE */
+
+.saved-blog-card h3{
+  font-size:16px;
+  margin:10px 0;
+}
+
+/* ACTION ICONS */
+
+.saved-blog-card .actions{
+  display:flex;
+  justify-content:space-between;
+  padding:0 20px;
+  margin-top:10px;
+}
+
+.saved-blog-card i{
+  cursor:pointer;
+  font-size:18px;
+  color:#0b3d2e;
+}
+
+.saved-blog-card i:hover{
+  color:#1c7a5a;
+}
