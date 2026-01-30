@@ -63,7 +63,7 @@ a{
   border-radius:50%;
 }
 
-/* ================= SIDEBAR FIX ================= */
+/* ================= FINAL SIDEBAR FIX ================= */
 
 .sidebar{
   position:fixed;
@@ -76,14 +76,10 @@ a{
   padding:20px 15px;
   display:flex;
   flex-direction:column;
-  align-items:center;
-  overflow-y:auto;
 }
 
-/* Profile block */
-
+/* Profile wrapper */
 .sidebar .profile{
-  width:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -91,36 +87,47 @@ a{
   margin-bottom:25px;
 }
 
-.sidebar .profile img{
+/* Circular avatar container */
+.sidebar .avatar{
   width:90px;
   height:90px;
   border-radius:50%;
-  object-fit:cover;
   background:white;
-  padding:4px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
 }
 
+/* Image inside circle */
+.sidebar .avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Name */
 .sidebar .profile span{
   font-size:16px;
   font-weight:600;
 }
 
-/* Links */
+/* Nav links wrapper */
+.sidebar .nav-links{
+  flex:1;
+}
 
+/* Links */
 .sidebar a{
-  width:100%;
+  display:block;
   color:white;
   padding:12px;
   border-radius:6px;
   margin-bottom:6px;
-  text-align:left;
 }
 
-/* Logout button */
-
+/* Logout button pinned bottom */
 .sidebar .logout-btn{
-  margin-top:auto;
-  width:100%;
   background:#145c46;
   border:none;
   color:white;
