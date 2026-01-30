@@ -103,3 +103,16 @@ iframe{
 #blogContent img{
   max-width:100%;
 }
+
+.bookmark{
+  position:absolute;
+  top:12px;
+  right:12px;
+  font-size:22px;
+  cursor:pointer;
+  color:#ccc;
+}
+
+.bookmark.saved{
+  color:#0b3d2e;
+}
