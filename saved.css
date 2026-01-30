@@ -206,3 +206,17 @@ a{
   }
 
 }
+
+/* ================= SIDEBAR TOGGLE FIX ================= */
+
+.sidebar{
+  transform:translateX(-100%);
+}
+
+.sidebar.show{
+  transform:translateX(0);
+}
+
+.main.shift{
+  margin-left:220px;
+}
