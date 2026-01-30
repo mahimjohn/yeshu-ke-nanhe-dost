@@ -115,7 +115,7 @@ a{
 
 .main{
   margin-top:60px;
-  margin-left:220px;   /* Reserve sidebar space */
+  margin-left:260px;   /* Reserve sidebar space */
   padding:30px;
   max-width:1200px;
 }
