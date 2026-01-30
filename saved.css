@@ -63,7 +63,7 @@ a{
   border-radius:50%;
 }
 
-/* ================= FINAL SIDEBAR FIX ================= */
+/* ================= SIDEBAR ================= */
 
 .sidebar{
   position:fixed;
@@ -73,61 +73,32 @@ a{
   height:calc(100vh - 60px);
   background:#0b3d2e;
   color:white;
-  padding:20px 15px;
+  padding:20px;
   display:flex;
   flex-direction:column;
+  transform:translateX(-100%);
+  transition:0.3s ease;
+  z-index:900;
 }
 
-/* Profile wrapper */
-.sidebar .profile{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-  margin-bottom:25px;
+.sidebar.show{
+  transform:translateX(0);
 }
 
-/* Circular avatar container */
-.sidebar .avatar{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  background:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-
-/* Image inside circle */
-.sidebar .avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* Name */
-.sidebar .profile span{
-  font-size:16px;
-  font-weight:600;
-}
-
-/* Nav links wrapper */
-.sidebar .nav-links{
-  flex:1;
-}
-
-/* Links */
 .sidebar a{
-  display:block;
   color:white;
   padding:12px;
   border-radius:6px;
-  margin-bottom:6px;
+  margin-bottom:5px;
 }
 
-/* Logout button pinned bottom */
+.sidebar a:hover,
+.sidebar a.active{
+  background:#145c46;
+}
+
 .sidebar .logout-btn{
+  margin-top:auto;
   background:#145c46;
   border:none;
   color:white;
@@ -149,7 +120,7 @@ a{
 }
 
 .main.shift{
-  margin-left:220px;
+  margin-left:260px;
 }
 
 /* ================= SAVED BLOG GRID ================= */
@@ -226,31 +197,4 @@ a{
 
 .saved-blog-card i:hover{
   color:#1c7a5a;
-}
-
-/* ================= LAYOUT FIX ================= */
-
-/* Keep content away from sidebar */
-.main{
-  margin-left:0;
-  transition:0.3s ease;
-}
-
-.main.shift{
-  margin-left:260px;
-}
-
-/* Limit content width */
-.main{
-  max-width:1200px;
-  margin-right:auto;
-}
-
-/* ================= GRID FIX ================= */
-
-#savedBlogs{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
-  gap:18px;
-  justify-content:start;
 }
