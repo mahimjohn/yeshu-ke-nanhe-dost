@@ -225,3 +225,35 @@ a{
   gap:18px;
   justify-content:start;
 }
+
+/* ================= DESKTOP LAYOUT ================= */
+
+@media (min-width: 900px){
+
+  .sidebar{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:220px;
+  }
+
+}
+
+/* ================= MOBILE LAYOUT ================= */
+
+@media (max-width: 899px){
+
+  .sidebar{
+    transform:translateX(-100%);
+  }
+
+  .sidebar.show{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+}
