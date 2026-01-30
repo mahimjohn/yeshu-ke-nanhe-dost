@@ -71,14 +71,22 @@ function loadSavedBlogs(uid){
         </div>
       `;
 
-      // OPEN BLOG
-      card.querySelector(".open").onclick = ()=>{
+      /* CLICK ANYWHERE ON CARD → OPEN */
+      card.onclick = ()=>{
         window.location.href =
           "dashboard-blogs.html?postId="+blog.postId;
       };
 
-      // REMOVE BLOG
-      card.querySelector(".remove").onclick = ()=>{
+      /* OPEN ICON */
+      card.querySelector(".open").onclick = (e)=>{
+        e.stopPropagation();
+        window.location.href =
+          "dashboard-blogs.html?postId="+blog.postId;
+      };
+
+      /* REMOVE ICON */
+      card.querySelector(".remove").onclick = (e)=>{
+        e.stopPropagation();
         db.ref("savedBlogs/"+uid+"/"+blog.postId).remove();
       };
 
