@@ -1,45 +1,136 @@
+/* ================= FIREBASE ================= */
+
 const auth = firebase.auth();
 const db = firebase.database();
 
-const API_KEY = "AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
-const BLOG_ID = "571259613266997453";
+/* ================= UI ELEMENTS ================= */
 
-const blogsDiv = document.getElementById("blogs");
-const loading = document.getElementById("loading");
-const reader = document.getElementById("reader");
-const list = document.getElementById("list");
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.querySelector(".sidebar");
+const main = document.querySelector(".main");
 
-const blogTitle = document.getElementById("blogTitle");
-const blogContent = document.getElementById("blogContent");
+const userPhoto = document.getElementById("userPhoto");
+const userName = document.getElementById("userName");
+const sidePhoto = document.getElementById("sidePhoto");
+const sideName = document.getElementById("sideName");
+const logoutBtn = document.getElementById("logoutBtn");
 
-let currentPostId = null;
+const prayerCountText = document.getElementById("prayerCount");
+const savedBlogText = document.getElementById("savedBlogCount");
 
-/* AUTH */
+const verseText = document.getElementById("verseText");
+const verseRef = document.getElementById("verseRef");
 
-auth.onAuthStateChanged(user=>{
+const featuredBlogsDiv = document.getElementById("featuredBlogs");
+
+/* ================= AUTH ================= */
+
+auth.onAuthStateChanged(user => {
+
   if(!user){
-    window.location.href="login.html";
+    window.location.href = "index.html";
+    return;
   }
+
+  userPhoto.src = user.photoURL || "logos/logo.png";
+  sidePhoto.src = user.photoURL || "logos/logo.png";
+
+  userName.innerText = user.displayName || "User";
+  sideName.innerText = user.displayName || "User";
+
+  loadPrayerCount(user.uid);
+  loadSavedBlogsCount(user.uid);
 });
 
-/* URL PARAM */
+/* ================= SIDEBAR ================= */
 
-const params = new URLSearchParams(window.location.search);
-const openPostId = params.get("postId");
+menuBtn.onclick = () => {
+  sidebar.classList.toggle("show");
+  main.classList.toggle("shift");
+};
 
-/* LOAD LIST */
+/* ================= LOGOUT ================= */
+
+logoutBtn.onclick = () => {
+  auth.signOut().then(()=>{
+    window.location.href="index.html";
+  });
+};
+
+/* ================= PRAYER COUNT ================= */
+
+function loadPrayerCount(uid){
+
+  db.ref("prayers/"+uid).on("value", snap=>{
+
+    if(!snap.exists()){
+      prayerCountText.innerText = "No requests submitted";
+      return;
+    }
+
+    const count = snap.numChildren();
+
+    prayerCountText.innerText =
+      count===1 ? "1 request submitted" :
+      count+" requests submitted";
+
+  });
+
+}
+
+/* ================= SAVED BLOG COUNT ================= */
+
+function loadSavedBlogsCount(uid){
+
+  db.ref("savedBlogs/"+uid).on("value", snap=>{
+
+    const count = snap.numChildren();
+
+    savedBlogText.innerText =
+      count===0 ? "0 blogs saved" :
+      count+" blogs saved";
+
+  });
+
+}
+
+/* ================= VERSE OF THE DAY ================= */
+
+const verses = [
+ {text:"The Lord is my shepherd; I shall not want.",ref:"Psalm 23:1"},
+ {text:"I can do all things through Christ who strengthens me.",ref:"Philippians 4:13"},
+ {text:"For God so loved the world that He gave His only Son.",ref:"John 3:16"},
+ {text:"Be still, and know that I am God.",ref:"Psalm 46:10"},
+ {text:"Trust in the Lord with all your heart.",ref:"Proverbs 3:5"}
+];
+
+const dayIndex = new Date().getDate() % verses.length;
+verseText.innerText = verses[dayIndex].text;
+verseRef.innerText = verses[dayIndex].ref;
+
+/* ================= FEATURED BLOGS ================= */
+
+const API_KEY = "AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
+const BLOG_ID = "571259613266997453";
 
 fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=100`)
 .then(res=>res.json())
 .then(data=>{
 
+  /* Same blogs for whole day */
+  const seed = new Date().toDateString();
+  data.items.sort((a,b)=>{
+    return (a.id+seed).localeCompare(b.id+seed);
+  });
 
-  data.items.forEach(post=>{
+  const posts = data.items.slice(0,5);
+
+  posts.forEach(post=>{
 
     const temp=document.createElement("div");
     temp.innerHTML=post.content;
     const img=temp.querySelector("img");
-    const image=img?img.src:"https://via.placeholder.com/400";
+    const image=img?img.src:"https://via.placeholder.com/300";
 
     const card=document.createElement("div");
     card.className="blog-card";
@@ -50,96 +141,12 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
     `;
 
     card.onclick=()=>{
-      window.location.href="dashboard-blogs.html?postId="+post.id;
+      window.location.href =
+        "dashboard-blogs.html?postId="+post.id;
     };
 
-    blogsDiv.appendChild(card);
+    featuredBlogsDiv.appendChild(card);
+
   });
 
-  if(openPostId){
-    openBlog(openPostId);
-  }
 });
-
-/* OPEN BLOG */
-
-function openBlog(postId){
-
-  currentPostId = postId;
-
-  fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/${postId}?key=${API_KEY}`)
-  .then(res=>res.json())
-  .then(post=>{
-
-    list.style.display="none";
-    reader.style.display="block";
-
-    blogTitle.innerText=post.title;
-
-    blogContent.innerHTML=`
-      <div style="text-align:right;margin-bottom:15px;">
-        <span id="bookmarkBtn"
-          style="cursor:pointer;font-size:24px;">🔖</span>
-      </div>
-      ${post.content}
-    `;
-
-    checkSaved(postId,post.title);
-  });
-}
-
-/* CHECK SAVED */
-
-function checkSaved(postId,title){
-
-  const user = auth.currentUser;
-
-  db.ref("savedBlogs/"+user.uid+"/"+postId)
-  .once("value", snap=>{
-
-    const btn=document.getElementById("bookmarkBtn");
-
-    if(snap.exists()){
-      btn.style.color="#f5c400";
-    }else{
-      btn.style.color="gray";
-    }
-
-    btn.onclick=()=>{
-      toggleSave(postId,title);
-    };
-
-  });
-}
-
-/* TOGGLE SAVE */
-
-function toggleSave(postId,title){
-
-  const user=auth.currentUser;
-  const ref=db.ref("savedBlogs/"+user.uid+"/"+postId);
-
-  ref.once("value", snap=>{
-
-    if(snap.exists()){
-      ref.remove();
-      document.getElementById("bookmarkBtn").style.color="gray";
-    }else{
-      ref.set({
-        postId,
-        title,
-        time:Date.now()
-      });
-      document.getElementById("bookmarkBtn").style.color="#f5c400";
-    }
-
-  });
-}
-
-/* BACK */
-
-function goBack(){
-  reader.style.display="none";
-  list.style.display="block";
-  history.replaceState({},document.title,"dashboard-blogs.html");
-}
