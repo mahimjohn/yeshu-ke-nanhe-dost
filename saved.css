@@ -63,7 +63,7 @@ a{
   border-radius:50%;
 }
 
-/* ================= SIDEBAR ================= */
+/* ================= SIDEBAR FIX ================= */
 
 .sidebar{
   position:fixed;
@@ -73,32 +73,54 @@ a{
   height:calc(100vh - 60px);
   background:#0b3d2e;
   color:white;
-  padding:20px;
+  padding:20px 15px;
   display:flex;
   flex-direction:column;
-  transform:translateX(-100%);
-  transition:0.3s ease;
-  z-index:900;
+  align-items:center;
+  overflow-y:auto;
 }
 
-.sidebar.show{
-  transform:translateX(0);
+/* Profile block */
+
+.sidebar .profile{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-bottom:25px;
 }
+
+.sidebar .profile img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  background:white;
+  padding:4px;
+}
+
+.sidebar .profile span{
+  font-size:16px;
+  font-weight:600;
+}
+
+/* Links */
 
 .sidebar a{
+  width:100%;
   color:white;
   padding:12px;
   border-radius:6px;
-  margin-bottom:5px;
+  margin-bottom:6px;
+  text-align:left;
 }
 
-.sidebar a:hover,
-.sidebar a.active{
-  background:#145c46;
-}
+/* Logout button */
 
 .sidebar .logout-btn{
   margin-top:auto;
+  width:100%;
   background:#145c46;
   border:none;
   color:white;
