@@ -76,7 +76,6 @@ a{
   padding:20px;
   display:flex;
   flex-direction:column;
-  transition:0.3s ease;
   z-index:900;
 }
 
@@ -115,7 +114,7 @@ a{
 
 .main{
   margin-top:60px;
-  margin-left:260px;   /* Reserve sidebar space */
+  margin-left:220px;   /* Space for sidebar */
   padding:30px;
   max-width:1200px;
 }
@@ -195,6 +194,7 @@ a{
 
   .sidebar{
     transform:translateX(-100%);
+    transition:0.3s ease;
   }
 
   .sidebar.show{
@@ -205,18 +205,4 @@ a{
     margin-left:0;
   }
 
-}
-
-/* ================= SIDEBAR TOGGLE FIX ================= */
-
-.sidebar{
-  transform:translateX(-100%);
-}
-
-.sidebar.show{
-  transform:translateX(0);
-}
-
-.main.shift{
-  margin-left:220px;
 }
