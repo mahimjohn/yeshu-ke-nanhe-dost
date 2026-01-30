@@ -18,8 +18,6 @@ const list = document.getElementById("list");
 const blogTitle = document.getElementById("blogTitle");
 const blogContent = document.getElementById("blogContent");
 
-let currentPostId = null;
-
 /* ================= AUTH ================= */
 
 auth.onAuthStateChanged(user=>{
@@ -75,8 +73,6 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
 
 function openBlog(postId){
 
-  currentPostId = postId;
-
   fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/${postId}?key=${API_KEY}`)
   .then(res=>res.json())
   .then(post=>{
@@ -85,6 +81,12 @@ function openBlog(postId){
     reader.style.display="block";
 
     blogTitle.innerText = post.title;
+
+    // Extract image
+    const temp=document.createElement("div");
+    temp.innerHTML=post.content;
+    const img=temp.querySelector("img");
+    const image=img?img.src:"https://via.placeholder.com/400";
 
     blogContent.innerHTML = `
       <div style="text-align:right;margin-bottom:15px;">
@@ -95,7 +97,7 @@ function openBlog(postId){
       ${post.content}
     `;
 
-    checkSaved(post.id, post.title);
+    checkSaved(post.id, post.title, image);
 
   });
 
@@ -103,7 +105,7 @@ function openBlog(postId){
 
 /* ================= CHECK SAVED ================= */
 
-function checkSaved(postId,title){
+function checkSaved(postId,title,image){
 
   const user = auth.currentUser;
   const ref = db.ref("savedBlogs/"+user.uid+"/"+postId);
@@ -121,7 +123,7 @@ function checkSaved(postId,title){
     }
 
     btn.onclick=()=>{
-      toggleSave(postId,title);
+      toggleSave(postId,title,image);
     };
 
   });
@@ -130,14 +132,13 @@ function checkSaved(postId,title){
 
 /* ================= TOGGLE SAVE ================= */
 
-function toggleSave(postId,title){
+function toggleSave(postId,title,image){
 
   const user = auth.currentUser;
   const ref = db.ref("savedBlogs/"+user.uid+"/"+postId);
+  const btn=document.getElementById("bookmarkBtn");
 
   ref.once("value", snap=>{
-
-    const btn=document.getElementById("bookmarkBtn");
 
     if(snap.exists()){
       ref.remove();
@@ -147,6 +148,7 @@ function toggleSave(postId,title){
       ref.set({
         postId,
         title,
+        image,
         time:Date.now()
       });
       btn.className="fa-solid fa-bookmark";
