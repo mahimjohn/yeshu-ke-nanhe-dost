@@ -9,10 +9,9 @@ const list = document.getElementById("list");
 const blogTitle = document.getElementById("blogTitle");
 const blogContent = document.getElementById("blogContent");
 
-/* ================= LOAD BLOG LIST ================= */
+/* LOAD BLOG LIST */
 
-fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=100&timestamp=${new Date().getTime()}`)
-
+fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=100`)
 .then(res => res.json())
 .then(data => {
 
@@ -39,72 +38,41 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
     card.onclick = () => openBlog(post.id);
 
     blogsDiv.appendChild(card);
-
   });
-
 });
 
-/* ================= OPEN SINGLE BLOG ================= */
+/* OPEN BLOG */
 
 function openBlog(postId){
 
   fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/${postId}?key=${API_KEY}`)
-  .then(res => res.json())
-  .then(post => {
+  .then(res=>res.json())
+  .then(post=>{
 
-    list.style.display = "none";
-    reader.style.display = "block";
+    list.style.display="none";
+    reader.style.display="block";
 
     blogTitle.innerText = post.title;
 
-    // Clear first
-    blogContent.innerHTML = "";
-
-    // CREATE SAVE BUTTON
-    const saveBtn = document.createElement("button");
-    saveBtn.innerText = "Save Blog";
-    saveBtn.style.marginBottom = "15px";
-    saveBtn.style.background = "#0b3d2e";
-    saveBtn.style.color = "white";
-    saveBtn.style.border = "none";
-    saveBtn.style.padding = "10px 18px";
-    saveBtn.style.borderRadius = "6px";
-    saveBtn.style.cursor = "pointer";
-
-    saveBtn.onclick = () => saveBlog(post.id, post.title);
-
-    // ADD BUTTON + BLOG CONTENT
-    blogContent.appendChild(saveBtn);
-    blogContent.innerHTML += post.content;
-
+    blogContent.innerHTML = `
+      <div style="text-align:right;margin-bottom:15px;">
+        <span style="cursor:pointer;font-size:22px;" 
+              onclick="redirectLogin()">🔖</span>
+      </div>
+      ${post.content}
+    `;
   });
-
 }
 
-/* ================= BACK ================= */
+/* PUBLIC SAVE CLICK */
+
+function redirectLogin(){
+  window.location.href="login.html";
+}
+
+/* BACK */
 
 function goBack(){
-  reader.style.display = "none";
-  list.style.display = "block";
-}
-
-/* ================= SAVE BLOG ================= */
-
-function saveBlog(postId, title){
-
-  const user = firebase.auth().currentUser;
-
-  if(!user){
-    alert("Please login first");
-    return;
-  }
-
-  firebase.database()
-  .ref("savedBlogs/" + user.uid)
-  .push({
-    postId: postId,
-    title: title
-  });
-
-  alert("Blog Saved Successfully!");
+  reader.style.display="none";
+  list.style.display="block";
 }
