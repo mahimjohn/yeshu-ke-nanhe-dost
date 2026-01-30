@@ -1,5 +1,9 @@
+/* ================= FIREBASE ================= */
+
 const auth = firebase.auth();
 const db = firebase.database();
+
+/* ================= UI ================= */
 
 const savedBlogsDiv = document.getElementById("savedBlogs");
 
@@ -13,33 +17,33 @@ const sidePhoto = document.getElementById("sidePhoto");
 const sideName = document.getElementById("sideName");
 const logoutBtn = document.getElementById("logoutBtn");
 
-/* SIDEBAR */
+/* ================= SIDEBAR ================= */
 
-menuBtn.onclick=()=>{
+menuBtn.onclick = () => {
   sidebar.classList.toggle("show");
   main.classList.toggle("shift");
 };
 
-/* AUTH */
+/* ================= AUTH ================= */
 
-auth.onAuthStateChanged(user=>{
+auth.onAuthStateChanged(user => {
 
   if(!user){
     window.location.href="index.html";
     return;
   }
 
-  userPhoto.src=user.photoURL || "logos/logo.png";
-  sidePhoto.src=user.photoURL || "logos/logo.png";
-  userName.innerText=user.displayName || "User";
-  sideName.innerText=user.displayName || "User";
+  userPhoto.src = user.photoURL || "logos/logo.png";
+  sidePhoto.src = user.photoURL || "logos/logo.png";
+  userName.innerText = user.displayName || "User";
+  sideName.innerText = user.displayName || "User";
 
-  loadSaved(user.uid);
+  loadSavedBlogs(user.uid);
 });
 
-/* LOAD SAVED */
+/* ================= LOAD SAVED BLOGS ================= */
 
-function loadSaved(uid){
+function loadSavedBlogs(uid){
 
   db.ref("savedBlogs/"+uid).on("value", snap=>{
 
@@ -52,34 +56,49 @@ function loadSaved(uid){
 
     snap.forEach(child=>{
 
-      const blog=child.val();
+      const blog = child.val();
 
-      const card=document.createElement("div");
-      card.className="card";
+      const card = document.createElement("div");
+      card.className="saved-blog-card";
 
-      card.innerHTML=`
+      card.innerHTML = `
+        <img src="https://via.placeholder.com/300">
         <h3>${blog.title}</h3>
-        <button class="open-btn">Open</button>
-        <button class="remove-btn">Unsave</button>
+
+        <div class="actions">
+          <i class="fa-solid fa-book-open open"></i>
+          <i class="fa-solid fa-trash remove"></i>
+        </div>
       `;
 
-      card.querySelector(".open-btn").onclick=()=>{
-        window.location.href=
-        "dashboard-blogs.html?postId="+blog.postId;
+      // OPEN
+      card.querySelector(".open").onclick = ()=>{
+        window.location.href =
+          "dashboard-blogs.html?postId="+blog.postId;
       };
 
-      card.querySelector(".remove-btn").onclick=()=>{
-        db.ref("savedBlogs/"+uid+"/"+blog.postId).remove();
+      // REMOVE
+      card.querySelector(".remove").onclick = ()=>{
+        removeBlog(uid, child.key);
       };
 
       savedBlogsDiv.appendChild(card);
+
     });
+
   });
+
 }
 
-/* LOGOUT */
+/* ================= REMOVE BLOG ================= */
 
-logoutBtn.onclick=()=>{
+function removeBlog(uid,key){
+  db.ref("savedBlogs/"+uid+"/"+key).remove();
+}
+
+/* ================= LOGOUT ================= */
+
+logoutBtn.onclick = ()=>{
   auth.signOut().then(()=>{
     window.location.href="index.html";
   });
