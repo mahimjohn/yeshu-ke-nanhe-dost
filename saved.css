@@ -119,10 +119,11 @@ a{text-decoration:none;color:inherit}
 
 #savedBlogs{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
   gap:22px;
   margin-top:30px;
 }
+
 
 /* CARD */
 
@@ -133,6 +134,7 @@ a{text-decoration:none;color:inherit}
   overflow:hidden;
   cursor:pointer;
   transition:0.25s ease;
+  max-width:320px;     /* controls width */
 }
 
 .saved-blog-card:hover{
@@ -143,8 +145,8 @@ a{text-decoration:none;color:inherit}
 
 .saved-blog-card img{
   width:100%;
-  height:150px;
-  object-fit:cover;
+  height:180px;        /* fixed height */
+  object-fit:cover;   /* crop nicely */
   display:block;
 }
 
