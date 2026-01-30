@@ -62,7 +62,7 @@ function loadSavedBlogs(uid){
       card.className="saved-blog-card";
 
       card.innerHTML = `
-        <img src="https://via.placeholder.com/300">
+        <img src="${blog.image || 'https://via.placeholder.com/400'}">
         <h3>${blog.title}</h3>
 
         <div class="actions">
@@ -71,15 +71,15 @@ function loadSavedBlogs(uid){
         </div>
       `;
 
-      // OPEN
+      // OPEN BLOG
       card.querySelector(".open").onclick = ()=>{
         window.location.href =
           "dashboard-blogs.html?postId="+blog.postId;
       };
 
-      // REMOVE
+      // REMOVE BLOG
       card.querySelector(".remove").onclick = ()=>{
-        removeBlog(uid, child.key);
+        db.ref("savedBlogs/"+uid+"/"+blog.postId).remove();
       };
 
       savedBlogsDiv.appendChild(card);
@@ -88,12 +88,6 @@ function loadSavedBlogs(uid){
 
   });
 
-}
-
-/* ================= REMOVE BLOG ================= */
-
-function removeBlog(uid,key){
-  db.ref("savedBlogs/"+uid+"/"+key).remove();
 }
 
 /* ================= LOGOUT ================= */
