@@ -18,41 +18,37 @@
 <body>
 
 <div class="topbar">
-  <button onclick="goBack()">⬅ Back</button>
-  <h2>Settings</h2>
+  <button onclick="goBack()" data-i18n="back">Back</button>
+  <h2 data-i18n="settings_title">Settings</h2>
 </div>
 
-<div class="container">
+<div class="wrapper">
 
-<!-- PROFILE -->
 <div class="card">
-  <h3>Profile</h3>
+  <h3 data-i18n="profile">Profile</h3>
 
-  <img id="profilePic" src="https://via.placeholder.com/120">
+  <img id="profilePic" class="profile-pic" src="https://via.placeholder.com/120">
   <input type="file" id="photoInput">
 
-  <input type="text" id="usernameInput" placeholder="Enter username">
-  <button onclick="saveProfile()">Save Profile</button>
+  <input type="text" id="usernameInput" data-i18n-placeholder="enter_username">
+  <button class="save-btn" onclick="saveProfile()" data-i18n="save_profile">Save Profile</button>
 
   <p id="userEmail"></p>
 </div>
 
-<!-- THEME -->
 <div class="card">
-  <h3>Theme</h3>
+  <h3 data-i18n="theme">Theme</h3>
   <select id="themeSelect">
     <option value="light">Light</option>
     <option value="dark">Dark</option>
   </select>
 </div>
 
-<!-- LANGUAGE -->
 <div class="card">
-  <h3>Language</h3>
-  <select id="languageSelect">
+  <h3 data-i18n="language">Language</h3>
 
-  <!-- Major World Languages -->
-  <option value="en">English</option>
+<select id="languageSelect">
+<option value="en">English</option>
   <option value="hi">Hindi (हिन्दी)</option>
   <option value="es">Spanish (Español)</option>
   <option value="fr">French (Français)</option>
@@ -122,33 +118,29 @@
   <option value="my">Burmese</option>
   <option value="ka">Georgian</option>
   <option value="hy">Armenian</option>
-
 </select>
+
 </div>
 
-<!-- NOTIFICATIONS -->
 <div class="card">
-  <h3>Notifications</h3>
-  <label>
+  <h3 data-i18n="notifications">Notifications</h3>
+  <label class="toggle-row">
     <input type="checkbox" id="notifyToggle">
-    Enable Notifications
+    <span data-i18n="enable_notifications">Enable Notifications</span>
   </label>
 </div>
 
-<!-- PASSWORD -->
 <div class="card">
-  <h3>Password</h3>
-  <button onclick="resetPassword()">Send Reset Email</button>
+  <h3 data-i18n="password">Password</h3>
+  <button class="blue-btn" onclick="resetPassword()" data-i18n="reset_email">Send Reset Email</button>
 </div>
 
-<!-- DELETE ACCOUNT -->
-<div class="card danger">
-  <button onclick="deleteAccount()">Delete Account</button>
+<div class="card">
+  <button class="red-btn" onclick="deleteAccount()" data-i18n="delete_account">Delete Account</button>
 </div>
 
-<!-- LOGOUT -->
-<div class="card danger">
-  <button onclick="logout()">Logout</button>
+<div class="card">
+  <button class="logout-btn" onclick="logout()" data-i18n="logout">Logout</button>
 </div>
 
 </div>
