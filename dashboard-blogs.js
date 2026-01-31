@@ -167,7 +167,5 @@ function toggleSave(postId,title,image){
 /* ================= BACK ================= */
 
 function goBack(){
-  reader.style.display="none";
-  list.style.display="block";
-  history.replaceState({}, document.title, "dashboard.html");
+  window.location.href = "dashboard.html";
 }
