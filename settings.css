@@ -1,40 +1,16 @@
-/* ================= BASE ================= */
-
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial;
   background:#f3f3f3;
   color:#222;
 }
-
-/* ================= DARK MODE ================= */
 
 body.dark{
   background:#121212;
   color:#eee;
 }
-
-body.dark .card{
-  background:#1e1e1e;
-  box-shadow:0 0 0 rgba(0,0,0,0);
-}
-
-body.dark input,
-body.dark select{
-  background:#2a2a2a;
-  color:#fff;
-  border:1px solid #444;
-}
-
-body.dark .topbar{
-  background:#0b3d2e;
-}
-
-/* ================= TOP BAR ================= */
 
 .topbar{
   height:60px;
@@ -42,12 +18,13 @@ body.dark .topbar{
   color:white;
   display:flex;
   align-items:center;
-  padding:0 20px;
   gap:15px;
+  padding:0 20px;
 }
 
 .topbar button{
   background:white;
+  color:#0b3d2e;
   border:none;
   padding:8px 14px;
   border-radius:6px;
@@ -55,107 +32,60 @@ body.dark .topbar{
   font-weight:bold;
 }
 
-.topbar h2{
-  margin:0;
+.topbar button:hover{
+  background:#145c46;
+  color:white;
 }
 
-/* ================= PAGE WRAPPER ================= */
-
 .wrapper{
-  max-width:500px;
+  max-width:480px;
   margin:40px auto;
   padding:0 20px;
 }
 
-/* ================= CARD ================= */
-
 .card{
   background:white;
-  border-radius:12px;
   padding:20px;
-  margin-bottom:25px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  border-radius:12px;
+  margin-bottom:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* ================= HEADINGS ================= */
-
-.card h3{
-  margin:0 0 12px 0;
+body.dark .card{
+  background:#1e1e1e;
 }
-
-/* ================= PROFILE ================= */
 
 .profile-pic{
-  width:100px;
-  height:100px;
+  width:120px;
+  height:120px;
   border-radius:50%;
   object-fit:cover;
   display:block;
-  margin:0 auto 12px;
+  margin:0 auto 10px;
   border:2px solid #0b3d2e;
 }
 
-input[type="text"],
-input[type="file"],
-select{
+input,select{
   width:100%;
   padding:10px;
   margin-top:8px;
-  border-radius:6px;
-  border:1px solid #ccc;
-  font-size:14px;
 }
 
-/* ================= BUTTONS ================= */
-
 button{
-  padding:10px 14px;
+  padding:10px;
   border:none;
   border-radius:6px;
   cursor:pointer;
-  font-weight:bold;
-}
-
-.save-btn{
-  background:#0b3d2e;
-  color:white;
-  margin-top:12px;
-}
-
-.save-btn:hover{
-  background:#145c46;
-}
-
-.blue-btn{
-  background:#1976d2;
-  color:white;
-}
-
-.red-btn{
-  background:#d32f2f;
-  color:white;
-}
-
-.logout-btn{
-  background:#b71c1c;
-  color:white;
-}
-
-/* ================= CHECKBOX ================= */
-
-.toggle-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
   margin-top:10px;
 }
 
-/* ================= RESPONSIVE ================= */
+.save-btn{background:#0b3d2e;color:white;}
+.blue-btn{background:#1976d2;color:white;}
+.red-btn{background:#d32f2f;color:white;}
+.logout-btn{background:#b71c1c;color:white;}
 
-@media(max-width:600px){
-
-  .wrapper{
-    margin:25px auto;
-  }
-
+.toggle-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
 }
