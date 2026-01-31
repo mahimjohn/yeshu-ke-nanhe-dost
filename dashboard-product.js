@@ -1,42 +1,100 @@
-const products=[
- {id:1,name:"Christian Hoodie",price:999,image:"https://via.placeholder.com/400"},
- {id:2,name:"Jesus T-Shirt",price:599,image:"https://via.placeholder.com/400/ff0000"},
- {id:3,name:"Bible Book",price:299,image:"https://via.placeholder.com/400/00ff00"},
- {id:4,name:"Faith Bracelet",price:199,image:"https://via.placeholder.com/400/0000ff"},
- {id:5,name:"Smart Watch",price:1999,image:"https://via.placeholder.com/400/999999"},
- {id:6,name:"Leather Bag",price:1499,image:"https://via.placeholder.com/400/333333"},
- {id:7,name:"Coffee Mug",price:249,image:"https://via.placeholder.com/400/bbbbbb"}
+// Firebase reference
+const db = firebase.database();
+
+const productGrid = document.getElementById("productGrid");
+const searchInput = document.getElementById("searchInput");
+const bannerImage = document.getElementById("bannerImage");
+
+let allProducts = [];
+let currentCategory = "all";
+
+/* ---------- BANNER SLIDER ---------- */
+
+const banners = [
+  "https://via.placeholder.com/1200x300/0b3d2e/ffffff?text=Faith+Merchandise",
+  "https://via.placeholder.com/1200x300/145c46/ffffff?text=Christian+Books",
+  "https://via.placeholder.com/1200x300/1c7c5c/ffffff?text=Accessories+%26+Gifts"
 ];
 
-const featuredRow=document.getElementById("featuredRow");
-const grid=document.getElementById("productGrid");
+let bannerIndex = 0;
 
-products.forEach(p=>{
+function rotateBanner(){
+  bannerImage.src = banners[bannerIndex];
+  bannerIndex = (bannerIndex+1) % banners.length;
+}
 
- const card=document.createElement("div");
- card.className="card";
- card.onclick=()=>openProduct(p.id);
+setInterval(rotateBanner,3000);
+rotateBanner();
 
- card.innerHTML=`
-  <img src="${p.image}">
-  <div class="info">
-   <h4>${p.name}</h4>
-   <div class="price">₹${p.price}</div>
-  </div>
- `;
+/* ---------- LOAD PRODUCTS ---------- */
 
- featuredRow.appendChild(card.cloneNode(true));
- grid.appendChild(card);
+db.ref("products").on("value", snapshot=>{
+  allProducts = [];
+
+  snapshot.forEach(child=>{
+    allProducts.push({
+      id:child.key,
+      ...child.val()
+    });
+  });
+
+  renderProducts(allProducts);
 });
 
+/* ---------- RENDER ---------- */
+
+function renderProducts(list){
+
+  productGrid.innerHTML="";
+
+  list.forEach(p=>{
+
+    const card = document.createElement("div");
+    card.className="card";
+    card.onclick=()=>openProduct(p.id);
+
+    card.innerHTML=`
+      <div style="position:relative">
+        ${p.badge ? `<div class="badge">${p.badge}</div>` : ""}
+        <img src="${p.image}">
+      </div>
+
+      <div class="card-body">
+        <h4>${p.name}</h4>
+        <div class="price">₹${p.price}</div>
+      </div>
+    `;
+
+    productGrid.appendChild(card);
+  });
+}
+
+/* ---------- FILTER ---------- */
+
+function filterCategory(cat){
+  currentCategory = cat;
+
+  if(cat==="all"){
+    renderProducts(allProducts);
+  }else{
+    renderProducts(allProducts.filter(p=>p.category===cat));
+  }
+}
+
+/* ---------- SEARCH ---------- */
+
+searchInput.addEventListener("input",()=>{
+  const text = searchInput.value.toLowerCase();
+
+  renderProducts(
+    allProducts.filter(p=>
+      p.name.toLowerCase().includes(text)
+    )
+  );
+});
+
+/* ---------- OPEN PRODUCT ---------- */
+
 function openProduct(id){
- window.location.href="product.html?id="+id;
-}
-
-function goDashboard(){
- window.location.href="dashboard.html";
-}
-
-function viewCart(){
- window.location.href="cart.html";
+  window.location.href="product.html?id="+id;
 }
