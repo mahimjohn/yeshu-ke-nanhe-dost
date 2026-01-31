@@ -5,39 +5,56 @@
 <title>Store | Yeshu Ke Nanhe Dost</title>
 
 <link rel="stylesheet" href="dashboard-product.css">
-
 </head>
+
 <body>
 
-<!-- HEADER -->
-<div class="store-header">
-  <h2>Yeshu Ke Nanhe Dost</h2>
+<!-- NAVBAR -->
+<div class="amazon-navbar">
 
-  <div>
-    <button onclick="goBack()">Dashboard</button>
-    <button onclick="viewCart()">Cart</button>
+  <div class="nav-left">
+    <div class="logo">Yeshu Ke Nanhe Dost</div>
   </div>
+
+  <div class="nav-search">
+    <select>
+      <option>All</option>
+      <option>Books</option>
+      <option>Clothing</option>
+      <option>Accessories</option>
+    </select>
+
+    <input type="text" placeholder="Search products">
+    <button>🔍</button>
+  </div>
+
+  <div class="nav-right">
+    <div onclick="goDashboard()">Dashboard</div>
+    <div onclick="viewCart()">Cart</div>
+  </div>
+
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>Faith Inspired Merchandise</h1>
-  <p>Shop hoodies, books, accessories & more</p>
-</section>
+<!-- CATEGORY BAR -->
+<div class="categories">
+  <span>All</span>
+  <span>Books</span>
+  <span>Clothing</span>
+  <span>Electronics</span>
+  <span>Accessories</span>
+</div>
+
+<!-- SLIDER -->
+<div class="slider"></div>
 
 <!-- FEATURED -->
-<section>
-  <h2 class="section-title">Featured Products</h2>
-  <div id="featuredRow" class="row-scroll"></div>
-</section>
+<h2 class="title">Featured Products</h2>
+<div class="row" id="featuredRow"></div>
 
-<!-- ALL PRODUCTS -->
-<section>
-  <h2 class="section-title">Explore More</h2>
-  <div id="productGrid" class="grid"></div>
-</section>
+<!-- EXPLORE -->
+<h2 class="title">Explore More</h2>
+<div class="grid" id="productGrid"></div>
 
 <script src="dashboard-product.js"></script>
-
 </body>
 </html>
