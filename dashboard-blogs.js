@@ -49,10 +49,15 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
     const card = document.createElement("div");
     card.className = "blog-card";
 
-    card.innerHTML = `
-      <img src="${image}">
-      <h3>${post.title}</h3>
-    `;
+    const published = new Date(post.published)
+  .toISOString()
+  .split("T")[0];
+
+card.innerHTML = `
+  <img src="${image}">
+  <h3>${post.title}</h3>
+  <p class="date">${published}</p>
+`;
 
     card.onclick = ()=>{
       window.location.href =
