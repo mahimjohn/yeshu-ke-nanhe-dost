@@ -1,86 +1,161 @@
+/* ================= BASE ================= */
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   background:#f3f3f3;
-  color:#000;
+  color:#222;
 }
 
-.dark{
+/* ================= DARK MODE ================= */
+
+body.dark{
   background:#121212;
-  color:#fff;
+  color:#eee;
 }
+
+body.dark .card{
+  background:#1e1e1e;
+  box-shadow:0 0 0 rgba(0,0,0,0);
+}
+
+body.dark input,
+body.dark select{
+  background:#2a2a2a;
+  color:#fff;
+  border:1px solid #444;
+}
+
+body.dark .topbar{
+  background:#0b3d2e;
+}
+
+/* ================= TOP BAR ================= */
 
 .topbar{
+  height:60px;
   background:#0b3d2e;
   color:white;
-  padding:15px;
   display:flex;
   align-items:center;
+  padding:0 20px;
   gap:15px;
 }
 
 .topbar button{
   background:white;
   border:none;
-  padding:6px 10px;
-  border-radius:5px;
+  padding:8px 14px;
+  border-radius:6px;
   cursor:pointer;
+  font-weight:bold;
 }
 
-.container{
-  max-width:450px;
-  margin:30px auto;
-  padding:20px;
+.topbar h2{
+  margin:0;
 }
+
+/* ================= PAGE WRAPPER ================= */
+
+.wrapper{
+  max-width:500px;
+  margin:40px auto;
+  padding:0 20px;
+}
+
+/* ================= CARD ================= */
 
 .card{
   background:white;
+  border-radius:12px;
   padding:20px;
-  border-radius:10px;
-  margin-bottom:20px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+  margin-bottom:25px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
-.dark .card{
-  background:#1e1e1e;
+/* ================= HEADINGS ================= */
+
+.card h3{
+  margin:0 0 12px 0;
 }
 
-h3{
-  margin-top:0;
-}
+/* ================= PROFILE ================= */
 
-button{
-  background:#0b3d2e;
-  color:white;
-  border:none;
-  padding:10px;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#145c46;
-}
-
-input, select{
-  width:100%;
-  padding:8px;
-  margin:8px 0;
-}
-
-img{
-  width:120px;
-  height:120px;
+.profile-pic{
+  width:100px;
+  height:100px;
   border-radius:50%;
   object-fit:cover;
   display:block;
-  margin-bottom:10px;
+  margin:0 auto 12px;
+  border:2px solid #0b3d2e;
 }
 
-.danger button{
-  background:#c0392b;
+input[type="text"],
+input[type="file"],
+select{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:14px;
 }
 
-.danger button:hover{
-  background:#e74c3c;
+/* ================= BUTTONS ================= */
+
+button{
+  padding:10px 14px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.save-btn{
+  background:#0b3d2e;
+  color:white;
+  margin-top:12px;
+}
+
+.save-btn:hover{
+  background:#145c46;
+}
+
+.blue-btn{
+  background:#1976d2;
+  color:white;
+}
+
+.red-btn{
+  background:#d32f2f;
+  color:white;
+}
+
+.logout-btn{
+  background:#b71c1c;
+  color:white;
+}
+
+/* ================= CHECKBOX ================= */
+
+.toggle-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:600px){
+
+  .wrapper{
+    margin:25px auto;
+  }
+
 }
