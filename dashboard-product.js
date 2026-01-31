@@ -30,10 +30,10 @@ const products = [
 
 ];
 
-/* LOAD FEATURED */
-
 const featuredRow = document.getElementById("featuredRow");
 const grid = document.getElementById("productGrid");
+
+/* LOAD PRODUCTS */
 
 products.forEach(p=>{
 
