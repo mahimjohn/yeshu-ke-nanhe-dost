@@ -1,0 +1,54 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f3f3f3;
+}
+
+.container{
+  max-width:500px;
+  margin:40px auto;
+  padding:20px;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card h3{
+  margin-top:0;
+}
+
+button{
+  background:#0b3d2e;
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#145c46;
+}
+
+select{
+  width:100%;
+  padding:8px;
+}
+
+.danger button{
+  background:#c0392b;
+}
+
+.danger button:hover{
+  background:#e74c3c;
+}
