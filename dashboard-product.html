@@ -1,60 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Store | Yeshu Ke Nanhe Dost</title>
+  <title>Store | Yeshu Ke Nanhe Dost</title>
 
-<link rel="stylesheet" href="dashboard-product.css">
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <!-- Your Firebase config (already used in your site) -->
+  <script src="firebase.js"></script>
+
+  <link rel="stylesheet" href="dashboard-product.css">
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-<div class="amazon-navbar">
+<div class="navbar">
+  <div class="logo">Yeshu Ke Nanhe Dost</div>
 
-  <div class="nav-left">
-    <div class="logo">Yeshu Ke Nanhe Dost</div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search products...">
   </div>
 
-  <div class="nav-search">
-    <select>
-      <option>All</option>
-      <option>Books</option>
-      <option>Clothing</option>
-      <option>Accessories</option>
-    </select>
-
-    <input type="text" placeholder="Search products">
-    <button>🔍</button>
+  <div class="nav-btns">
+    <button onclick="location.href='dashboard.html'">Dashboard</button>
+    <button onclick="location.href='cart.html'">Cart</button>
   </div>
-
-  <div class="nav-right">
-    <div onclick="goDashboard()">Dashboard</div>
-    <div onclick="viewCart()">Cart</div>
-  </div>
-
 </div>
 
 <!-- CATEGORY BAR -->
 <div class="categories">
-  <span>All</span>
-  <span>Books</span>
-  <span>Clothing</span>
-  <span>Electronics</span>
-  <span>Accessories</span>
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('books')">Books</button>
+  <button onclick="filterCategory('clothing')">Clothing</button>
+  <button onclick="filterCategory('electronics')">Electronics</button>
+  <button onclick="filterCategory('accessories')">Accessories</button>
 </div>
 
-<!-- SLIDER -->
-<div class="slider"></div>
+<!-- BANNER -->
+<div class="banner">
+  <img id="bannerImage">
+</div>
 
-<!-- FEATURED -->
 <h2 class="title">Featured Products</h2>
-<div class="row" id="featuredRow"></div>
 
-<!-- EXPLORE -->
-<h2 class="title">Explore More</h2>
-<div class="grid" id="productGrid"></div>
+<div class="product-grid" id="productGrid"></div>
 
 <script src="dashboard-product.js"></script>
+
 </body>
 </html>
