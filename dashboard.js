@@ -150,3 +150,20 @@ fetch(`https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KE
   });
 
 });
+
+/* ================= VERSE OF THE DAY ================= */
+
+fetch("https://beta.ourmanna.com/api/v1/get/?format=json")
+  .then(res => res.json())
+  .then(data => {
+    const verse = data.verse.details.text;
+    const reference = data.verse.details.reference;
+
+    document.getElementById("verseText").innerText = verse;
+    document.getElementById("verseRef").innerText = reference;
+  })
+  .catch(err=>{
+    document.getElementById("verseText").innerText =
+      "Unable to load verse today.";
+    console.log(err);
+  });
