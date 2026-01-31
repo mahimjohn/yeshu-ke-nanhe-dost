@@ -164,5 +164,5 @@ function toggleSave(postId,title,image){
 function goBack(){
   reader.style.display="none";
   list.style.display="block";
-  history.replaceState({}, document.title, "dashboard-blogs.html");
+  history.replaceState({}, document.title, "dashboard.html");
 }
