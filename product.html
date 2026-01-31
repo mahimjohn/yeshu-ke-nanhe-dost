@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Product</title>
+
+<link rel="stylesheet" href="product.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="store-header">
+
+  <div class="left">
+    <button onclick="goBack()">⬅ Dashboard</button>
+    <h2>Faith Store</h2>
+  </div>
+
+  <div class="right">
+    <button onclick="viewCart()">
+      <i class="fa fa-shopping-cart"></i> Cart
+    </button>
+  </div>
+
+</div>
+
+<!-- PRODUCT SECTION -->
+
+<div class="product-container">
+
+  <!-- IMAGES -->
+  <div class="images">
+
+    <div class="thumbs" id="thumbs"></div>
+
+    <img id="mainImage" class="main-img">
+
+  </div>
+
+  <!-- INFO -->
+  <div class="info">
+
+    <h1 id="title"></h1>
+
+    <div class="rating">
+      ⭐⭐⭐⭐☆ <span id="ratingText"></span>
+    </div>
+
+    <h2 id="price"></h2>
+
+    <p id="shortDesc"></p>
+
+    <label>Quantity</label>
+    <input type="number" id="qty" value="1" min="1">
+
+    <button class="cart-btn" onclick="addToCart()">Add to Cart</button>
+    <button class="buy-btn">Buy Now</button>
+
+  </div>
+
+</div>
+
+<!-- DESCRIPTION -->
+
+<div class="description">
+  <h3>Description</h3>
+  <p id="longDesc"></p>
+</div>
+
+<!-- REVIEWS -->
+
+<div class="reviews">
+
+  <h3>Reviews</h3>
+  <div id="reviewList"></div>
+
+</div>
+
+<script src="product.js"></script>
+
+</body>
+</html>
