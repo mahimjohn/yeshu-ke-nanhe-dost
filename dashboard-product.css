@@ -1,0 +1,101 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f3f3f3;
+}
+
+/* HEADER */
+
+.store-header{
+  background:#0b3d2e;
+  color:white;
+  padding:14px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.actions button{
+  background:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-left:10px;
+}
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(135deg,#0b3d2e,#145c46);
+  color:white;
+  padding:60px 20px;
+  text-align:center;
+}
+
+/* SECTIONS */
+
+.section{
+  padding:30px 20px;
+}
+
+.section h3{
+  margin-bottom:15px;
+}
+
+/* HORIZONTAL ROW */
+
+.product-row{
+  display:flex;
+  gap:15px;
+  overflow-x:auto;
+}
+
+/* GRID */
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+
+.card{
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 3px 8px rgba(0,0,0,0.1);
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card .info{
+  padding:12px;
+}
+
+.card h4{
+  margin:0;
+  font-size:15px;
+}
+
+.price{
+  color:#0b3d2e;
+  font-weight:bold;
+  margin-top:5px;
+}
