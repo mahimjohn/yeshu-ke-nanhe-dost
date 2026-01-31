@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Settings</title>
+
+<link rel="stylesheet" href="settings.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script src="firebase.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>Settings</h2>
+
+  <!-- Profile -->
+  <div class="card">
+    <h3>Profile</h3>
+    <p id="userEmail">Loading...</p>
+  </div>
+
+  <!-- Change Password -->
+  <div class="card">
+    <h3>Change Password</h3>
+    <button onclick="resetPassword()">Send Reset Email</button>
+  </div>
+
+  <!-- Theme -->
+  <div class="card">
+    <h3>Theme</h3>
+    <select id="themeSelect">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </div>
+
+  <!-- Notifications -->
+  <div class="card">
+    <h3>Notifications</h3>
+    <label>
+      <input type="checkbox" id="notifyToggle">
+      Enable notifications
+    </label>
+  </div>
+
+  <!-- Logout -->
+  <div class="card danger">
+    <button onclick="logout()">Logout</button>
+  </div>
+
+</div>
+
+<script src="settings.js"></script>
+
+</body>
+</html>
