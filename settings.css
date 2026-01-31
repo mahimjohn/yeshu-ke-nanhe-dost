@@ -2,17 +2,35 @@ body{
   margin:0;
   font-family:Arial;
   background:#f3f3f3;
+  color:#000;
+}
+
+.dark{
+  background:#121212;
+  color:#fff;
+}
+
+.topbar{
+  background:#0b3d2e;
+  color:white;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.topbar button{
+  background:white;
+  border:none;
+  padding:6px 10px;
+  border-radius:5px;
+  cursor:pointer;
 }
 
 .container{
-  max-width:500px;
-  margin:40px auto;
+  max-width:450px;
+  margin:30px auto;
   padding:20px;
-}
-
-h2{
-  text-align:center;
-  margin-bottom:30px;
 }
 
 .card{
@@ -20,10 +38,14 @@ h2{
   padding:20px;
   border-radius:10px;
   margin-bottom:20px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
 }
 
-.card h3{
+.dark .card{
+  background:#1e1e1e;
+}
+
+h3{
   margin-top:0;
 }
 
@@ -31,7 +53,7 @@ button{
   background:#0b3d2e;
   color:white;
   border:none;
-  padding:10px 16px;
+  padding:10px;
   border-radius:6px;
   cursor:pointer;
 }
@@ -40,9 +62,19 @@ button:hover{
   background:#145c46;
 }
 
-select{
+input, select{
   width:100%;
   padding:8px;
+  margin:8px 0;
+}
+
+img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  margin-bottom:10px;
 }
 
 .danger button{
