@@ -94,20 +94,6 @@ function loadSavedBlogsCount(uid){
 
 }
 
-/* ================= VERSE OF THE DAY ================= */
-
-const verses = [
- {text:"The Lord is my shepherd; I shall not want.",ref:"Psalm 23:1"},
- {text:"I can do all things through Christ who strengthens me.",ref:"Philippians 4:13"},
- {text:"For God so loved the world that He gave His only Son.",ref:"John 3:16"},
- {text:"Be still, and know that I am God.",ref:"Psalm 46:10"},
- {text:"Trust in the Lord with all your heart.",ref:"Proverbs 3:5"}
-];
-
-const dayIndex = new Date().getDate() % verses.length;
-verseText.innerText = verses[dayIndex].text;
-verseRef.innerText = verses[dayIndex].ref;
-
 /* ================= FEATURED BLOGS ================= */
 
 const API_KEY = "AIzaSyDKLvTHoh1XOfSnJcmGy_7Y4Da00zEJBbA";
