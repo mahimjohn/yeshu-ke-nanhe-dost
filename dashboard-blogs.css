@@ -1,10 +1,12 @@
+/* ================= BASE ================= */
+
 body{
   margin:0;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   background:#f3f3f3;
 }
 
-/* TOP BAR */
+/* ================= TOP BAR ================= */
 
 .topbar{
   background:#0b3d2e;
@@ -23,7 +25,16 @@ body{
   cursor:pointer;
 }
 
-/* BLOG LIST */
+/* ================= BLOG GRID ================= */
+
+#blogs{
+  display:grid;                           /* IMPORTANT */
+  grid-template-columns:repeat(4, 1fr);  /* 4 per row */
+  gap:20px;
+  padding:20px;
+}
+
+/* Responsive */
 
 @media(max-width:1100px){
   #blogs{
@@ -43,6 +54,8 @@ body{
   }
 }
 
+/* ================= BLOG CARD ================= */
+
 .blog-card{
   background:white;
   border-radius:12px;
@@ -50,6 +63,8 @@ body{
   box-shadow:0 4px 10px rgba(0,0,0,0.1);
   cursor:pointer;
   transition:0.2s;
+  display:flex;
+  flex-direction:column;
 }
 
 .blog-card:hover{
@@ -58,44 +73,30 @@ body{
 
 .blog-card img{
   width:100%;
-  height:160px;
+  height:180px;
   object-fit:cover;
 }
 
 .blog-card h3{
   padding:12px;
   font-size:16px;
+  margin:0;
 }
 
-/* READER */
+/* ================= READER ================= */
 
 #reader{
   padding:20px;
 }
 
-#saveBtn{
-  background:#0b3d2e;
-  color:white;
-  border:none;
-  padding:10px 16px;
-  border-radius:6px;
-  margin-bottom:15px;
-  cursor:pointer;
-}
-
-#saveBtn:hover{
-  background:#145c46;
-}
+/* Bookmark icon inside reader */
 
 .bookmark{
-  position:absolute;
-  top:12px;
-  right:12px;
   font-size:22px;
   cursor:pointer;
   color:#ccc;
 }
 
 .bookmark.saved{
-  color:#0b3d2e;
+  color:#f5c400;
 }
