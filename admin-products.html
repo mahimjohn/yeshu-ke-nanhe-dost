@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Product Manager</title>
-  <link rel="stylesheet" href="admin-products.css">
+<meta charset="UTF-8">
+<title>Admin Product Panel</title>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<!-- Your existing firebase config -->
+<script src="firebase.js"></script>
+
+<link rel="stylesheet" href="admin-products.css">
 </head>
+
 <body>
 
-<h2>Product Admin Panel</h2>
+<h2>Admin Product Manager</h2>
 
 <div class="form-box">
 
   <input type="text" id="name" placeholder="Product Name">
-
   <input type="number" id="price" placeholder="Price">
 
   <select id="category">
@@ -36,21 +46,9 @@
 </div>
 
 <h3>All Products</h3>
-<div id="productList"></div>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
-<script>
-  const firebaseConfig = {
-    // 🔥 PASTE YOUR FIREBASE CONFIG HERE
-  };
-  firebase.initializeApp(firebaseConfig);
-</script>
+<div id="productList" class="product-list"></div>
 
 <script src="admin-products.js"></script>
-
 </body>
 </html>
