@@ -1,6 +1,9 @@
 console.log("Admin JS Loaded");
 
-/* ---------------- ADD PRODUCT ---------------- */
+const db = firebase.database();
+const storage = firebase.storage();
+
+/* ================= ADD PRODUCT ================= */
 
 function addProduct(){
 
@@ -16,50 +19,52 @@ function addProduct(){
     return;
   }
 
-  const productId = db.ref("products").push().key;
+  const id = db.ref("products").push().key;
   const urls = [];
 
   Array.from(images).forEach((file,i)=>{
 
-    const ref = storage.ref("products/"+productId+"_"+i);
+    const imgRef = storage.ref("products/"+id+"_"+i);
 
-    ref.put(file).then(snapshot=>{
-      snapshot.ref.getDownloadURL().then(url=>{
-        urls.push(url);
+    imgRef.put(file)
+    .then(snapshot => snapshot.ref.getDownloadURL())
+    .then(url => {
 
-        if(urls.length === images.length){
+      urls.push(url);
 
-          db.ref("products/"+productId).set({
-            name,
-            price,
-            category,
-            badge,
-            description,
-            images: urls
-          });
+      if(urls.length === images.length){
 
-          alert("Product Added Successfully");
+        db.ref("products/"+id).set({
+          name,
+          price,
+          category,
+          badge,
+          description,
+          images: urls
+        });
 
-          document.getElementById("name").value="";
-          document.getElementById("price").value="";
-          document.getElementById("description").value="";
-          document.getElementById("image").value="";
-        }
-      });
+        alert("Product Added Successfully");
+
+        document.getElementById("name").value="";
+        document.getElementById("price").value="";
+        document.getElementById("description").value="";
+        document.getElementById("image").value="";
+      }
+
     });
 
   });
 
 }
 
-/* ---------------- LOAD PRODUCTS ---------------- */
+/* ================= LOAD PRODUCTS ================= */
 
-db.ref("products").on("value",snap=>{
+db.ref("products").on("value", snapshot => {
 
   const list = document.getElementById("productList");
-  list.innerHTML="";
+  list.innerHTML = "";
 
-  snap.forEach(child=>{
+  snapshot.forEach(child => {
 
     const p = child.val();
 
@@ -71,11 +76,12 @@ db.ref("products").on("value",snap=>{
         <button onclick="deleteProduct('${child.key}')">Delete</button>
       </div>
     `;
+
   });
 
 });
 
-/* ---------------- DELETE ---------------- */
+/* ================= DELETE ================= */
 
 function deleteProduct(id){
   if(confirm("Delete this product?")){
