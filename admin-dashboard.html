@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Admin Product Panel</title>
+  <title>Admin Product Manager</title>
 
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-<!-- Your existing firebase config -->
-<script src="firebase.js"></script>
+  <!-- Your Firebase Config -->
+  <script src="firebase.js"></script>
 
-<link rel="stylesheet" href="admin-dashboard.css">
+  <link rel="stylesheet" href="admin-dashboard.css">
 </head>
 
 <body>
 
-<h2>Admin Product Manager</h2>
+<h1 class="title">Admin Product Manager</h1>
 
-<div class="form-box">
+<!-- ADD PRODUCT FORM -->
+<div class="form-card">
 
-  <input type="text" id="name" placeholder="Product Name">
-  <input type="number" id="price" placeholder="Price">
+  <input id="name" type="text" placeholder="Product Name">
+
+  <input id="price" type="number" placeholder="Price">
 
   <select id="category">
     <option value="books">Books</option>
@@ -39,15 +40,15 @@
 
   <textarea id="description" placeholder="Product Description"></textarea>
 
-  <input type="file" id="image" multiple>
+  <input id="image" type="file" multiple>
 
   <button onclick="addProduct()">Add Product</button>
 
 </div>
 
-<h3>All Products</h3>
+<h2 class="subtitle">All Products</h2>
 
-<div id="productList" class="product-list"></div>
+<div id="productList" class="product-grid"></div>
 
 <script src="admin-dashboard.js"></script>
 </body>
