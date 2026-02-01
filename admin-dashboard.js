@@ -1,18 +1,23 @@
 console.log("Admin JS Loaded");
 
+const db = firebase.database();
+const storage = firebase.storage();
+
+const productList = document.getElementById("productList");
+
 /* ---------------- ADD PRODUCT ---------------- */
 
 function addProduct(){
 
-  const name = document.getElementById("name").value;
-  const price = document.getElementById("price").value;
+  const name = document.getElementById("name").value.trim();
+  const price = document.getElementById("price").value.trim();
   const category = document.getElementById("category").value;
   const badge = document.getElementById("badge").value;
-  const description = document.getElementById("description").value;
+  const description = document.getElementById("description").value.trim();
   const images = document.getElementById("image").files;
 
   if(!name || !price || images.length === 0){
-    alert("Fill all required fields");
+    alert("Please fill all required fields");
     return;
   }
 
@@ -44,7 +49,6 @@ function addProduct(){
           document.getElementById("price").value="";
           document.getElementById("description").value="";
           document.getElementById("image").value="";
-
         }
       });
     });
@@ -57,8 +61,7 @@ function addProduct(){
 
 db.ref("products").on("value", snapshot=>{
 
-  const productList = document.getElementById("productList");
-  productList.innerHTML = "";
+  productList.innerHTML="";
 
   snapshot.forEach(child=>{
 
@@ -77,7 +80,7 @@ db.ref("products").on("value", snapshot=>{
 
 });
 
-/* ---------------- DELETE ---------------- */
+/* ---------------- DELETE PRODUCT ---------------- */
 
 function deleteProduct(id){
   if(confirm("Delete this product?")){
