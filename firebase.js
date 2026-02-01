@@ -1,4 +1,6 @@
-// Firebase Configuration
+// firebase.js
+
+// Your Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyB6-aF6ycLVrmLBAr-1X4fL6ZVgwF0agFc",
   authDomain: "yeshu-ke-nanhe-dost.firebaseapp.com",
@@ -9,8 +11,13 @@ const firebaseConfig = {
   appId: "1:496839768513:web:e49e55eb2d196c8e095740"
 };
 
-var db = firebase.database();
-var storage = firebase.storage();
+// Prevent double initialization
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// Global references
+window.db = firebase.database();
+window.storage = firebase.storage();
+
+console.log("Firebase Connected");
