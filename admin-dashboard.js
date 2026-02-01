@@ -1,5 +1,6 @@
 console.log("Admin JS Loaded");
 
+// Firebase Services
 const db = firebase.database();
 const storage = firebase.storage();
 
@@ -7,11 +8,11 @@ const storage = firebase.storage();
 
 function addProduct(){
 
-  const name = document.getElementById("name").value;
-  const price = document.getElementById("price").value;
+  const name = document.getElementById("name").value.trim();
+  const price = document.getElementById("price").value.trim();
   const category = document.getElementById("category").value;
   const badge = document.getElementById("badge").value;
-  const description = document.getElementById("description").value;
+  const description = document.getElementById("description").value.trim();
   const images = document.getElementById("image").files;
 
   if(!name || !price || images.length === 0){
@@ -22,36 +23,41 @@ function addProduct(){
   const id = db.ref("products").push().key;
   const urls = [];
 
-  Array.from(images).forEach((file,i)=>{
+  Array.from(images).forEach((file, i) => {
 
-    const imgRef = storage.ref("products/"+id+"_"+i);
+    const imgRef = storage.ref("products/" + id + "_" + i);
 
     imgRef.put(file)
-    .then(snapshot => snapshot.ref.getDownloadURL())
-    .then(url => {
+      .then(snapshot => snapshot.ref.getDownloadURL())
+      .then(url => {
 
-      urls.push(url);
+        urls.push(url);
 
-      if(urls.length === images.length){
+        if(urls.length === images.length){
 
-        db.ref("products/"+id).set({
-          name,
-          price,
-          category,
-          badge,
-          description,
-          images: urls
-        });
+          db.ref("products/" + id).set({
+            name,
+            price,
+            category,
+            badge,
+            description,
+            images: urls
+          });
 
-        alert("Product Added Successfully");
+          alert("Product Added Successfully");
 
-        document.getElementById("name").value="";
-        document.getElementById("price").value="";
-        document.getElementById("description").value="";
-        document.getElementById("image").value="";
-      }
+          // Clear form
+          document.getElementById("name").value="";
+          document.getElementById("price").value="";
+          document.getElementById("description").value="";
+          document.getElementById("image").value="";
+        }
 
-    });
+      })
+      .catch(err=>{
+        console.error(err);
+        alert("Upload failed");
+      });
 
   });
 
@@ -81,10 +87,10 @@ db.ref("products").on("value", snapshot => {
 
 });
 
-/* ================= DELETE ================= */
+/* ================= DELETE PRODUCT ================= */
 
 function deleteProduct(id){
   if(confirm("Delete this product?")){
-    db.ref("products/"+id).remove();
+    db.ref("products/" + id).remove();
   }
 }
