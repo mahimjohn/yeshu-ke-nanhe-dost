@@ -3,14 +3,15 @@
 <head>
   <title>Admin Product Manager</title>
 
-  <!-- Firebase CDN -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-  <!-- Firebase Config -->
+  <!-- Your Firebase Config -->
   <script src="firebase.js"></script>
 
+  <!-- Styles -->
   <link rel="stylesheet" href="admin-dashboard.css">
 </head>
 
@@ -18,7 +19,7 @@
 
 <h1 class="title">Admin Product Manager</h1>
 
-<!-- ADD PRODUCT FORM -->
+<!-- FORM -->
 <div class="form-card">
 
   <input id="name" type="text" placeholder="Product Name">
@@ -42,7 +43,7 @@
 
   <input id="image" type="file" multiple>
 
-  <button type="button" onclick="addProduct()">Add Product</button>
+  <button onclick="addProduct()">Add Product</button>
 
 </div>
 
@@ -50,7 +51,7 @@
 
 <div id="productList" class="product-grid"></div>
 
-<!-- MAIN JS -->
+<!-- Admin Logic -->
 <script src="admin-dashboard.js"></script>
 
 </body>
