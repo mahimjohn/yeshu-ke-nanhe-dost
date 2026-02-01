@@ -1,111 +1,84 @@
 console.log("Admin JS Loaded");
 
-// Wait until page loads
-document.addEventListener("DOMContentLoaded", () => {
+/* ---------------- ADD PRODUCT ---------------- */
 
-  const nameInput = document.getElementById("name");
-  const priceInput = document.getElementById("price");
-  const categoryInput = document.getElementById("category");
-  const badgeInput = document.getElementById("badge");
-  const descInput = document.getElementById("description");
-  const imageInput = document.getElementById("image");
-  const productList = document.getElementById("productList");
-  const addBtn = document.getElementById("addBtn");
+function addProduct(){
 
-  addBtn.addEventListener("click", addProduct);
+  const name = document.getElementById("name").value;
+  const price = document.getElementById("price").value;
+  const category = document.getElementById("category").value;
+  const badge = document.getElementById("badge").value;
+  const description = document.getElementById("description").value;
+  const images = document.getElementById("image").files;
 
-  // ---------------- ADD PRODUCT ----------------
-
-  function addProduct(){
-
-    const name = nameInput.value.trim();
-    const price = priceInput.value.trim();
-    const category = categoryInput.value;
-    const badge = badgeInput.value;
-    const description = descInput.value.trim();
-    const images = imageInput.files;
-
-    if(!name || !price || images.length === 0){
-      alert("Please fill all required fields");
-      return;
-    }
-
-    const id = db.ref("products").push().key;
-    const urls = [];
-
-    Array.from(images).forEach((file,index)=>{
-
-      const imgRef = storage.ref("products/" + id + "_" + index);
-
-      imgRef.put(file)
-        .then(snapshot => snapshot.ref.getDownloadURL())
-        .then(url => {
-
-          urls.push(url);
-
-          if(urls.length === images.length){
-
-            db.ref("products/" + id).set({
-              name,
-              price,
-              category,
-              badge,
-              description,
-              images: urls
-            });
-
-            alert("Product Added Successfully");
-
-            nameInput.value="";
-            priceInput.value="";
-            descInput.value="";
-            imageInput.value="";
-
-          }
-
-        })
-        .catch(err=>{
-          console.error(err);
-          alert("Image Upload Failed");
-        });
-
-    });
-
+  if(!name || !price || images.length === 0){
+    alert("Fill all required fields");
+    return;
   }
 
-  // ---------------- LOAD PRODUCTS ----------------
+  const productId = db.ref("products").push().key;
+  const urls = [];
 
-  db.ref("products").on("value", snapshot => {
+  Array.from(images).forEach((file,i)=>{
 
-    productList.innerHTML = "";
+    const ref = storage.ref("products/"+productId+"_"+i);
 
-    snapshot.forEach(child => {
+    ref.put(file).then(snapshot=>{
+      snapshot.ref.getDownloadURL().then(url=>{
+        urls.push(url);
 
-      const p = child.val();
+        if(urls.length === images.length){
 
-      const card = document.createElement("div");
-      card.className = "card";
+          db.ref("products/"+productId).set({
+            name,
+            price,
+            category,
+            badge,
+            description,
+            images: urls
+          });
 
-      card.innerHTML = `
-        <img src="${p.images[0]}">
-        <h4>${p.name}</h4>
-        <p>₹${p.price}</p>
-        <p>${p.category}</p>
-        <button onclick="deleteProduct('${child.key}')">Delete</button>
-      `;
+          alert("Product Added Successfully");
 
-      productList.appendChild(card);
-
+          document.getElementById("name").value="";
+          document.getElementById("price").value="";
+          document.getElementById("description").value="";
+          document.getElementById("image").value="";
+        }
+      });
     });
 
   });
 
+}
+
+/* ---------------- LOAD PRODUCTS ---------------- */
+
+db.ref("products").on("value",snap=>{
+
+  const list = document.getElementById("productList");
+  list.innerHTML="";
+
+  snap.forEach(child=>{
+
+    const p = child.val();
+
+    list.innerHTML += `
+      <div class="card">
+        <img src="${p.images[0]}">
+        <h4>${p.name}</h4>
+        <p>₹${p.price}</p>
+        <button onclick="deleteProduct('${child.key}')">Delete</button>
+      </div>
+    `;
+  });
+
 });
 
-// ---------------- DELETE PRODUCT ----------------
+/* ---------------- DELETE ---------------- */
 
 function deleteProduct(id){
   if(confirm("Delete this product?")){
-    db.ref("products/" + id).remove();
+    db.ref("products/"+id).remove();
   }
 }
