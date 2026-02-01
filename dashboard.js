@@ -1,3 +1,4 @@
+console.log("Dashboard JS Loaded");
 /* ================= FIREBASE ================= */
 
 const auth = firebase.auth();
