@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Product Manager</title>
+  <link rel="stylesheet" href="admin-products.css">
+</head>
+<body>
+
+<h2>Product Admin Panel</h2>
+
+<div class="form-box">
+
+  <input type="text" id="name" placeholder="Product Name">
+
+  <input type="number" id="price" placeholder="Price">
+
+  <select id="category">
+    <option value="books">Books</option>
+    <option value="clothing">Clothing</option>
+    <option value="electronics">Electronics</option>
+    <option value="accessories">Accessories</option>
+  </select>
+
+  <select id="badge">
+    <option value="">None</option>
+    <option value="New">New</option>
+    <option value="Bestseller">Bestseller</option>
+  </select>
+
+  <textarea id="description" placeholder="Product Description"></textarea>
+
+  <input type="file" id="image" multiple>
+
+  <button onclick="addProduct()">Add Product</button>
+
+</div>
+
+<h3>All Products</h3>
+<div id="productList"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<script>
+  const firebaseConfig = {
+    // 🔥 PASTE YOUR FIREBASE CONFIG HERE
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+<script src="admin-products.js"></script>
+
+</body>
+</html>
