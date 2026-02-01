@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Product Manager</title>
+<title>Admin Product Manager</title>
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+<link rel="stylesheet" href="admin-dashboard.css">
 
-  <!-- Your Files -->
-  <script src="firebase.js"></script>
-  <script defer src="admin-dashboard.js"></script>
+<!-- Firebase v8 SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
-  <link rel="stylesheet" href="admin-dashboard.css">
+<!-- Your config -->
+<script src="firebase.js"></script>
 </head>
 
 <body>
@@ -21,15 +21,13 @@
 
 <div class="form-card">
 
-  <input id="name" type="text" placeholder="Product Name">
-
+  <input id="name" placeholder="Product Name">
   <input id="price" type="number" placeholder="Price">
 
   <select id="category">
-    <option value="Books">Books</option>
-    <option value="Clothing">Clothing</option>
-    <option value="Electronics">Electronics</option>
-    <option value="Accessories">Accessories</option>
+    <option value="books">Books</option>
+    <option value="clothing">Clothing</option>
+    <option value="accessories">Accessories</option>
   </select>
 
   <select id="badge">
@@ -42,13 +40,13 @@
 
   <input id="image" type="file" multiple>
 
-  <button id="addBtn">Add Product</button>
+  <button onclick="addProduct()">Add Product</button>
 
 </div>
 
 <h2 class="subtitle">All Products</h2>
-
 <div id="productList" class="product-grid"></div>
 
+<script src="admin-dashboard.js"></script>
 </body>
 </html>
