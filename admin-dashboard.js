@@ -1,3 +1,4 @@
+console.log("Admin JS Loaded");
 const db = firebase.database();
 const storage = firebase.storage();
 
