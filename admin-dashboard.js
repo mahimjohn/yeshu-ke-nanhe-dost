@@ -1,86 +1,108 @@
 console.log("Admin JS Loaded");
 
-const db = firebase.database();
-const storage = firebase.storage();
+// Wait until page loads
+document.addEventListener("DOMContentLoaded", () => {
 
-const productList = document.getElementById("productList");
+  const nameInput = document.getElementById("name");
+  const priceInput = document.getElementById("price");
+  const categoryInput = document.getElementById("category");
+  const badgeInput = document.getElementById("badge");
+  const descInput = document.getElementById("description");
+  const imageInput = document.getElementById("image");
+  const productList = document.getElementById("productList");
+  const addBtn = document.getElementById("addBtn");
 
-/* ---------------- ADD PRODUCT ---------------- */
+  addBtn.addEventListener("click", addProduct);
 
-function addProduct(){
+  // ---------------- ADD PRODUCT ----------------
 
-  const name = document.getElementById("name").value.trim();
-  const price = document.getElementById("price").value.trim();
-  const category = document.getElementById("category").value;
-  const badge = document.getElementById("badge").value;
-  const description = document.getElementById("description").value.trim();
-  const images = document.getElementById("image").files;
+  function addProduct(){
 
-  if(!name || !price || images.length === 0){
-    alert("Please fill all required fields");
-    return;
-  }
+    const name = nameInput.value.trim();
+    const price = priceInput.value.trim();
+    const category = categoryInput.value;
+    const badge = badgeInput.value;
+    const description = descInput.value.trim();
+    const images = imageInput.files;
 
-  const productId = db.ref("products").push().key;
-  const imageUrls = [];
+    if(!name || !price || images.length === 0){
+      alert("Please fill all required fields");
+      return;
+    }
 
-  Array.from(images).forEach((file,index)=>{
+    const id = db.ref("products").push().key;
+    const urls = [];
 
-    const imgRef = storage.ref("products/" + productId + "_" + index);
+    Array.from(images).forEach((file,index)=>{
 
-    imgRef.put(file).then(snapshot=>{
-      snapshot.ref.getDownloadURL().then(url=>{
-        imageUrls.push(url);
+      const imgRef = storage.ref("products/" + id + "_" + index);
 
-        if(imageUrls.length === images.length){
+      imgRef.put(file)
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
 
-          db.ref("products/" + productId).set({
-            name,
-            price,
-            category,
-            badge,
-            description,
-            images: imageUrls
-          });
+          urls.push(url);
 
-          alert("Product Added Successfully");
+          if(urls.length === images.length){
 
-          document.getElementById("name").value="";
-          document.getElementById("price").value="";
-          document.getElementById("description").value="";
-          document.getElementById("image").value="";
-        }
-      });
+            db.ref("products/" + id).set({
+              name,
+              price,
+              category,
+              badge,
+              description,
+              images: urls
+            });
+
+            alert("Product Added Successfully");
+
+            nameInput.value="";
+            priceInput.value="";
+            descInput.value="";
+            imageInput.value="";
+
+          }
+
+        })
+        .catch(err=>{
+          console.error(err);
+          alert("Image Upload Failed");
+        });
+
     });
 
-  });
+  }
 
-}
+  // ---------------- LOAD PRODUCTS ----------------
 
-/* ---------------- LOAD PRODUCTS ---------------- */
+  db.ref("products").on("value", snapshot => {
 
-db.ref("products").on("value", snapshot=>{
+    productList.innerHTML = "";
 
-  productList.innerHTML="";
+    snapshot.forEach(child => {
 
-  snapshot.forEach(child=>{
+      const p = child.val();
 
-    const p = child.val();
+      const card = document.createElement("div");
+      card.className = "card";
 
-    productList.innerHTML += `
-      <div class="card">
+      card.innerHTML = `
         <img src="${p.images[0]}">
         <h4>${p.name}</h4>
         <p>₹${p.price}</p>
         <p>${p.category}</p>
         <button onclick="deleteProduct('${child.key}')">Delete</button>
-      </div>
-    `;
+      `;
+
+      productList.appendChild(card);
+
+    });
+
   });
 
 });
 
-/* ---------------- DELETE PRODUCT ---------------- */
+// ---------------- DELETE PRODUCT ----------------
 
 function deleteProduct(id){
   if(confirm("Delete this product?")){
