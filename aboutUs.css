@@ -1,1 +1,117 @@
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial, sans-serif;
+}
 
+/* HERO */
+
+.hero{
+  background:#0b3d2e;
+  color:white;
+  padding:80px 20px;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  font-size:18px;
+}
+
+/* ABOUT SECTION */
+
+.about-section{
+  padding:60px 20px;
+  background:#f9f9f9;
+}
+
+.about-container{
+  max-width:900px;
+  margin:auto;
+}
+
+.about-container h2{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:30px;
+}
+
+.about-container p{
+  font-size:17px;
+  line-height:1.7;
+  color:#333;
+  margin-bottom:20px;
+}
+
+/* FOUNDER MESSAGE */
+
+.founder-message{
+  padding:60px 20px;
+  background:white;
+}
+
+.section-title{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:40px;
+}
+
+.founder-container{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+  align-items:flex-start;
+}
+
+.founder-text{
+  flex:1;
+  font-size:17px;
+  line-height:1.7;
+  color:#333;
+}
+
+.founder-profile{
+  width:280px;
+  text-align:center;
+}
+
+.founder-profile img{
+  width:100%;
+  border-radius:8px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  margin-bottom:15px;
+}
+
+.founder-profile h3{
+  font-size:22px;
+  margin-bottom:5px;
+}
+
+.designation{
+  font-weight:bold;
+  color:#0b3d2e;
+}
+
+.degree{
+  font-size:14px;
+  color:#555;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+  .founder-container{
+    flex-direction:column;
+  }
+
+  .founder-profile{
+    margin:auto;
+  }
+}
