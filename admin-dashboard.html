@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel | Yeshu Ke Nanhe Dost</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+  <script src="../firebase.js"></script>
+  <script src="admin-auth.js"></script>
+
+  <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="admin-topbar">
+  <button id="menuBtn">☰</button>
+  <h2>Admin Panel</h2>
+  <button id="logoutBtn">Logout</button>
+</header>
+
+<!-- SIDEBAR -->
+<aside class="admin-sidebar" id="sidebar">
+  <h3 class="brand">Yeshu Ke Nanhe Dost</h3>
+
+  <nav>
+    <a href="products.html">🛍 Products</a>
+    <a href="orders.html">📦 Orders</a>
+    <a href="prayers.html">🙏 Prayer Requests</a>
+    <a href="blogs.html">📝 Blogs</a>
+  </nav>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="admin-main" id="main">
+  <h1>Welcome, Admin 👋</h1>
+  <p>Select an option from the sidebar to begin.</p>
+</main>
+
+<script src="admin-dashboard.js"></script>
+</body>
+</html>
