@@ -154,7 +154,3 @@ fetch("https://beta.ourmanna.com/api/v1/get/?format=json")
       "Unable to load verse today.";
     console.log(err);
   });
-
-function goToAdminPanel(){
-  window.location.href = "/admin-dashboard.html";
-}
