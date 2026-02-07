@@ -1,7 +1,4 @@
 console.log("Dashboard JS Loaded");
-/* ================= FIREBASE ================= */
-
-const db = firebase.database();
 
 /* ================= UI ELEMENTS ================= */
 
