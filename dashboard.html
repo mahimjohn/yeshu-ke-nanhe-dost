@@ -26,12 +26,6 @@
     <span id="userName"></span>
   </div>
 </div>
-<!-- ADMIN BUTTON -->
-  <button id="adminPanelBtn"
-        style="display:none"
-        onclick="goToAdminPanel()">
-  Admin Panel
-</button>
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
@@ -40,13 +34,15 @@
     <img id="sidePhoto">
     <h3 id="sideName">User</h3>
   </div>
-
+ 
   <a href="#" class="active">Dashboard</a>
   <a href="saved.html">Saved Blogs</a>
   <a href="order.html">My Orders</a>
   <a href="prayer.html">My Prayer Requests</a>
   <a href="forum.html">Forum</a>
   <a href="settings.html">Settings</a>
+  <button id="adminPanelBtn" style="display:none" onclick="goToAdminPanel()"> Admin Panel </button>
+
 
   <button id="logoutBtn" class="logout-btn">Logout</button>
 </aside>
@@ -102,6 +98,12 @@
 </div>
 
 </div>
+  
+  <script>
+function goToAdminPanel(){
+  window.location.href = "/admin-dashboard.html";
+}
+</script>
 
 <script src="dashboard.js"></script>
 </body>
