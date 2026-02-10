@@ -1,28 +1,27 @@
 console.log("Admin Guard Loaded");
 
+const auth = firebase.auth();
+const db = firebase.database();
+
 auth.onAuthStateChanged(user => {
 
-  // ❌ Not logged in
   if (!user) {
-    window.location.href = "index.html";
+    // ❌ Not logged in
+    window.location.replace("index.html");
     return;
   }
 
-  // 🔍 Check admin permission
   db.ref("admins/" + user.uid).once("value")
     .then(snapshot => {
-
-      // ❌ Logged in but NOT admin
       if (!snapshot.exists()) {
-        alert("Access denied: Admins only");
-        window.location.href = "dashboard.html";
+        // ❌ Logged in but NOT admin
+        alert("Access Denied: Admins only");
+        window.location.replace("dashboard.html");
       }
-
       // ✅ Admin → allow page
     })
-    .catch(err => {
-      console.error(err);
-      window.location.href = "dashboard.html";
+    .catch(() => {
+      window.location.replace("dashboard.html");
     });
 
 });
