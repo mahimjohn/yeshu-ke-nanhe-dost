@@ -5,10 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yeshu Ke Nanhe Dost</title>
 
-<script type="module" src="firebase.js"></script>
-
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -182,7 +178,7 @@ Existing User?
 
 </div>
 
-<a href="dashboard.html">My Orders</a>
+<a href="orders.html">My Orders</a>
 <a href="cart.html">Cart</a>
 <a href="saved.html">Saved Stories</a>
 <a href="prayer.html">Prayer Requests</a>
@@ -297,15 +293,39 @@ DYNAMIC PRODUCTS
 
 </section>
 
-<!-- VERSE -->
+<!-- ═══════════ DAILY VERSE ═══════════ -->
+<section class="daily-verse-section" id="daily-verse-section">
+  <div class="dv-inner">
 
-<section class="verse">
+    <div class="dv-header">
+      <div class="dv-cross">✝</div>
+      <div>
+        <span class="dv-label">Verse of the Day</span>
+        <div id="dv-date" class="dv-date"></div>
+      </div>
+      <button class="dv-refresh-btn" onclick="refreshVerse()" title="New verse">
+        <svg id="dv-refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.37"/></svg>
+      </button>
+    </div>
 
-<h2>Verse of the Day</h2>
+    <div class="dv-body">
+      <div class="dv-quote-mark">"</div>
+      <blockquote id="dv-text" class="dv-text">
+        <span class="dv-loading">
+          <span></span><span></span><span></span>
+        </span>
+      </blockquote>
+      <cite id="dv-reference" class="dv-reference"></cite>
+    </div>
 
-<p>"Let the little children come to me..."</p>
-<p>Matthew 19:14</p>
+    <div class="dv-footer">
+      <a href="blogs.html" class="dv-explore-btn">
+        Explore Bible Stories
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
 
+  </div>
 </section>
 
 
@@ -321,6 +341,7 @@ DYNAMIC PRODUCTS
 <div id="menu-overlay" class="menu-overlay"></div>
 
 <script type="module" src="index.js"></script>
+<script src="daily-verse.js"></script>
 <script type="module" src="navbar.js"></script>
 
 <div class="legal-footer">
