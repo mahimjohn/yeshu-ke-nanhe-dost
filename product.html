@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product</title>
+<script type="module" src="firebase.js"></script>
+<link rel="stylesheet" href="product.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+<img src="logo/logo.png">
+<span>Yeshu Ke Nanhe Dost</span>
+</div>
+
+<nav class="nav-links">
+<a href="index.html">Home</a>
+<a href="blogs.html">Stories</a>
+<a href="products.html">Products</a>
+<a href="mission.html">About</a>
+</nav>
+
+<div class="nav-right">
+
+<a href="cart.html" class="cart-link">
+🛒 Cart (<span id="cart-count">0</span>)
+</a>
+
+<div class="login-wrapper">
+
+<button id="login-btn" class="login-btn">Login</button>
+
+<div id="login-dropdown" class="login-dropdown">
+
+<button id="user-login">User Login</button>
+<button id="admin-login">Admin Login</button>
+
+</div>
+
+</div>
+
+<div class="menu">☰</div>
+
+</div>
+
+</header>
+
+<div class="user-menu" id="user-menu">
+
+<div class="user-header">
+<img id="user-avatar" src="logo/logo.png">
+<p id="user-name">Guest</p>
+</div>
+
+<a href="dashboard.html">My Orders</a>
+<a href="cart.html">Cart</a>
+<a href="saved.html">Saved Stories</a>
+<a href="prayer.html">Prayer Requests</a>
+<a href="settings.html">Settings</a>
+
+<button id="logout-btn">Logout</button>
+
+</div>
+
+
+<section class="product-page">
+
+<div class="product-layout">
+
+<div class="product-images">
+
+<div id="image-thumbs" class="thumbs"></div>
+
+<div class="main-image">
+<img id="main-image">
+</div>
+
+</div>
+
+
+<div class="product-info">
+
+<h1 id="product-name"></h1>
+
+<div id="product-rating" class="rating"></div>
+
+<div id="product-sold" class="sold"></div>
+
+<div class="price">
+<span id="price-now"></span>
+<span id="price-old"></span>
+<span id="discount"></span>
+</div>
+
+<div id="delivery" class="delivery"></div>
+
+<div id="stock" class="stock"></div>
+
+<div class="product-buttons">
+
+<button id="buy-btn" class="buy-btn">
+Buy Now
+</button>
+
+<button id="cart-btn" class="cart-btn">
+Add to Cart
+</button>
+
+</div>
+
+<p id="product-description"></p>
+
+</div>
+
+</div>
+
+</section>
+
+<div id="menu-overlay" class="menu-overlay"></div>
+
+<!-- LOGIN POPUP -->
+
+<div id="login-popup" class="login-popup">
+
+<div class="login-box">
+
+<button id="close-login" class="close-login">✕</button>
+
+<div class="login-left">
+
+<h2>Login</h2>
+<p>Get access to your Orders and Recommendations</p>
+
+<img src="images/jesus-children-cartoon.png" class="login-illustration">
+
+</div>
+
+<!-- RIGHT PANEL -->
+
+<div class="login-right">
+
+<h3>Enter Mobile Number</h3>
+
+<p class="login-info">
+Enter your mobile number to receive a one-time password (OTP)
+</p>
+
+<div id="phone-step">
+
+<input id="phone-input" placeholder="Enter mobile number">
+
+<button id="send-otp">Request OTP</button>
+
+<div id="recaptcha-container"></div>
+
+<p class="switch-link">
+New to Yeshu Ke Nanhe Dost?
+<span id="open-signup">Create an account</span>
+</p>
+
+</div>
+
+<div id="otp-step" style="display:none">
+
+<div class="otp-box">
+
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+
+</div>
+
+<button id="verify-otp">Verify OTP</button>
+
+<div class="otp-resend">
+
+<span id="otp-timer">Resend OTP in 30s</span>
+<button id="resend-otp" style="display:none">Resend OTP</button>
+
+</div>
+
+</div>
+
+<div id="name-step" style="display:none">
+
+<input id="name-input" placeholder="Enter your name">
+<input id="signup-phone" placeholder="Enter mobile number">
+
+<button id="signup-otp">Continue</button>
+
+<p class="switch-link">
+Existing User?
+<span id="open-login">Login</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="menu-overlay" class="menu-overlay"></div>
+
+<script type="module" src="product.js"></script>
+<script type="module" src="navbar.js"></script>
+
+</body>
+</html>

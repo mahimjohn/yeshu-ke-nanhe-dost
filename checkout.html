@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout - Yeshu Ke Nanhe Dost</title>
+
+<link rel="stylesheet" href="checkout.css">
+<script type="module" src="firebase.js"></script>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+<img src="logo/logo.png">
+<span>Yeshu Ke Nanhe Dost</span>
+</div>
+
+</header>
+
+
+<section class="checkout-page">
+
+<div class="checkout-layout">
+
+
+<!-- LEFT SIDE -->
+
+<div class="checkout-left">
+
+<div id="saved-address" style="display:none">
+
+<h3>Delivering to <span id="saved-name"></span></h3>
+
+<p id="saved-address-text"></p>
+
+<div class="address-actions">
+<button id="change-address">Change</button>
+<button id="delivery-note">Add delivery instructions</button>
+</div>
+
+</div>
+
+
+<!-- DELIVERY ADDRESS -->
+
+<div id="address-form" class="checkout-box">
+
+<h2>Delivery Address</h2>
+
+<input id="name" placeholder="Full Name" required>
+<input id="phone" placeholder="Phone Number" required>
+
+<input id="address1" placeholder="Address Line 1 (House / Street)" required>
+<input id="address2" placeholder="Address Line 2 (Area / Landmark)" required>
+<input id="address3" placeholder="Address Line 3 (Optional)">
+
+<div class="address-row">
+<input id="city" placeholder="City" required>
+<input id="pincode" placeholder="Pincode" required>
+</div>
+
+</div>
+
+
+<!-- PAYMENT METHODS -->
+
+<div class="checkout-box">
+
+<h2>Payment Method</h2>
+
+
+<!-- CASH ON DELIVERY -->
+
+<label class="payment-option">
+
+<input type="radio" name="payment" value="cod" checked>
+
+<div class="payment-text">
+
+<div class="payment-title">Cash on Delivery</div>
+
+<div class="payment-desc">
+Cash, UPI and Cards accepted
+</div>
+
+</div>
+
+</label>
+
+
+<!-- UPI PAYMENT -->
+
+<label class="payment-option">
+
+<input type="radio" name="payment" value="upi">
+
+<div class="payment-text">
+
+<div class="payment-title">UPI Payment</div>
+
+<div class="payment-logos">
+
+<img src="payments/upi.png">
+<img src="payments/bhim.png">
+<img src="payments/gpay.png">
+<img src="payments/phonepe.png">
+<img src="payments/paytm.png">
+
+</div>
+
+</div>
+
+</label>
+
+
+<!-- CARD PAYMENT -->
+
+<label class="payment-option">
+
+<input type="radio" name="payment" value="card">
+
+<div class="payment-text">
+
+<div class="payment-title">Credit / Debit Card</div>
+
+<div class="payment-logos">
+
+<img src="payments/visa.png">
+<img src="payments/mastercard.png">
+<img src="payments/amex.png">
+<img src="payments/rupay.png">
+<img src="payments/bajaj.png">
+
+</div>
+
+</div>
+
+</label>
+
+
+<!-- NET BANKING -->
+
+<label class="payment-option">
+
+<input type="radio" name="payment" value="netbanking">
+
+<div class="payment-text">
+
+<div class="payment-title">Net Banking</div>
+
+<div class="payment-logos">
+
+<img src="payments/hdfc.png">
+<img src="payments/sbi.png">
+<img src="payments/icici.png">
+<img src="payments/axis.png">
+
+</div>
+
+</div>
+
+</label>
+
+</div>
+
+</div>
+
+
+<!-- RIGHT SIDE -->
+
+<div class="checkout-right">
+
+<h2>Order Summary</h2>
+
+<div id="checkout-items"></div>
+
+<div class="order-total">
+
+<h3>Total: ₹<span id="order-total">0</span></h3>
+
+<button id="place-order" class="place-order-btn">
+Place Order
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LOGIN POPUP -->
+
+<div id="login-popup" class="login-popup">
+
+<div class="login-box">
+
+<button id="close-login" class="close-login">✕</button>
+
+<div class="login-left">
+
+<h2>Login</h2>
+<p>Get access to your Orders and Recommendations</p>
+
+<img src="images/jesus-children-cartoon.png" class="login-illustration">
+
+</div>
+
+<!-- RIGHT PANEL -->
+
+<div class="login-right">
+
+<h3>Enter Mobile Number</h3>
+
+<p class="login-info">
+Enter your mobile number to receive a one-time password (OTP)
+</p>
+
+<div id="phone-step">
+
+<input id="phone-input" placeholder="Enter mobile number">
+
+<button id="send-otp">Request OTP</button>
+
+<div id="recaptcha-container"></div>
+
+<p class="switch-link">
+New to Yeshu Ke Nanhe Dost?
+<span id="open-signup">Create an account</span>
+</p>
+
+</div>
+
+<div id="otp-step" style="display:none">
+
+<div class="otp-box">
+
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+
+</div>
+
+<button id="verify-otp">Verify OTP</button>
+
+<div class="otp-resend">
+
+<span id="otp-timer">Resend OTP in 30s</span>
+<button id="resend-otp" style="display:none">Resend OTP</button>
+
+</div>
+
+</div>
+
+<div id="name-step" style="display:none">
+
+<input id="name-input" placeholder="Enter your name">
+<input id="signup-phone" placeholder="Enter mobile number">
+
+<button id="signup-otp">Continue</button>
+
+<p class="switch-link">
+Existing User?
+<span id="open-login">Login</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ADDRESS SELECTOR POPUP -->
+
+<div id="address-popup" class="address-popup">
+
+<div class="address-popup-box">
+
+<h3>Select Delivery Address</h3>
+
+<div id="address-list"></div>
+
+<div style="margin-top:20px;text-align:right">
+<button class="back-btn" id="back-btn">← Back</button>
+</div>
+
+</div>
+
+</div>
+
+<div id="menu-overlay" class="menu-overlay"></div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script type="module" src="checkout.js"></script>
+<script type="module" src="navbar.js"></script>
+
+</body>
+</html>
