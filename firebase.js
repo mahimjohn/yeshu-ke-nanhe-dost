@@ -11,7 +11,7 @@ const firebaseConfig = {
   authDomain: "yeshu-ke-nanhe-dost.firebaseapp.com",
   databaseURL: "https://yeshu-ke-nanhe-dost-default-rtdb.firebaseio.com",
   projectId: "yeshu-ke-nanhe-dost",
-  storageBucket: "yeshu-ke-nanhe-dost.appspot.com",
+  storageBucket: "yeshu-ke-nanhe-dost.firebasestorage.app",
   messagingSenderId: "496839768513",
   appId: "1:496839768513:web:e49e55eb2d196c8e095740"
 };
