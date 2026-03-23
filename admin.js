@@ -276,13 +276,16 @@ BLOGS — sub-tabs + full Blogger toolbar
 ================================ */
 
 window.showBlogTab = function(tab, el){
+  if(tab === "add"){
+    window.location.href = "blog-editor.html";
+    return;
+  }
   document.querySelectorAll(".blog-tab").forEach(t=>t.style.display="none");
   document.getElementById("blog-tab-"+tab).style.display="block";
   document.querySelectorAll(".blog-subnav-btn").forEach(b=>b.classList.remove("active"));
   if(el) el.classList.add("active");
   if(tab==="update") loadUpdateList();
   if(tab==="view")   loadViewList();
-  if(tab==="add")    clearEditor();
 };
 
 window.fmt = function(cmd,val){ document.execCommand(cmd,false,val||null); document.getElementById("blog-editor")?.focus(); };
@@ -502,23 +505,8 @@ function loadUpdateList(){
   });
 }
 
-window.loadStoryForEdit = async function(id){
-  const snap=await getDoc(doc(fdb,"stories",id));
-  if(!snap.exists()) return;
-  const s=snap.data();
-  document.getElementById("blog-title").value=s.title||"";
-  document.getElementById("blog-editor").innerHTML=s.content||"";
-  document.getElementById("blog-image").value=s.image||"";
-  if(document.getElementById("blog-tags")) document.getElementById("blog-tags").value=(s.tags||[]).join(", ");
-  document.getElementById("edit-story-id").value=id;
-  if(s.published&&document.getElementById("blog-publish-date")) document.getElementById("blog-publish-date").value=new Date(s.published).toISOString().slice(0,16);
-  if(document.getElementById("blog-permalink")) document.getElementById("blog-permalink").value=s.permalink||"";
-  if(document.getElementById("blog-location")) document.getElementById("blog-location").value=s.location||"";
-  const prev=document.getElementById("cover-preview");
-  if(prev&&s.image) prev.innerHTML=`<img src="${s.image}">`;
-  const btnText=document.getElementById("publish-btn-text"); if(btnText) btnText.innerText="Update";
-  const status=document.getElementById("blog-status"); if(status) status.innerText=`Editing: "${s.title}"`;
-  showBlogTab("add",document.querySelectorAll(".blog-subnav-btn")[0]);
+window.loadStoryForEdit = function(id){
+  window.location.href = "blog-editor.html?id=" + id;
 };
 
 function loadViewList(){
