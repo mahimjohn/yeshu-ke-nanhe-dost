@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Editor — Yeshu Ke Nanhe Dost</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="product-upload.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="pu-topbar">
+  <div class="pu-topbar-left">
+    <a href="admin.html" class="pu-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Admin
+    </a>
+    <span class="pu-divider"></span>
+    <span class="pu-mode-label" id="pu-mode-label">Add Product</span>
+  </div>
+  <div class="pu-topbar-right">
+    <button class="pu-save-btn" id="save-btn" onclick="saveProduct()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      <span id="save-btn-text">Save Product</span>
+    </button>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div id="pu-status" class="pu-status"></div>
+
+<!-- MAIN FORM -->
+<div class="pu-body">
+
+  <!-- LEFT COLUMN -->
+  <div class="pu-col">
+
+    <div class="pu-card">
+      <h3 class="pu-card-title">Basic Info</h3>
+
+      <div class="pf">
+        <label>Product Name *</label>
+        <input id="p-name" placeholder="e.g. Bible Story Colouring Book for Kids">
+      </div>
+
+      <div class="pf-row">
+        <div class="pf">
+          <label>Price ₹ *</label>
+          <input id="p-price" type="number" placeholder="299">
+        </div>
+        <div class="pf">
+          <label>Original Price ₹</label>
+          <input id="p-original-price" type="number" placeholder="399">
+        </div>
+      </div>
+
+      <div class="pf">
+        <label>Category / Type</label>
+        <select id="p-type" class="pf-select">
+          <option value="">Select category</option>
+          <option value="book">Book</option>
+          <option value="coloring">Coloring Book</option>
+          <option value="toy">Toy</option>
+          <option value="stationery">Stationery</option>
+          <option value="gift">Gift</option>
+          <option value="audio">Audio / CD</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="pf">
+        <label>Description</label>
+        <textarea id="p-description" placeholder="Short product description shown on listing and product page..."></textarea>
+      </div>
+    </div>
+
+    <div class="pu-card">
+      <h3 class="pu-card-title">Stock & Delivery</h3>
+
+      <div class="pf-row">
+        <div class="pf">
+          <label>Stock Quantity</label>
+          <input id="p-stock" type="number" placeholder="50">
+        </div>
+        <div class="pf">
+          <label>Min Delivery Days</label>
+          <input id="p-delivery-min" type="number" placeholder="3">
+        </div>
+        <div class="pf">
+          <label>Max Delivery Days</label>
+          <input id="p-delivery-max" type="number" placeholder="7">
+        </div>
+      </div>
+    </div>
+
+    <div class="pu-card">
+      <h3 class="pu-card-title">Ratings (optional)</h3>
+      <div class="pf-row">
+        <div class="pf">
+          <label>Rating (1–5)</label>
+          <input id="p-rating" type="number" min="1" max="5" step="0.1" placeholder="4.5">
+        </div>
+        <div class="pf">
+          <label>Rating Count</label>
+          <input id="p-rating-count" type="number" placeholder="1238">
+        </div>
+        <div class="pf">
+          <label>Units Sold</label>
+          <input id="p-sold" type="number" placeholder="5000">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="pu-col">
+
+    <div class="pu-card">
+      <h3 class="pu-card-title">Product Images</h3>
+      <p class="pu-hint">First image selected = thumbnail shown in listings</p>
+
+      <!-- Existing images (edit mode) -->
+      <div id="existing-images" class="existing-wrap" style="display:none;">
+        <p class="pu-label">Current images</p>
+        <div id="existing-images-grid" class="img-grid"></div>
+      </div>
+
+      <label class="pu-upload-btn" for="p-images-upload">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Click to upload images
+      </label>
+      <input type="file" id="p-images-upload" accept="image/*" multiple style="display:none;">
+      <div id="new-images-preview" class="img-preview"></div>
+    </div>
+
+    <div class="pu-card">
+      <h3 class="pu-card-title">Product Video</h3>
+      <p class="pu-hint">MP4 / MOV — shown on the product page</p>
+
+      <div id="existing-video-wrap" style="display:none;">
+        <p class="pu-label">Current video</p>
+        <video id="existing-video" controls class="video-thumb"></video>
+        <button class="pu-remove-btn" onclick="removeVideo()">Remove video</button>
+      </div>
+
+      <label class="pu-upload-btn pu-upload-btn--video" for="p-video-upload">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Click to upload video
+      </label>
+      <input type="file" id="p-video-upload" accept="video/*" style="display:none;">
+      <div id="new-video-preview" class="video-preview"></div>
+    </div>
+
+    <input type="hidden" id="edit-product-id">
+    <input type="hidden" id="keep-images" value="[]">
+    <input type="hidden" id="keep-video" value="">
+
+  </div>
+
+</div>
+
+<script type="module" src="product-upload.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Your Addresses</title>
+
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="addresses.css">
+<script type="module" src="firebase.js"></script>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="logo">
+<img src="logo/logo.png">
+Yeshu Ke Nanhe Dost
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="#">Stories</a>
+<a href="products.html">Products</a>
+<a href="#">About</a>
+</div>
+
+<div class="nav-right">
+
+<span class="menu">☰</span>
+
+<div class="login-wrapper">
+
+<button class="login-btn">Login</button>
+
+<div class="login-dropdown" id="login-dropdown">
+<button id="user-login">User Login</button>
+<button id="admin-login">Admin Login</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- USER SIDE MENU -->
+
+<div class="menu-overlay" id="menu-overlay"></div>
+
+<div class="user-menu" id="user-menu">
+
+<div class="user-header">
+<img id="user-avatar" src="logo/logo.png">
+<p id="user-name">Guest</p>
+</div>
+
+<a href="cart.html">Cart</a>
+<a href="addresses.html">Addresses</a>
+<a href="orders.html">Orders</a>
+
+<button id="logout-btn">Logout</button>
+
+</div>
+
+
+<!-- HERO -->
+<div class="addr-hero">
+  <div class="addr-hero-inner">
+    <div class="addr-hero-title">
+      <span class="addr-hero-eyebrow">My Account</span>
+      <h1>Your Addresses</h1>
+      <p>Manage your saved delivery locations</p>
+    </div>
+    <button class="addr-add-btn" id="add-address">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add New Address
+    </button>
+  </div>
+</div>
+
+<!-- ADDRESS GRID -->
+<div class="addr-body">
+  <div id="address-container"></div>
+</div>
+
+
+<!-- ADDRESS MODAL -->
+<div class="modal" id="address-modal">
+  <div class="modal-box">
+    <h3>Add / Edit Address</h3>
+    <p class="modal-subtitle">Fill in your delivery details below</p>
+
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>Full Name *</label>
+        <input id="name" placeholder="Amit John">
+      </div>
+      <div class="modal-field">
+        <label>Phone Number *</label>
+        <input id="phone" placeholder="10-digit number">
+      </div>
+    </div>
+
+    <div class="modal-field">
+      <label>Address Line 1 *</label>
+      <input id="line1" placeholder="House no., Street name">
+    </div>
+    <div class="modal-field">
+      <label>Address Line 2</label>
+      <input id="line2" placeholder="Area, Landmark (optional)">
+    </div>
+
+    <div class="modal-row">
+      <div class="modal-field">
+        <label>City *</label>
+        <input id="city" placeholder="Jhansi">
+      </div>
+      <div class="modal-field">
+        <label>Pincode *</label>
+        <input id="pincode" placeholder="284003">
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-save-btn" id="save-address">Save Address</button>
+      <button class="modal-cancel-btn" id="cancel-address">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- LOGIN POPUP (needed for navbar login system) -->
+
+<div class="login-popup" id="login-popup">
+
+<div class="login-box">
+
+<button class="close-login" id="close-login">×</button>
+
+<div class="login-left">
+<h2>Welcome Back</h2>
+<p>Login to manage your orders and addresses</p>
+</div>
+
+<div class="login-right">
+
+<div id="phone-step">
+<h3>Login</h3>
+<p class="login-info">Enter your mobile number</p>
+
+<input id="phone-input" placeholder="10 digit phone">
+
+<button id="send-otp">Send OTP</button>
+
+<div id="recaptcha-container"></div>
+
+</div>
+
+<div id="otp-step" style="display:none">
+
+<h3>Verify OTP</h3>
+
+<div class="otp-box">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+</div>
+
+<button id="verify-otp">Verify</button>
+
+<p class="otp-resend">
+<span id="otp-timer"></span>
+<button id="resend-otp">Resend OTP</button>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- SCRIPTS -->
+
+<script type="module" src="navbar.js"></script>
+<script type="module" src="addresses.js"></script>
+
+</body>
+</html>

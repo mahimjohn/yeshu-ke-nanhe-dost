@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — Yeshu Ke Nanhe Dost</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin-login.css">
+</head>
+<body>
+
+<div class="page">
+
+  <div class="left-panel">
+    <div class="left-inner">
+      <div class="brand">
+        <img src="logo/logo.png" alt="Logo" class="brand-logo">
+        <span class="brand-name">Yeshu Ke Nanhe Dost</span>
+      </div>
+      <div class="left-text">
+        <h1 class="left-heading">Admin<br>Portal</h1>
+        <p class="left-sub">Manage stories, products, and orders for your ministry platform.</p>
+      </div>
+      <div class="left-deco">✝</div>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <div class="login-card">
+
+      <div class="card-top">
+        <div class="shield-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h2 class="card-title">Secure Login</h2>
+        <p class="card-sub">Enter your admin credentials to continue</p>
+      </div>
+
+      <div class="form-group">
+        <label for="admin-id">Admin ID</label>
+        <div class="input-wrap">
+          <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+          <input id="admin-id" type="text" placeholder="Enter your admin ID" autocomplete="username">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="admin-password">Password</label>
+        <div class="input-wrap">
+          <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <input id="admin-password" type="password" placeholder="Enter your password" autocomplete="current-password">
+          <button class="toggle-pw" type="button" onclick="togglePw()" title="Show/hide password">
+            <svg id="eye-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <p id="admin-login-error" class="error-msg"></p>
+
+      <button id="admin-login-btn" class="login-btn">
+        <span id="btn-text">Login</span>
+        <span id="btn-spinner" class="spinner" style="display:none"></span>
+      </button>
+
+      <a href="index.html" class="back-link">← Back to site</a>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function togglePw(){
+  const input = document.getElementById('admin-password');
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+// Show loading state on login
+document.getElementById('admin-login-btn').addEventListener('click', function(){
+  const id = document.getElementById('admin-id').value.trim();
+  const pw = document.getElementById('admin-password').value.trim();
+  if(id && pw){
+    document.getElementById('btn-text').style.display = 'none';
+    document.getElementById('btn-spinner').style.display = 'inline-block';
+    this.disabled = true;
+  }
+});
+</script>
+
+<script type="module" src="admin-login.js"></script>
+
+</body>
+</html>

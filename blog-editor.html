@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Editor — Yeshu Ke Nanhe Dost</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blog-editor.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="be-topbar">
+  <div class="be-topbar-left">
+    <a href="admin.html" class="be-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Admin
+    </a>
+    <span class="be-divider"></span>
+    <span class="be-mode-label" id="be-mode-label">New Story</span>
+  </div>
+  <div class="be-topbar-right">
+    <button class="be-preview-btn" onclick="previewBlog()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      Preview
+    </button>
+    <button class="be-publish-btn" id="publish-btn" onclick="publishBlog()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      <span id="publish-btn-text">Publish</span>
+    </button>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="be-toolbar">
+  <div class="tg">
+    <button class="tb" onclick="fmt('undo')" title="Undo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.37"/></svg></button>
+    <button class="tb" onclick="fmt('redo')" title="Redo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.37"/></svg></button>
+  </div>
+  <div class="td"></div>
+  <div class="tg">
+    <select class="tb-sel" onchange="fmtBlock(this.value);this.value=''">
+      <option value="">Normal</option>
+      <option value="h1">Heading 1</option>
+      <option value="h2">Heading 2</option>
+      <option value="h3">Heading 3</option>
+      <option value="h4">Heading 4</option>
+      <option value="blockquote">Quote</option>
+      <option value="pre">Code</option>
+    </select>
+  </div>
+  <div class="td"></div>
+  <div class="tg">
+    <button class="tb tb-b" onclick="fmt('bold')" title="Bold">B</button>
+    <button class="tb tb-i" onclick="fmt('italic')" title="Italic">I</button>
+    <button class="tb tb-u" onclick="fmt('underline')" title="Underline">U</button>
+    <button class="tb tb-s" onclick="fmt('strikeThrough')" title="Strikethrough">S</button>
+  </div>
+  <div class="td"></div>
+  <div class="tg" style="position:relative;">
+    <button class="tb" onclick="togglePicker('text-color-picker')" title="Text color">
+      <span style="font-size:13px;font-weight:700;border-bottom:3px solid #e74c3c;line-height:1.1;">A</span>
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+    </button>
+    <div id="text-color-picker" class="color-picker" style="display:none;">
+      <div class="cp-row">
+        <button onclick="applyColor('foreColor','#000000')" style="background:#000"></button>
+        <button onclick="applyColor('foreColor','#e74c3c')" style="background:#e74c3c"></button>
+        <button onclick="applyColor('foreColor','#e67e22')" style="background:#e67e22"></button>
+        <button onclick="applyColor('foreColor','#f1c40f')" style="background:#f1c40f"></button>
+        <button onclick="applyColor('foreColor','#27ae60')" style="background:#27ae60"></button>
+        <button onclick="applyColor('foreColor','#2980b9')" style="background:#2980b9"></button>
+        <button onclick="applyColor('foreColor','#8e44ad')" style="background:#8e44ad"></button>
+        <button onclick="applyColor('foreColor','#ffffff')" style="background:#fff;border:1px solid #ccc;"></button>
+      </div>
+      <div class="cp-row">
+        <button onclick="applyColor('foreColor','#c0392b')" style="background:#c0392b"></button>
+        <button onclick="applyColor('foreColor','#d35400')" style="background:#d35400"></button>
+        <button onclick="applyColor('foreColor','#f39c12')" style="background:#f39c12"></button>
+        <button onclick="applyColor('foreColor','#16a085')" style="background:#16a085"></button>
+        <button onclick="applyColor('foreColor','#1abc9c')" style="background:#1abc9c"></button>
+        <button onclick="applyColor('foreColor','#2574a9')" style="background:#2574a9"></button>
+        <button onclick="applyColor('foreColor','#6c3483')" style="background:#6c3483"></button>
+        <button onclick="applyColor('foreColor','#7f8c8d')" style="background:#7f8c8d"></button>
+      </div>
+    </div>
+  </div>
+  <div class="tg" style="position:relative;">
+    <button class="tb" onclick="togglePicker('highlight-picker')" title="Highlight">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+    </button>
+    <div id="highlight-picker" class="color-picker" style="display:none;">
+      <div class="cp-row">
+        <button onclick="applyColor('hiliteColor','#fff176')" style="background:#fff176"></button>
+        <button onclick="applyColor('hiliteColor','#a5d6a7')" style="background:#a5d6a7"></button>
+        <button onclick="applyColor('hiliteColor','#90caf9')" style="background:#90caf9"></button>
+        <button onclick="applyColor('hiliteColor','#f48fb1')" style="background:#f48fb1"></button>
+        <button onclick="applyColor('hiliteColor','#ffcc80')" style="background:#ffcc80"></button>
+        <button onclick="applyColor('hiliteColor','#ce93d8')" style="background:#ce93d8"></button>
+        <button onclick="applyColor('hiliteColor','transparent')" style="background:white;border:1px solid #ccc;" title="None">✕</button>
+      </div>
+    </div>
+  </div>
+  <div class="td"></div>
+  <div class="tg">
+    <button class="tb" onclick="insertLink()" title="Link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+    <label class="tb" for="img-upload" title="Insert image"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></label>
+    <input type="file" id="img-upload" accept="image/*" style="display:none" onchange="insertBodyImage(this)">
+    <label class="tb" for="video-upload" title="Insert video"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></label>
+    <input type="file" id="video-upload" accept="video/*" style="display:none" onchange="insertBodyVideo(this)">
+    <button class="tb" onclick="insertEmoji()" title="Emoji"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></button>
+  </div>
+  <div class="td"></div>
+  <div class="tg" style="position:relative;">
+    <button class="tb" onclick="toggleMenu('align-menu')" title="Align"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg></button>
+    <div id="align-menu" class="drop-menu" style="display:none;">
+      <button class="dm-item" onclick="fmt('justifyLeft');closeMenus()">Left</button>
+      <button class="dm-item" onclick="fmt('justifyCenter');closeMenus()">Center</button>
+      <button class="dm-item" onclick="fmt('justifyRight');closeMenus()">Right</button>
+      <button class="dm-item" onclick="fmt('justifyFull');closeMenus()">Justify</button>
+    </div>
+  </div>
+  <button class="tb" onclick="fmt('indent')" title="Indent"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="9 12 12 15 9 18"/><line x1="12" y1="12" x2="21" y2="12"/><line x1="12" y1="18" x2="21" y2="18"/></svg></button>
+  <button class="tb" onclick="fmt('outdent')" title="Outdent"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="11 12 8 15 11 18"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg></button>
+  <div class="td"></div>
+  <div class="tg">
+    <button class="tb" onclick="fmt('insertUnorderedList')" title="Bullet list"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg></button>
+    <button class="tb" onclick="fmt('insertOrderedList')" title="Numbered list"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></button>
+    <button class="tb" onclick="fmtBlock('blockquote')" title="Quote"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></button>
+    <button class="tb" onclick="insertHR()" title="Horizontal rule"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/></svg></button>
+  </div>
+  <div class="td"></div>
+  <div class="tg" style="position:relative;">
+    <button class="tb" onclick="toggleMenu('more-menu')" title="More"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
+    <div id="more-menu" class="drop-menu" style="display:none;">
+      <button class="dm-item" onclick="fmt('removeFormat');closeMenus()">Clear formatting</button>
+      <button class="dm-item" onclick="insertTable();closeMenus()">Insert table</button>
+      <button class="dm-item" onclick="fmt('subscript');closeMenus()">Subscript</button>
+      <button class="dm-item" onclick="fmt('superscript');closeMenus()">Superscript</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN BODY -->
+<div class="be-body">
+
+  <!-- EDITOR -->
+  <div class="be-editor-wrap">
+    <input id="blog-title" class="be-title" placeholder="Title">
+    <div id="blog-editor" class="be-editor" contenteditable="true" data-placeholder="Start writing your story..."></div>
+    <input type="hidden" id="blog-image">
+    <input type="hidden" id="edit-story-id">
+    <div id="be-status" class="be-status"></div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="be-sidebar">
+    <div class="ps-title">Post settings</div>
+
+    <div class="ps-block">
+      <div class="ps-head" onclick="togglePS(this)">
+        <svg class="ps-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        Labels
+      </div>
+      <div class="ps-body">
+        <input id="blog-tags" class="ps-input" placeholder="Separate with commas">
+        <p class="ps-hint">e.g. Moses, Noah, Jesus</p>
+      </div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-head" onclick="togglePS(this)">
+        <svg class="ps-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        Cover Image
+      </div>
+      <div class="ps-body">
+        <label class="ps-upload" for="cover-upload">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload cover photo
+        </label>
+        <input type="file" id="cover-upload" accept="image/*" style="display:none" onchange="setCover(this)">
+        <div id="cover-preview" class="ps-img-preview"></div>
+      </div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-head" onclick="togglePS(this)">
+        <svg class="ps-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        Published on
+      </div>
+      <div class="ps-body">
+        <input type="datetime-local" id="blog-publish-date" class="ps-input">
+        <p class="ps-hint">Leave blank to publish now</p>
+      </div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-head" onclick="togglePS(this)">
+        <svg class="ps-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        Permalink
+      </div>
+      <div class="ps-body">
+        <input id="blog-permalink" class="ps-input" placeholder="custom-url-slug">
+        <p class="ps-hint">Leave blank for auto-generated</p>
+      </div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-head" onclick="togglePS(this)">
+        <svg class="ps-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        Location
+      </div>
+      <div class="ps-body">
+        <input id="blog-location" class="ps-input" placeholder="Enter location">
+      </div>
+    </div>
+
+    <div class="ps-block">
+      <div class="ps-head" onclick="togglePS(this)">
+        <svg class="ps-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+        Options
+      </div>
+      <div class="ps-body">
+        <label class="ps-checkbox"><input type="checkbox" id="blog-allow-comments" checked> Allow comments</label>
+        <label class="ps-checkbox"><input type="checkbox" id="blog-pinned"> Pin to top</label>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<script type="module" src="blog-editor.js"></script>
+
+<script>
+// Close menus on outside click
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.tg') && !e.target.closest('.color-picker') && !e.target.closest('.drop-menu')){
+    closeMenus();
+  }
+});
+</script>
+
+</body>
+</html>

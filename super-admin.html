@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Super Admin Panel</title>
+
+<link rel="stylesheet" href="super-admin.css">
+</head>
+
+<body>
+
+<div class="header">
+
+<h2>Super Admin Dashboard</h2>
+
+<button id="logout-btn">Logout</button>
+
+</div>
+
+<div class="container">
+
+<!-- ADMIN MANAGEMENT -->
+
+<div class="section">
+
+<h3>Admins</h3>
+
+<div id="admins-list">Loading...</div>
+
+</div>
+
+<!-- ADD ADMIN -->
+
+<div class="section">
+
+<h3>Add New Admin</h3>
+
+<input id="new-admin-id" placeholder="Admin ID">
+
+<input id="new-admin-name" placeholder="Name">
+
+<input id="new-admin-username" placeholder="Username">
+
+<input id="new-admin-password" placeholder="Password">
+
+<button id="add-admin-btn">Create Admin</button>
+
+</div>
+
+<!-- ORDERS -->
+
+<div class="section">
+
+<h3>All Orders</h3>
+
+<div id="orders-list">Loading...</div>
+
+</div>
+
+</div>
+
+<script type="module" src="super-admin.js"></script>
+
+</body>
+
+</html>
