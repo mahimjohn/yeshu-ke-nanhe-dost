@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products - Yeshu Ke Nanhe Dost</title>
+<script type="module" src="firebase.js"></script>
+<link rel="stylesheet" href="products.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+<img src="logo/logo.png">
+<span>Yeshu Ke Nanhe Dost</span>
+</div>
+
+<nav class="nav-links">
+<a href="index.html">Home</a>
+<a href="blogs.html">Stories</a>
+<a href="products.html">Products</a>
+<a href="mission.html">About</a>
+</nav>
+
+<div class="nav-right">
+
+<a href="cart.html" class="cart-link">
+🛒 (<span id="cart-count">0</span>)
+</a>
+
+<div class="login-wrapper">
+
+<button id="login-btn" class="login-btn">Login</button>
+
+<div id="login-dropdown" class="login-dropdown">
+
+<button id="user-login">User Login</button>
+<button id="admin-login">Admin Login</button>
+
+</div>
+
+</div>
+
+<div class="menu">☰</div>
+
+</div>
+
+</header>
+
+
+
+<div class="user-menu" id="user-menu">
+
+<div class="user-header">
+<img id="user-avatar" src="logo/logo.png">
+<p id="user-name">Guest</p>
+</div>
+
+<a href="dashboard.html">My Orders</a>
+<a href="cart.html">Cart</a>
+<a href="saved.html">Saved Stories</a>
+<a href="prayer.html">Prayer Requests</a>
+<a href="settings.html">Settings</a>
+
+<button id="logout-btn">Logout</button>
+
+</div>
+
+
+<section class="products-page">
+
+<div class="products-layout">
+
+<!-- FILTERS -->
+
+<div class="filters">
+<h3>Filter</h3>
+<div id="dynamic-filters"></div>
+</div>
+
+
+<!-- PRODUCTS AREA -->
+
+<div class="products-main">
+
+<!-- SEARCH + SORT -->
+
+<div class="products-toolbar">
+
+<input
+type="text"
+id="product-search"
+class="product-search"
+placeholder="Search products..."
+>
+
+<select id="product-sort" class="product-sort">
+<option value="">Sort by</option>
+<option value="low">Price Low → High</option>
+<option value="high">Price High → Low</option>
+</select>
+
+</div>
+
+
+<!-- ALL PRODUCTS -->
+
+<h2 class="section-title">All Products</h2>
+<div id="products-container" class="products-grid"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<div id="menu-overlay" class="menu-overlay"></div>
+
+<!-- LOGIN POPUP -->
+
+<div id="login-popup" class="login-popup">
+
+<div class="login-box">
+
+<button id="close-login" class="close-login">✕</button>
+
+<div class="login-left">
+
+<h2>Login</h2>
+<p>Get access to your Orders and Recommendations</p>
+
+<img src="images/jesus-children-cartoon.png" class="login-illustration">
+
+</div>
+
+<!-- RIGHT PANEL -->
+
+<div class="login-right">
+
+<h3>Enter Mobile Number</h3>
+
+<p class="login-info">
+Enter your mobile number to receive a one-time password (OTP)
+</p>
+
+<div id="phone-step">
+
+<input id="phone-input" placeholder="Enter mobile number">
+
+<button id="send-otp">Request OTP</button>
+
+<div id="recaptcha-container"></div>
+
+<p class="switch-link">
+New to Yeshu Ke Nanhe Dost?
+<span id="open-signup">Create an account</span>
+</p>
+
+</div>
+
+<div id="otp-step" style="display:none">
+
+<div class="otp-box">
+
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+
+</div>
+
+<button id="verify-otp">Verify OTP</button>
+
+<div class="otp-resend">
+
+<span id="otp-timer">Resend OTP in 30s</span>
+<button id="resend-otp" style="display:none">Resend OTP</button>
+
+</div>
+
+</div>
+
+<div id="name-step" style="display:none">
+
+<input id="name-input" placeholder="Enter your name">
+<input id="signup-phone" placeholder="Enter mobile number">
+
+<button id="signup-otp">Continue</button>
+
+<p class="switch-link">
+Existing User?
+<span id="open-login">Login</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="menu-overlay" class="menu-overlay"></div>
+
+<script type="module" src="products.js"></script>
+<script type="module" src="navbar.js"></script>
+
+</body>
+</html>
+
