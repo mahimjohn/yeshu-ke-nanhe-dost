@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Confirmed</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f3f3f3;
+margin:0;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:white;
+padding:15px 40px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+font-weight:bold;
+color:#2a7de1;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:8px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* SUCCESS HEADER */
+
+.success{
+color:#067d62;
+font-size:22px;
+margin-bottom:10px;
+}
+
+.subtitle{
+color:#555;
+margin-bottom:25px;
+}
+
+/* PRODUCT */
+
+.product{
+display:flex;
+gap:20px;
+align-items:center;
+border-top:1px solid #eee;
+padding-top:20px;
+margin-top:20px;
+}
+
+.product img{
+width:100px;
+border-radius:6px;
+}
+
+.product-details{
+flex:1;
+}
+
+.product-title{
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.price{
+color:#b12704;
+font-weight:bold;
+}
+
+/* DELIVERY BOX */
+
+.delivery{
+background:#f7f7f7;
+padding:15px;
+margin-top:20px;
+border-radius:6px;
+}
+
+/* BUTTON */
+
+.btn{
+margin-top:25px;
+background:#ff9900;
+border:none;
+padding:12px 20px;
+border-radius:6px;
+cursor:pointer;
+color:white;
+font-size:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+Yeshu Ke Nanhe Dost
+</div>
+
+<div class="container">
+
+<div class="success">✅ Order placed successfully</div>
+<div class="subtitle">Thank you. Your order has been confirmed.</div>
+
+<div id="order-items"></div>
+
+<div class="delivery" id="delivery-info"></div>
+
+<button class="btn" onclick="window.location.href='products.html'">
+Continue Shopping
+</button>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyB6-aF6ycLVrmLBAr-1X4fL6ZVgwF0agFc",
+authDomain: "yeshu-ke-nanhe-dost.firebaseapp.com",
+databaseURL: "https://yeshu-ke-nanhe-dost-default-rtdb.firebaseio.com",
+projectId: "yeshu-ke-nanhe-dost",
+storageBucket: "yeshu-ke-nanhe-dost.firebasestorage.app",
+messagingSenderId: "496839768513",
+appId: "1:496839768513:web:e49e55eb2d196c8e095740"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/* GET ORDER ID FROM URL */
+
+const params = new URLSearchParams(window.location.search);
+const orderId = params.get("id");
+
+async function loadOrder(){
+
+if(!orderId){
+document.getElementById("order-items").innerHTML="Order ID missing";
+return;
+}
+
+const snapshot = await get(ref(db,"orders/" + orderId));
+
+if(!snapshot.exists()){
+document.getElementById("order-items").innerHTML="Order not found";
+return;
+}
+
+const order = snapshot.val();
+
+const container = document.getElementById("order-items");
+
+container.innerHTML="";
+
+/* LOOP ITEMS */
+
+Object.values(order.items).forEach(item=>{
+
+const div=document.createElement("div");
+
+div.innerHTML = `
+<div style="display:flex;gap:15px;margin-bottom:15px">
+
+<img src="${item.image}" width="70">
+
+<div>
+
+<b>${item.name}</b><br>
+Quantity: ${item.qty}<br>
+₹${item.price}
+
+</div>
+
+</div>
+`;
+
+container.appendChild(div);
+
+});
+
+/* DELIVERY INFO */
+
+const delivery=new Date();
+delivery.setDate(delivery.getDate()+5);
+
+document.getElementById("delivery-info").innerHTML=`
+
+<b>Estimated Delivery:</b> ${delivery.toDateString()}<br><br>
+
+<b>Delivering to:</b><br>
+${order.name}<br>
+${order.address.line1}<br>
+${order.address.city} - ${order.address.pincode}<br><br>
+
+<b>Total Paid:</b> ₹${order.total}
+
+`;
+
+}
+
+loadOrder();
+
+</script>
+
+</body>
+</html>

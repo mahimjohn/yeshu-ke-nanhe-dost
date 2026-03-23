@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yeshu Ke Nanhe Dost</title>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Yeshu Ke Nanhe Dost",
+  "url": "https://yeshukenanhedost.com/",
+  "logo": "https://yeshukenanhedost.com/logos/favicon.png"
+}
+</script>
+
+<link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+<div class="logo">
+    <img src="logo/logo.png">
+    <span>Yeshu Ke Nanhe Dost</span>
+</div>
+
+<nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="blogs.html">Stories</a>
+    <a href="products.html">Products</a>
+    <a href="mission.html">About</a>
+</nav>
+
+<div class="nav-right">
+
+<!-- <a href="cart.html" class="cart-link">
+🛒 (<span id="cart-count">0</span>)
+</a> -->
+
+<div class="login-wrapper">
+
+<button id="login-btn" class="login-btn">Login</button>
+
+<div id="login-dropdown" class="login-dropdown">
+
+<button id="user-login">User Login</button>
+<button id="admin-login">Admin Login</button>
+
+</div>
+
+</div>
+
+<div class="menu">☰</div>
+
+</div>
+
+</header>
+
+<!-- LOGIN POPUP -->
+
+<div id="login-popup" class="login-popup">
+
+<div class="login-box">
+
+<button id="close-login" class="close-login">✕</button>
+
+<!-- LEFT PANEL -->
+
+<div class="login-left">
+
+<h2 id="login-title">Login</h2>
+<p id="login-subtitle">
+Get access to your Orders, Wishlist and Recommendations
+</p>
+
+<img class="login-illustration"
+src="images/jesus-children-cartoon.png">
+
+</div>
+
+
+<!-- RIGHT PANEL -->
+
+<div class="login-right">
+
+<h3>Enter Mobile Number</h3>
+
+<p class="login-info">
+Enter your mobile number to receive a one-time password (OTP)
+</p>
+
+<!-- PHONE STEP -->
+
+<div id="phone-step">
+
+<input id="phone-input" placeholder="Enter mobile number">
+
+<button id="send-otp">Request OTP</button>
+
+<div id="recaptcha-container"></div>
+
+<div class="switch-link">
+New to Yeshu Ke Nanhe Dost?
+<span id="open-signup">Create an account</span>
+</div>
+
+</div>
+
+
+<!-- OTP STEP -->
+
+<div id="otp-step" style="display:none">
+
+<p class="login-info">
+Please enter the OTP sent to your phone
+</p>
+
+<div class="otp-box">
+
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+<input class="otp-input" maxlength="1">
+
+</div>
+
+<button id="verify-otp">Verify</button>
+
+<div class="otp-resend">
+
+<span id="otp-timer">Resend OTP in 30s</span>
+
+<button id="resend-otp" style="display:none">
+Resend OTP
+</button>
+
+</div>
+
+</div>
+<!-- SIGNUP STEP -->
+
+<div id="name-step" style="display:none">
+
+<input id="name-input" placeholder="Enter your name">
+
+<input id="signup-phone" placeholder="Enter mobile number">
+
+<button id="signup-otp">Continue</button>
+
+<div class="switch-link">
+Existing User?
+<span id="open-login">Log in</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="user-menu" id="user-menu">
+
+<div class="user-header">
+
+<img id="user-avatar" src="logo/logo.png">
+
+<p id="user-name">Guest</p>
+
+</div>
+
+<a href="orders.html">My Orders</a>
+<a href="cart.html">Cart</a>
+<a href="saved.html">Saved Stories</a>
+<a href="prayer.html">Prayer Requests</a>
+<a href="settings.html">Settings</a>
+
+<button id="logout-btn">Logout</button>
+
+</div>
+
+
+<!-- HERO SLIDER -->
+
+<section class="hero">
+
+<button class="arrow left">&#10094;</button>
+
+<div class="hero-slider">
+
+<div class="slide">
+<h1>Jesus Loves Children</h1>
+<p>Learn beautiful Bible stories</p>
+</div>
+
+<div class="slide">
+<h1>Fun Bible Learning</h1>
+<p>Stories made for young hearts</p>
+</div>
+
+<div class="slide">
+<h1>Grow in Faith</h1>
+<p>Discover God's love</p>
+</div>
+
+<!-- CLONE OF FIRST SLIDE -->
+
+<div class="slide">
+<h1>Jesus Loves Children</h1>
+<p>Learn beautiful Bible stories</p>
+</div>
+
+</div>
+
+<button class="arrow right">&#10095;</button>
+
+</section>
+
+<section class="quick-nav">
+
+<h2>Explore</h2>
+
+<div class="quick-container">
+
+<a href="blogs.html" class="quick-card">
+<div class="quick-icon">📖</div>
+<h3>Bible Stories</h3>
+<p>Read wonderful stories from the Bible</p>
+</a>
+
+<a href="vbolgs.html" class="quick-card">
+<div class="quick-icon">🎬</div>
+<h3>Visual Stories</h3>
+<p>Watch Bible stories come to life</p>
+</a>
+
+<a href="products.html" class="quick-card">
+<div class="quick-icon">🛍️</div>
+<h3>Products</h3>
+<p>Explore books, gifts, and more</p>
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ===============================
+DYNAMIC BLOGS
+================================ -->
+<section class="dynamic-section">
+
+<h2>Bible Stories</h2>
+
+<div class="slider-wrapper">
+
+<button class="slide-btn left" onclick="slideLeft('blogs-slider')">❮</button>
+
+<div class="slider" id="blogs-slider"></div>
+
+<button class="slide-btn right" onclick="slideRight('blogs-slider')">❯</button>
+
+</div>
+
+</section>
+
+
+<!-- ===============================
+DYNAMIC PRODUCTS
+================================ -->
+<section class="dynamic-section">
+
+<h2>Featured Products</h2>
+
+<div class="slider-wrapper">
+
+<button class="slide-btn left" onclick="slideLeft('products-slider')">❮</button>
+
+<div class="slider" id="products-slider"></div>
+
+<button class="slide-btn right" onclick="slideRight('products-slider')">❯</button>
+
+</div>
+
+</section>
+
+<!-- ═══════════ DAILY VERSE ═══════════ -->
+<section class="daily-verse-section" id="daily-verse-section">
+  <div class="dv-inner">
+
+    <div class="dv-header">
+      <div class="dv-cross">✝</div>
+      <div>
+        <span class="dv-label">Verse of the Day</span>
+        <div id="dv-date" class="dv-date"></div>
+      </div>
+      <button class="dv-refresh-btn" onclick="refreshVerse()" title="New verse">
+        <svg id="dv-refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.37"/></svg>
+      </button>
+    </div>
+
+    <div class="dv-body">
+      <div class="dv-quote-mark">"</div>
+      <blockquote id="dv-text" class="dv-text">
+        <span class="dv-loading">
+          <span></span><span></span><span></span>
+        </span>
+      </blockquote>
+      <cite id="dv-reference" class="dv-reference"></cite>
+    </div>
+
+    <div class="dv-footer">
+      <a href="blogs.html" class="dv-explore-btn">
+        Explore Bible Stories
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>© Yeshu Ke Nanhe Dost</p>
+<p>Spreading the love of Jesus to children</p>
+
+</footer>
+
+<div id="menu-overlay" class="menu-overlay"></div>
+
+<script type="module" src="index.js"></script>
+<script src="daily-verse.js"></script>
+<script type="module" src="navbar.js"></script>
+
+<div class="legal-footer">
+
+<a href="about.html">About</a>
+<span>|</span>
+
+<a href="privacy.html">Privacy Policy</a>
+<span>|</span>
+
+<a href="terms.html">Terms</a>
+
+</div>
+
+</body>
+</html>

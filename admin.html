@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Yeshu Ke Nanhe Dost</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <img src="logo/logo.png" alt="Logo" class="sidebar-logo">
+      <div>
+        <div class="sidebar-title">YKND</div>
+        <div class="sidebar-sub">Admin Panel</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Main</div>
+      <li class="nav-item active" onclick="showSection('overview', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </li>
+      <li class="nav-item" onclick="showSection('orders', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Orders
+      </li>
+      <li class="nav-item" onclick="showSection('products', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        Products
+      </li>
+      <div class="nav-label" style="margin-top:16px;">Content</div>
+      <li class="nav-item" onclick="showSection('blogs', this)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Blogs
+      </li>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="admin-chip">
+        <div class="admin-avatar">A</div>
+        <div>
+          <div class="admin-chip-name" id="admin-chip-name">Admin</div>
+          <div class="admin-chip-role" id="admin-chip-role">Administrator</div>
+        </div>
+      </div>
+      <button class="logout-btn" id="logout-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <h1 class="page-heading" id="page-heading">Overview</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="search-wrap">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input placeholder="Search orders…" id="topbar-search">
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ OVERVIEW ═══════════ -->
+    <div id="section-overview" class="section active-section">
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon stat-icon--purple">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Total Revenue</div>
+            <div class="stat-value" id="stat-revenue">₹0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon stat-icon--blue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Customers</div>
+            <div class="stat-value" id="stat-customers">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon stat-icon--green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Total Orders</div>
+            <div class="stat-value" id="stat-orders">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon stat-icon--amber">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Delivered</div>
+            <div class="stat-value" id="stat-delivered">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-panel">
+        <div class="chart-panel-head">
+          <h3 class="panel-title">Revenue Growth</h3>
+          <div class="chart-controls">
+            <select id="rangeFilter">
+              <option value="all">All time</option>
+              <option value="daily">Today</option>
+              <option value="weekly">This week</option>
+              <option value="monthly">This month</option>
+            </select>
+            <select id="dataType">
+              <option value="both">Revenue + Orders</option>
+              <option value="revenue">Revenue only</option>
+              <option value="orders">Orders only</option>
+            </select>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="salesChart"></canvas>
+        </div>
+      </div>
+
+      <div class="table-panel">
+        <div class="table-panel-head">
+          <h3 class="panel-title">All Orders</h3>
+          <div class="legend-row">
+            <span class="leg"><span class="dot dot--green"></span>Delivered</span>
+            <span class="leg"><span class="dot dot--amber"></span>Shipped</span>
+            <span class="leg"><span class="dot dot--red"></span>Packed</span>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ═══════════ ORDERS ═══════════ -->
+    <div id="section-orders" class="section" style="display:none">
+      <div id="orders-container" class="orders-grid"></div>
+    </div>
+
+    <!-- ═══════════ PRODUCTS ═══════════ -->
+    <div id="section-products" class="section" style="display:none">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:20px;">
+        <a href="product-upload.html" class="primary-btn" style="max-width:180px;text-decoration:none;display:flex;align-items:center;gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Product
+        </a>
+      </div>
+      <div class="list-panel">
+        <h3 class="panel-title" style="margin-bottom:16px;">All Products</h3>
+        <div id="products-container" class="products-list"></div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════ BLOGS ═══════════ -->
+    <!-- ═══════════ BLOGS ═══════════ -->
+    <div id="section-blogs" class="section" style="display:none">
+
+      <!-- SUB-NAV -->
+      <div class="blog-subnav">
+        <button class="blog-subnav-btn active" onclick="showBlogTab('add',this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Blog
+        </button>
+        <button class="blog-subnav-btn" onclick="showBlogTab('update',this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Update Blog
+        </button>
+        <button class="blog-subnav-btn" onclick="showBlogTab('view',this)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          View All Blogs
+        </button>
+      </div>
+
+      <!-- ── ADD / EDIT BLOG ── -->
+      <div id="blog-tab-add" class="blog-tab">
+        <div class="blogger-wrap">
+
+          <!-- BLOGGER TOP BAR -->
+          <div class="blogger-topbar">
+            <div class="blogger-topbar-left">
+              <button class="tbb tbb-icon" title="Edit mode" style="color:#555;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+              </button>
+              <div class="tb-div"></div>
+              <button class="tbb tbb-icon" onclick="fmt('undo')" title="Undo">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.37"/></svg>
+              </button>
+              <button class="tbb tbb-icon" onclick="fmt('redo')" title="Redo">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.37"/></svg>
+              </button>
+              <div class="tb-div"></div>
+              <div class="tb-dropdown-wrap">
+                <button class="tbb tbb-icon" title="Font family">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+              </div>
+              <div class="tb-dropdown-wrap">
+                <button class="tbb tbb-icon" title="Font size">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                  <span style="font-size:9px;font-weight:700;">TT</span>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+              </div>
+              <select class="tbb-sel" onchange="fmtBlock(this.value);this.value='';" title="Paragraph style">
+                <option value="">Normal</option>
+                <option value="h1">Heading 1</option>
+                <option value="h2">Heading 2</option>
+                <option value="h3">Heading 3</option>
+                <option value="h4">Heading 4</option>
+                <option value="h5">Heading 5</option>
+                <option value="h6">Heading 6</option>
+                <option value="blockquote">Quote</option>
+                <option value="pre">Code</option>
+              </select>
+              <div class="tb-div"></div>
+              <button class="tbb tbb-b" onclick="fmt('bold')" title="Bold">B</button>
+              <button class="tbb tbb-i" onclick="fmt('italic')" title="Italic">I</button>
+              <button class="tbb tbb-u" onclick="fmt('underline')" title="Underline">U</button>
+              <button class="tbb tbb-s" onclick="fmt('strikeThrough')" title="Strikethrough">S</button>
+              <div class="tb-dropdown-wrap" style="position:relative;">
+                <button class="tbb tbb-icon" title="Text color" onclick="toggleColorPicker('text-color-picker')">
+                  <span style="font-size:13px;font-weight:700;border-bottom:3px solid #e74c3c;line-height:1.1;">A</span>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                <div id="text-color-picker" class="color-picker" style="display:none;">
+                  <div class="color-picker-row">
+                    <button onclick="applyColor('foreColor','#000000')" style="background:#000000" title="Black"></button>
+                    <button onclick="applyColor('foreColor','#434343')" style="background:#434343" title="Dark grey"></button>
+                    <button onclick="applyColor('foreColor','#666666')" style="background:#666666" title="Grey"></button>
+                    <button onclick="applyColor('foreColor','#999999')" style="background:#999999" title="Light grey"></button>
+                    <button onclick="applyColor('foreColor','#b7b7b7')" style="background:#b7b7b7" title="Lighter grey"></button>
+                    <button onclick="applyColor('foreColor','#cccccc')" style="background:#cccccc" title="Very light grey"></button>
+                    <button onclick="applyColor('foreColor','#d9d9d9')" style="background:#d9d9d9" title="Almost white"></button>
+                    <button onclick="applyColor('foreColor','#ffffff')" style="background:#ffffff;border:1px solid #ccc" title="White"></button>
+                  </div>
+                  <div class="color-picker-row">
+                    <button onclick="applyColor('foreColor','#ff0000')" style="background:#ff0000"></button>
+                    <button onclick="applyColor('foreColor','#ff9900')" style="background:#ff9900"></button>
+                    <button onclick="applyColor('foreColor','#ffff00')" style="background:#ffff00"></button>
+                    <button onclick="applyColor('foreColor','#00ff00')" style="background:#00ff00"></button>
+                    <button onclick="applyColor('foreColor','#00ffff')" style="background:#00ffff"></button>
+                    <button onclick="applyColor('foreColor','#0000ff')" style="background:#0000ff"></button>
+                    <button onclick="applyColor('foreColor','#9900ff')" style="background:#9900ff"></button>
+                    <button onclick="applyColor('foreColor','#ff00ff')" style="background:#ff00ff"></button>
+                  </div>
+                  <div class="color-picker-row">
+                    <button onclick="applyColor('foreColor','#f4cccc')" style="background:#f4cccc"></button>
+                    <button onclick="applyColor('foreColor','#fce5cd')" style="background:#fce5cd"></button>
+                    <button onclick="applyColor('foreColor','#fff2cc')" style="background:#fff2cc"></button>
+                    <button onclick="applyColor('foreColor','#d9ead3')" style="background:#d9ead3"></button>
+                    <button onclick="applyColor('foreColor','#d0e0e3')" style="background:#d0e0e3"></button>
+                    <button onclick="applyColor('foreColor','#cfe2f3')" style="background:#cfe2f3"></button>
+                    <button onclick="applyColor('foreColor','#d9d2e9')" style="background:#d9d2e9"></button>
+                    <button onclick="applyColor('foreColor','#ead1dc')" style="background:#ead1dc"></button>
+                  </div>
+                  <div class="color-picker-row">
+                    <button onclick="applyColor('foreColor','#ea9999')" style="background:#ea9999"></button>
+                    <button onclick="applyColor('foreColor','#f9cb9c')" style="background:#f9cb9c"></button>
+                    <button onclick="applyColor('foreColor','#ffe599')" style="background:#ffe599"></button>
+                    <button onclick="applyColor('foreColor','#b6d7a8')" style="background:#b6d7a8"></button>
+                    <button onclick="applyColor('foreColor','#a2c4c9')" style="background:#a2c4c9"></button>
+                    <button onclick="applyColor('foreColor','#9fc5e8')" style="background:#9fc5e8"></button>
+                    <button onclick="applyColor('foreColor','#b4a7d6')" style="background:#b4a7d6"></button>
+                    <button onclick="applyColor('foreColor','#d5a6bd')" style="background:#d5a6bd"></button>
+                  </div>
+                  <div class="color-picker-row">
+                    <button onclick="applyColor('foreColor','#e06666')" style="background:#e06666"></button>
+                    <button onclick="applyColor('foreColor','#f6b26b')" style="background:#f6b26b"></button>
+                    <button onclick="applyColor('foreColor','#ffd966')" style="background:#ffd966"></button>
+                    <button onclick="applyColor('foreColor','#93c47d')" style="background:#93c47d"></button>
+                    <button onclick="applyColor('foreColor','#76a5af')" style="background:#76a5af"></button>
+                    <button onclick="applyColor('foreColor','#6fa8dc')" style="background:#6fa8dc"></button>
+                    <button onclick="applyColor('foreColor','#8e7cc3')" style="background:#8e7cc3"></button>
+                    <button onclick="applyColor('foreColor','#c27ba0')" style="background:#c27ba0"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="tb-dropdown-wrap" style="position:relative;">
+                <button class="tbb tbb-icon" title="Highlight color" onclick="toggleColorPicker('highlight-picker')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                <div id="highlight-picker" class="color-picker" style="display:none;">
+                  <div class="color-picker-row">
+                    <button onclick="applyColor('hiliteColor','#ffff00')" style="background:#ffff00" title="Yellow"></button>
+                    <button onclick="applyColor('hiliteColor','#00ffff')" style="background:#00ffff" title="Cyan"></button>
+                    <button onclick="applyColor('hiliteColor','#ff00ff')" style="background:#ff00ff" title="Magenta"></button>
+                    <button onclick="applyColor('hiliteColor','#ff9900')" style="background:#ff9900" title="Orange"></button>
+                    <button onclick="applyColor('hiliteColor','#00ff00')" style="background:#00ff00" title="Green"></button>
+                    <button onclick="applyColor('hiliteColor','#ff0000')" style="background:#ff0000" title="Red"></button>
+                    <button onclick="applyColor('hiliteColor','#0000ff')" style="background:#0000ff" title="Blue"></button>
+                    <button onclick="applyColor('hiliteColor','transparent')" style="background:white;border:1px solid #ccc;" title="None">✕</button>
+                  </div>
+                </div>
+              </div>
+              <div class="tb-div"></div>
+              <button class="tbb tbb-icon" onclick="insertLink()" title="Insert link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              </button>
+              <div class="tb-dropdown-wrap" style="position:relative;">
+                <label class="tbb tbb-icon" for="blog-img-upload" title="Insert image">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                </label>
+                <input type="file" id="blog-img-upload" accept="image/*" style="display:none" onchange="insertBodyImage(this)">
+              </div>
+              <div class="tb-dropdown-wrap" style="position:relative;">
+                <label class="tbb tbb-icon" for="blog-video-upload" title="Insert video">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                </label>
+                <input type="file" id="blog-video-upload" accept="video/*" style="display:none" onchange="insertBodyVideo(this)">
+              </div>
+              <button class="tbb tbb-icon" onclick="insertEmoji()" title="Insert emoji">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </button>
+              <div class="tb-div"></div>
+              <div class="tb-dropdown-wrap" style="position:relative;">
+                <button class="tbb tbb-icon" onclick="toggleAlignMenu()" title="Alignment">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                </button>
+                <div id="align-menu" class="tb-dropdown-menu" style="display:none;">
+                  <button class="tb-menu-item" onclick="fmt('justifyLeft');closeMenus()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg> Left
+                  </button>
+                  <button class="tb-menu-item" onclick="fmt('justifyCenter');closeMenus()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg> Center
+                  </button>
+                  <button class="tb-menu-item" onclick="fmt('justifyRight');closeMenus()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="9" y1="12" x2="21" y2="12"/><line x1="6" y1="18" x2="21" y2="18"/></svg> Right
+                  </button>
+                  <button class="tb-menu-item" onclick="fmt('justifyFull');closeMenus()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg> Justify
+                  </button>
+                </div>
+              </div>
+              <button class="tbb tbb-icon" onclick="fmt('indent')" title="Increase indent">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="9 12 12 15 9 18"/><line x1="12" y1="12" x2="21" y2="12"/><line x1="12" y1="18" x2="21" y2="18"/></svg>
+              </button>
+              <button class="tbb tbb-icon" onclick="fmt('outdent')" title="Decrease indent">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><polyline points="11 12 8 15 11 18"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/></svg>
+              </button>
+              <div class="tb-div"></div>
+              <button class="tbb tbb-icon" onclick="fmt('insertUnorderedList')" title="Bullet list">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="9" y1="6" x2="20" y2="6"/><line x1="9" y1="12" x2="20" y2="12"/><line x1="9" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></svg>
+              </button>
+              <button class="tbb tbb-icon" onclick="fmt('insertOrderedList')" title="Numbered list">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" y1="6" x2="21" y2="6"/><line x1="10" y1="12" x2="21" y2="12"/><line x1="10" y1="18" x2="21" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+              </button>
+              <div class="tb-div"></div>
+              <button class="tbb tbb-icon" onclick="fmtBlock('blockquote')" title="Blockquote">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+              </button>
+              <button class="tbb tbb-icon" onclick="insertHR()" title="Horizontal rule">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/></svg>
+              </button>
+              <div class="tb-div"></div>
+              <div class="tb-dropdown-wrap" style="position:relative;">
+                <button class="tbb tbb-icon" onclick="toggleMoreMenu()" title="More">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+                </button>
+                <div id="more-menu" class="tb-dropdown-menu" style="display:none;">
+                  <button class="tb-menu-item" onclick="fmt('removeFormat');closeMenus()">Clear formatting</button>
+                  <button class="tb-menu-item" onclick="insertTable();closeMenus()">Insert table</button>
+                  <button class="tb-menu-item" onclick="fmt('subscript');closeMenus()">Subscript</button>
+                  <button class="tb-menu-item" onclick="fmt('superscript');closeMenus()">Superscript</button>
+                </div>
+              </div>
+            </div>
+            <div class="blogger-topbar-right">
+              <button class="blogger-preview-btn" onclick="previewBlog()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                Preview
+              </button>
+              <button class="blogger-publish-btn" id="publish-blog-btn" onclick="publishBlog()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                <span id="publish-btn-text">Publish</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- TITLE + EDITOR + SIDEBAR -->
+          <div class="blogger-body">
+            <div class="blogger-main">
+              <input id="blog-title" class="blogger-title-input" placeholder="Title">
+              <div id="blog-editor" class="blogger-editor" contenteditable="true" data-placeholder="Start writing your story..."></div>
+              <input type="hidden" id="blog-image">
+              <input type="hidden" id="edit-story-id">
+              <div id="blog-status" class="blog-status-bar"></div>
+            </div>
+
+            <!-- RIGHT SIDEBAR (Post settings) -->
+            <div class="blogger-sidebar">
+              <div class="ps-title">Post settings</div>
+
+              <div class="ps-block">
+                <div class="ps-head" onclick="togglePS(this)">
+                  <svg class="ps-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+                  Labels
+                </div>
+                <div class="ps-body">
+                  <input id="blog-tags" class="ps-input" placeholder="Separate labels with commas">
+                  <p class="ps-hint">e.g. Moses, Noah, Jesus</p>
+                </div>
+              </div>
+
+              <div class="ps-block">
+                <div class="ps-head" onclick="togglePS(this)">
+                  <svg class="ps-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+                  Cover Image
+                </div>
+                <div class="ps-body">
+                  <label class="ps-upload" for="blog-cover-upload">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Upload cover photo
+                  </label>
+                  <input type="file" id="blog-cover-upload" accept="image/*" style="display:none" onchange="setCover(this)">
+                  <div id="cover-preview" class="ps-img-preview"></div>
+                </div>
+              </div>
+
+              <div class="ps-block">
+                <div class="ps-head" onclick="togglePS(this)">
+                  <svg class="ps-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+                  Published on
+                </div>
+                <div class="ps-body">
+                  <input type="datetime-local" id="blog-publish-date" class="ps-input">
+                  <p class="ps-hint">Leave blank to publish now</p>
+                </div>
+              </div>
+
+              <div class="ps-block">
+                <div class="ps-head" onclick="togglePS(this)">
+                  <svg class="ps-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+                  Permalink
+                </div>
+                <div class="ps-body">
+                  <input id="blog-permalink" class="ps-input" placeholder="custom-url-slug">
+                  <p class="ps-hint">Leave blank for auto-generated</p>
+                </div>
+              </div>
+
+              <div class="ps-block">
+                <div class="ps-head" onclick="togglePS(this)">
+                  <svg class="ps-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+                  Location
+                </div>
+                <div class="ps-body">
+                  <input id="blog-location" class="ps-input" placeholder="Enter location">
+                </div>
+              </div>
+
+              <div class="ps-block">
+                <div class="ps-head" onclick="togglePS(this)">
+                  <svg class="ps-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+                  Options
+                </div>
+                <div class="ps-body">
+                  <label class="ps-checkbox"><input type="checkbox" id="blog-allow-comments" checked> Allow comments</label>
+                  <label class="ps-checkbox" style="margin-top:8px;"><input type="checkbox" id="blog-pinned"> Pin to top</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── UPDATE ── -->
+      <div id="blog-tab-update" class="blog-tab" style="display:none">
+        <div class="list-panel">
+          <h3 class="panel-title" style="margin-bottom:16px;">Select a story to edit</h3>
+          <div id="update-stories-list" class="blogs-list"></div>
+        </div>
+      </div>
+
+      <!-- ── VIEW ALL ── -->
+      <div id="blog-tab-view" class="blog-tab" style="display:none">
+        <div class="list-panel">
+          <h3 class="panel-title" style="margin-bottom:16px;">All Published Stories</h3>
+          <div id="blogs-container" class="blogs-list"></div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="admin.js"></script>
+
+</body>
+</html>
