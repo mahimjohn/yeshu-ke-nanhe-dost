@@ -1,4 +1,8 @@
 import { rtdb, fdb, storage } from "./firebase.js";
+
+/* ── CLOUD FUNCTION URLs ── */
+const PUBLISH_FN = "https://us-central1-yeshu-ke-nanhe-dost.cloudfunctions.net/publishToBlogger";
+const UPDATE_FN  = "https://us-central1-yeshu-ke-nanhe-dost.cloudfunctions.net/updateBloggerPost";
 import { ref as sRef, uploadBytes, getDownloadURL }
 from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 import { collection, addDoc, doc, getDoc, updateDoc }
@@ -148,15 +152,49 @@ window.publishBlog = async () => {
 
   try{
     const data={title,content,image,tags,published,permalink,location,comments,pinned};
+
     if(storyId){
+      // Get existing bloggerId if any
+      const existing = await getDoc(doc(fdb,"stories",storyId));
+      const bloggerId = existing.exists() ? existing.data().bloggerId : null;
+
+      // Update Firebase
       await updateDoc(doc(fdb,"stories",storyId),{...data,updatedAt:new Date().toISOString()});
-      if(status) status.innerText="Story updated!";
+      if(status) status.innerText="Story updated! Syncing to Blogger...";
+
+      // Sync to Blogger if it was previously published there
+      if(bloggerId){
+        const bRes = await fetch(UPDATE_FN, {
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({bloggerId, title, content, tags})
+        });
+        const bData = await bRes.json();
+        if(bData.error) throw new Error("Blogger sync failed: "+JSON.stringify(bData.error));
+      }
+      if(status) status.innerText="Story updated & synced to Blogger!";
+
     }else{
-      await addDoc(collection(fdb,"stories"),{...data,createdAt:new Date().toISOString()});
-      if(status) status.innerText="Story published!";
-    }
-    setTimeout(()=>{ if(status) status.innerText=""; },3000);
-    if(!storyId){
+      // Publish to Blogger first to get bloggerId
+      if(status) status.innerText="Publishing to Blogger...";
+      const bRes = await fetch(PUBLISH_FN, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({title, content, tags})
+      });
+      const bData = await bRes.json();
+      if(bData.error) throw new Error("Blogger sync failed: "+JSON.stringify(bData.error));
+
+      // Save to Firebase with bloggerId
+      await addDoc(collection(fdb,"stories"),{
+        ...data,
+        bloggerId: bData.bloggerId,
+        bloggerUrl: bData.bloggerUrl,
+        autoTagged: false,
+        createdAt: new Date().toISOString()
+      });
+      if(status) status.innerText="Published to site & Blogger!";
+
       // Clear for new story
       document.getElementById("blog-title").value="";
       document.getElementById("blog-editor").innerHTML="";
@@ -164,6 +202,9 @@ window.publishBlog = async () => {
       document.getElementById("blog-tags").value="";
       document.getElementById("cover-preview").innerHTML="";
     }
+
+    setTimeout(()=>{ if(status) status.innerText=""; },4000);
+
   }catch(e){
     if(status) status.innerText="Error: "+e.message;
   }
