@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Stories – Yeshu Ke Nanhe Dost</title>
+<link rel="stylesheet" href="index.css">
+<style>
+
+/* ── PAGE HERO ── */
+.vs-hero {
+  background: linear-gradient(135deg, #74b9e7 0%, #a8d8f0 100%);
+  padding: 60px 24px 48px;
+  text-align: center;
+  color: white;
+}
+.vs-hero h1 {
+  font-size: 2.4em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.vs-hero p {
+  font-size: 1.1em;
+  opacity: 0.9;
+}
+
+/* ── GRID ── */
+.vs-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+.vs-section h2 {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 24px;
+}
+.vs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+/* ── VIDEO CARD ── */
+.vs-card {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #f0f0f0;
+}
+.vs-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.13);
+}
+.vs-thumb {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  background: #e8f4fd;
+  overflow: hidden;
+}
+.vs-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.vs-thumb-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #74b9e7, #a8d8f0);
+  font-size: 48px;
+}
+.vs-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.25);
+  transition: background 0.2s;
+}
+.vs-card:hover .vs-play-btn { background: rgba(0,0,0,0.38); }
+.vs-play-icon {
+  width: 52px; height: 52px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+}
+.vs-card:hover .vs-play-icon { transform: scale(1.1); }
+.vs-play-icon svg {
+  width: 20px; height: 20px;
+  fill: #ff9800;
+  margin-left: 3px;
+}
+.vs-card-body {
+  padding: 14px 16px 16px;
+}
+.vs-card-body h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+  line-height: 1.35;
+}
+.vs-card-body p {
+  font-size: 13px;
+  color: #777;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.vs-tag {
+  display: inline-block;
+  font-size: 11px;
+  background: #e8f4fd;
+  color: #2a7de1;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* ── EMPTY STATE ── */
+.vs-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #aaa;
+}
+.vs-empty .vs-empty-icon { font-size: 56px; margin-bottom: 14px; }
+.vs-empty p { font-size: 15px; }
+
+/* ── VIDEO POPUP ── */
+.vs-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.82);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+.vs-popup-overlay.active { display: flex; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.vs-popup {
+  background: #111;
+  border-radius: 14px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 820px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  animation: slideUp 0.25s ease;
+}
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.vs-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #1a1a1a;
+}
+.vs-popup-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 40px);
+}
+.vs-popup-close {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.vs-popup-close:hover { background: rgba(255,255,255,0.2); }
+
+.vs-popup-video {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: black;
+}
+.vs-popup-video iframe,
+.vs-popup-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.vs-popup-desc {
+  padding: 14px 18px;
+  background: #1a1a1a;
+  font-size: 13px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .vs-hero h1 { font-size: 1.7em; }
+  .vs-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .vs-card-body h3 { font-size: 13px; }
+  .vs-card-body p { display: none; }
+}
+@media (max-width: 380px) {
+  .vs-grid { grid-template-columns: 1fr; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR (same as index.html) -->
+<header class="navbar">
+  <div class="logo">
+    <img src="logo/logo.png">
+    <span style="white-space:nowrap;">Yeshu Ke Nanhe Dost</span>
+  </div>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="blogs.html">Stories</a>
+    <a href="vbolgs.html" style="color:#ff9800;font-weight:600;">Visual Stories</a>
+    <a href="products.html">Products</a>
+    <a href="mission.html">About</a>
+  </nav>
+  <div class="nav-right">
+    <a href="cart.html" class="cart-link">🛒 (<span id="cart-count">0</span>)</a>
+    <div class="login-wrapper">
+      <button id="login-btn" class="login-btn">Login</button>
+      <div id="login-dropdown" class="login-dropdown">
+        <button id="user-login">User Login</button>
+        <button id="admin-login">Admin Login</button>
+      </div>
+    </div>
+    <div class="menu">☰</div>
+  </div>
+</header>
+
+<!-- USER MENU -->
+<div class="user-menu" id="user-menu">
+  <div class="user-header">
+    <img id="user-avatar" src="logo/logo.png">
+    <p id="user-name">Guest</p>
+  </div>
+  <a href="dashboard.html">My Orders</a>
+  <a href="cart.html">Cart</a>
+  <a href="saved.html">Saved Stories</a>
+  <a href="prayer.html">Prayer Requests</a>
+  <a href="settings.html">Settings</a>
+  <button id="logout-btn">Logout</button>
+</div>
+
+<!-- HERO -->
+<section class="vs-hero">
+  <h1>🎬 Visual Stories</h1>
+  <p>Watch Bible stories come to life through videos</p>
+</section>
+
+<!-- VIDEO GRID -->
+<section class="vs-section">
+  <h2>All Videos</h2>
+  <div class="vs-grid" id="vs-grid">
+    <div class="vs-empty">
+      <div class="vs-empty-icon">🎬</div>
+      <p>Loading videos...</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO POPUP -->
+<div class="vs-popup-overlay" id="vs-popup-overlay" onclick="closeVideoPopup(event)">
+  <div class="vs-popup" id="vs-popup">
+    <div class="vs-popup-header">
+      <span class="vs-popup-title" id="vs-popup-title">Video Title</span>
+      <button class="vs-popup-close" onclick="closeVideoPopupDirect()">✕</button>
+    </div>
+    <div class="vs-popup-video" id="vs-popup-video"></div>
+    <div class="vs-popup-desc" id="vs-popup-desc"></div>
+  </div>
+</div>
+
+<div id="menu-overlay" class="menu-overlay"></div>
+
+<footer>
+  <p>© Yeshu Ke Nanhe Dost</p>
+  <p>Spreading the love of Jesus to children</p>
+</footer>
+
+<div class="legal-footer">
+  <a href="about.html">About</a><span>|</span>
+  <a href="privacy.html">Privacy Policy</a><span>|</span>
+  <a href="terms.html">Terms</a>
+</div>
+
+<script type="module" src="navbar.js"></script>
+<script type="module">
+import { fdb } from "./firebase.js";
+import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const grid = document.getElementById("vs-grid");
+
+onSnapshot(collection(fdb, "visual_stories"), snapshot => {
+  grid.innerHTML = "";
+
+  if(snapshot.empty){
+    grid.innerHTML = `<div class="vs-empty">
+      <div class="vs-empty-icon">🎬</div>
+      <p>No videos yet. Check back soon!</p>
+    </div>`;
+    return;
+  }
+
+  snapshot.forEach(doc => {
+    const v = doc.data();
+    const card = document.createElement("div");
+    card.className = "vs-card";
+    card.onclick = () => openVideoPopup(v);
+
+    const thumb = v.thumbnail
+      ? `<img src="${v.thumbnail}" alt="${v.title}">`
+      : `<div class="vs-thumb-placeholder">🎬</div>`;
+
+    card.innerHTML = `
+      <div class="vs-thumb">
+        ${thumb}
+        <div class="vs-play-btn">
+          <div class="vs-play-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="vs-card-body">
+        <h3>${v.title || "Untitled"}</h3>
+        ${v.description ? `<p>${v.description}</p>` : ""}
+        ${v.tag ? `<span class="vs-tag">${v.tag}</span>` : ""}
+      </div>`;
+
+    grid.appendChild(card);
+  });
+});
+
+window.openVideoPopup = function(v){
+  document.getElementById("vs-popup-title").innerText = v.title || "Video";
+  document.getElementById("vs-popup-desc").innerText = v.description || "";
+
+  const videoContainer = document.getElementById("vs-popup-video");
+
+  // Detect YouTube / direct video
+  if(v.youtubeId){
+    videoContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${v.youtubeId}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+  } else if(v.videoUrl){
+    videoContainer.innerHTML = `<video src="${v.videoUrl}" controls autoplay style="background:#000;"></video>`;
+  } else if(v.youtubeUrl){
+    const id = extractYouTubeId(v.youtubeUrl);
+    videoContainer.innerHTML = id
+      ? `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>`
+      : `<p style="color:#aaa;padding:20px;">Video unavailable</p>`;
+  } else {
+    videoContainer.innerHTML = `<p style="color:#aaa;padding:40px;text-align:center;">No video source found</p>`;
+  }
+
+  document.getElementById("vs-popup-overlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+};
+
+window.closeVideoPopup = function(e){
+  if(e.target === document.getElementById("vs-popup-overlay")) closeVideoPopupDirect();
+};
+
+window.closeVideoPopupDirect = function(){
+  document.getElementById("vs-popup-overlay").classList.remove("active");
+  document.getElementById("vs-popup-video").innerHTML = ""; // stop video
+  document.body.style.overflow = "";
+};
+
+// Close on Escape key
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape") closeVideoPopupDirect();
+});
+
+function extractYouTubeId(url){
+  const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+  return m ? m[1] : null;
+}
+</script>
+
+</body>
+</html>
